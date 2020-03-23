@@ -1,6 +1,13 @@
-# Change Log
+# Changelog
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+## 2.6.0 (2020-03-23)
+
+
+### Features
+
+* initial public release ([0ed2346](https://github.com/labor-digital/typo3-vue-framework/commit/0ed2346cc2c4115646179531ffe891a8c66d7b3b))
 
 ## [2.5.2] (2020-01-15)
 
