@@ -1,0 +1,369 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>@labor-digital/typo3-vue-framework</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="assets/js/search.js" data-base=".">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="index.html" class="title">@labor-digital/typo3-vue-framework</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+							<input type="checkbox" id="tsd-filter-only-exported" />
+							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="globals.html">Globals</a>
+				</li>
+			</ul>
+			<h1>@labor-digital/typo3-vue-framework</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<div class="tsd-panel tsd-typography">
+				<a href="#typo3---vuejs-framework" id="typo3---vuejs-framework" style="color: inherit; text-decoration: none;">
+					<h1>TYPO3 - Vue.js Framework</h1>
+				</a>
+				<p>This package contains a wrapper around the vue.js framework that is designed to provide a complete frontend for your TYPO3 website.
+					It is designed to work with the <a href="https://github.com/labor-digital/typo3-frontend-api">frontend-api</a> extension out of the box.
+					The bundle allows you to utilize the power of the vue.js framework with or without server side rendering. Webpack is used as building
+				service that allows code splitting and lazy loading for content elements for top notch performance.</p>
+				<a href="#installation" id="installation" style="color: inherit; text-decoration: none;">
+					<h2>Installation</h2>
+				</a>
+				<p>Install this package using npm:</p>
+				<pre><code><span class="hljs-built_in">npm</span> install @labor-digital/typo3-vue-framework</code></pre>
+				<a href="#basic-usage" id="basic-usage" style="color: inherit; text-decoration: none;">
+					<h2>Basic Usage</h2>
+				</a>
+				<p>For the moment the simplest way to set up the framework is by creating a new package json using the labor <a href="https://github.com/labor-digital/asset-building">asset builder webpack</a> bundle.</p>
+				<p>Install the dependencies for building the script:</p>
+				<pre><code><span class="hljs-built_in">npm</span> install @labor-digital/asset-building @labor-digital/asset-building-dev-server @labor-digital/asset-building-env-vuejs nodemon</code></pre><p>Update your package json:</p>
+				<pre><code>{
+    <span class="hljs-string">"name"</span>: <span class="hljs-string">"@your-vendor/your-project"</span>,
+    ...
+    <span class="hljs-string">"scripts"</span>: {
+        <span class="hljs-string">"start"</span>: <span class="hljs-string">"node index.js"</span>,
+        <span class="hljs-string">"start:development"</span>: <span class="hljs-string">"nodemon -L index.js"</span>,
+        <span class="hljs-string">"build"</span>: <span class="hljs-string">"labor-asset-building build"</span>
+    },
+    <span class="hljs-string">"labor"</span>: {
+        <span class="hljs-string">"apps"</span>: [
+            {
+                <span class="hljs-string">"entry"</span>: <span class="hljs-string">"./src/App.ts"</span>,
+                <span class="hljs-string">"output"</span>: <span class="hljs-string">"./dist/bundle.js"</span>,
+                <span class="hljs-string">"useSsr"</span>: <span class="hljs-literal">true</span>,
+                <span class="hljs-string">"htmlTemplate"</span>: <span class="hljs-literal">true</span>,
+                <span class="hljs-string">"extensions"</span>: [
+                    <span class="hljs-string">"@labor/asset-building-env-vuejs"</span>
+                ]
+            }
+        ],
+        <span class="hljs-string">"extensions"</span>: [
+            <span class="hljs-string">"@labor/asset-building-dev-server"</span>
+        ]
+    }
+}</code></pre><p>Create the following folder structure at the folder where your package.json lives:</p>
+				<pre><code>package.json
+src
+src<span class="hljs-symbol">\C</span>ontentElement
+src<span class="hljs-symbol">\C</span>ontentElement<span class="hljs-symbol">\T</span>ypoExtensionVendor
+src<span class="hljs-symbol">\C</span>ontentElement<span class="hljs-symbol">\T</span>ypoExtensionVendor<span class="hljs-symbol">\C</span>ontentElementKey</code></pre><p>These directories should store your content elements will reside. This is the recommended way
+					but you can adjust this in the following step. Now we create the your main application file a
+				at <code>src\App.ts</code></p>
+				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> {ucFirst} <span class="hljs-keyword">from</span> <span class="hljs-string">"@labor-digital/helferlein/lib/Strings/ucFirst"</span>;
+<span class="hljs-keyword">import</span> {SpaApp} <span class="hljs-keyword">from</span> <span class="hljs-string">"@labor-digital/typo3-vue-framework/lib/Variants/SpaApp"</span>;
+<span class="hljs-keyword">import</span> <span class="hljs-string">"./App.sass"</span>;
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> SpaApp.init({
+    api: {
+        <span class="hljs-comment">// Define the api endpoint root that is used to resolve the resources</span>
+        baseUrl: <span class="hljs-string">"https://www.example.org"</span>,
+    },
+    vue: {
+        <span class="hljs-comment">// This part is important: This tells webpack how it should include your components.</span>
+        <span class="hljs-comment">// If you create the folder structure as described above you can simply copy and paste this,</span>
+        <span class="hljs-comment">// it will take care that all content elements will be linked to your correct .vue files</span>
+        dynamicComponentResolver: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"><span class="hljs-keyword">type</span>: <span class="hljs-built_in">string</span></span>) </span>{
+            <span class="hljs-keyword">const</span> parts = <span class="hljs-keyword">type</span>.split(<span class="hljs-string">"/"</span>);
+            <span class="hljs-keyword">const</span> isPlugin = parts.length === <span class="hljs-number">4</span>;
+            <span class="hljs-keyword">if</span> (isPlugin) <span class="hljs-keyword">return</span> <span class="hljs-keyword">import</span>(<span class="hljs-string">"./ContentElement/"</span> + ucFirst(parts[<span class="hljs-number">0</span>]) + <span class="hljs-string">"/"</span> + ucFirst(parts[<span class="hljs-number">1</span>]) + <span class="hljs-string">"/"</span> + ucFirst(parts[<span class="hljs-number">2</span>]) + <span class="hljs-string">"/"</span> + ucFirst(parts[<span class="hljs-number">3</span>]) + <span class="hljs-string">".vue"</span>);
+            <span class="hljs-keyword">else</span> <span class="hljs-keyword">return</span> <span class="hljs-keyword">import</span>(<span class="hljs-string">"./ContentElement/"</span> + ucFirst(parts[<span class="hljs-number">0</span>]) + <span class="hljs-string">"/"</span> + ucFirst(parts[<span class="hljs-number">1</span>]) + <span class="hljs-string">"/"</span> + ucFirst(parts[<span class="hljs-number">1</span>]) + <span class="hljs-string">".vue"</span>);
+        }
+    }
+});</code></pre>
+				<p>This is enough if you don&#39;t want server side rendering. For the use of a server-side-renderer you need to create an node server.
+				I tried to keep the creation as simple as possible: Create a new index.js file:</p>
+				<pre><code class="language-javascript"><span class="hljs-keyword">const</span> expressAssetBuildingPlugin = <span class="hljs-built_in">require</span>(<span class="hljs-string">"@labor-digital/asset-building/dist/Express/expressAssetBuildingPlugin.js"</span>);
+<span class="hljs-keyword">const</span> expressDevServerPlugin = <span class="hljs-built_in">require</span>(<span class="hljs-string">"@labor-digital/asset-building-dev-server/dist/expressDevServerPlugin.js"</span>);
+<span class="hljs-keyword">const</span> expressSsrPlugin = <span class="hljs-built_in">require</span>(<span class="hljs-string">"@labor-digital/asset-building-env-vuejs/dist/expressSsrPlugin.js"</span>);
+<span class="hljs-keyword">const</span> express = <span class="hljs-built_in">require</span>(<span class="hljs-string">"express"</span>);
+<span class="hljs-keyword">const</span> app = express();
+<span class="hljs-keyword">const</span> port = <span class="hljs-number">8000</span>;
+
+<span class="hljs-comment">// Create the express asset builder context</span>
+expressAssetBuildingPlugin(app)
+
+<span class="hljs-comment">// Register your custom routes, those will not reach the expressSsrPlugin!</span>
+    .then(<span class="hljs-function"><span class="hljs-params">context</span> =&gt;</span> {
+        <span class="hljs-comment">// Add static resources to express handling</span>
+        context.registerPublicAssets(<span class="hljs-string">"public"</span>);
+
+        <span class="hljs-comment">// Return the context</span>
+        <span class="hljs-keyword">return</span> context;
+    })
+
+    <span class="hljs-comment">// Register the asset-builder dev-server plugin</span>
+    .then(expressDevServerPlugin)
+
+    <span class="hljs-comment">// Register the ssr plugin which acts as a wildcard for everything that is not defined above</span>
+    .then(expressSsrPlugin)
+
+    <span class="hljs-comment">// Create the app</span>
+    .then(<span class="hljs-function"><span class="hljs-params">context</span> =&gt;</span> {
+        context.expressApp.listen(port, () =&gt; <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`\r\nThe frontend is listening on port <span class="hljs-subst">${port}</span>!`</span>));
+    });</code></pre>
+				<p>With this the main setup should be done, now you can create your first content element. First create the content element following
+				the frontend-api documentation and set up your site for using SPA rendering.</p>
+				<p>Now let&#39;s create the frontend component; let&#39;s say we have a content element that is called typoExtensionVendor/contentElementKey
+				you will have to create a ContentElementKey.vue single file component in the <code>src\ContentElement\TypoExtensionVendor\ContentElementKey</code> directory. </p>
+				<pre><code class="language-vue">&lt;template&gt;
+    &lt;div class=&quot;contentElement&quot;&gt;
+        {{text}}
+    &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script lang=&quot;ts&quot;&gt;
+    import {ContentElementContext} from &quot;@labor-digital/typo3-vue-framework/lib/Core/Context/ContentElementContext&quot;;
+
+    export default {
+        name: &quot;ContentElementKey&quot;,
+        props: {
+            // You can request the context in every content element component as a prop.
+            // The content provides you with all information about the current app.
+            context: null as ContentElementContext
+        },
+        computed: {
+            text() {
+                // We retrieve the initial data from the data attribute of the context
+                return this.context.data.get(&quot;text&quot;);
+            }
+        }
+    };
+&lt;/script&gt;
+
+&lt;style scoped lang=&quot;sass&quot;&gt;&lt;/style&gt;</code></pre>
+				<p>Now lets run your frontend using: <code>npm run start:development</code></p>
+				<a href="#documentation" id="documentation" style="color: inherit; text-decoration: none;">
+					<h2>Documentation</h2>
+				</a>
+				<p>I know the documentation under &quot;basic usage&quot; is really sparse and can be seen as a temporary placeholder. I&#39;m working
+				on a nice documentation, until it is in place you can find the api <a href="https://typo3-vue-framework.labor.tools">here</a>.</p>
+				<a href="#postcardware" id="postcardware" style="color: inherit; text-decoration: none;">
+					<h2>Postcardware</h2>
+				</a>
+				<p>You&#39;re free to use this package, but if it makes it to your production environment we highly appreciate you sending us a postcard from your hometown, mentioning which of our package(s) you are using.</p>
+				<p>Our address is: LABOR.digital - Fischtorplatz 21 - 55116 Mainz, Germany</p>
+				<p>We publish all received postcards on our <a href="https://labor.digital">company website</a>.</p>
+			</div>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="globals  ">
+						<a href="globals.html"><em>Globals</em></a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_component_contentelementchildrencomponent_.html">&quot;<wbr>Component/<wbr>Content<wbr>Element<wbr>Children<wbr>Component&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_component_contentelementcomponent_.html">&quot;<wbr>Component/<wbr>Content<wbr>Element<wbr>Component&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_component_defaultappcomponent_.html">&quot;<wbr>Component/<wbr>Default<wbr>App<wbr>Component&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_component_defaultapperrorcomponent_.html">&quot;<wbr>Component/<wbr>Default<wbr>App<wbr>Error<wbr>Component&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_component_defaultcontentelementerrorcomponent_.html">&quot;<wbr>Component/<wbr>Default<wbr>Content<wbr>Element<wbr>Error<wbr>Component&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_component_defaultcontentelementloadercomponent_.html">&quot;<wbr>Component/<wbr>Default<wbr>Content<wbr>Element<wbr>Loader<wbr>Component&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_component_defaultpagelayoutcomponent_.html">&quot;<wbr>Component/<wbr>Default<wbr>Page<wbr>Layout<wbr>Component&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_component_defaultpreviewmarkercomponent_.html">&quot;<wbr>Component/<wbr>Default<wbr>Preview<wbr>Marker<wbr>Component&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_component_routecomponent_.html">&quot;<wbr>Component/<wbr>Route<wbr>Component&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_component_statichtmlcomponent_.html">&quot;<wbr>Component/<wbr>Static<wbr>Html<wbr>Component&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_core_bootstrap_basicbootstrap_.html">&quot;<wbr>Core/<wbr>Bootstrap/<wbr>Basic<wbr>Bootstrap&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_core_bootstrap_hybridbootstrap_.html">&quot;<wbr>Core/<wbr>Bootstrap/<wbr>Hybrid<wbr>Bootstrap&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_core_bootstrap_spabootstrap_.html">&quot;<wbr>Core/<wbr>Bootstrap/<wbr>Spa<wbr>Bootstrap&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_core_config_appconfig_interfaces_.html">&quot;<wbr>Core/<wbr>Config/<wbr>App<wbr>Config.interfaces&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_core_config_basicappconfiginterface_.html">&quot;<wbr>Core/<wbr>Config/<wbr>Basic<wbr>App<wbr>Config<wbr>Interface&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_core_config_hybridappconfiginterface_.html">&quot;<wbr>Core/<wbr>Config/<wbr>Hybrid<wbr>App<wbr>Config<wbr>Interface&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_core_config_spaappconfiginterface_.html">&quot;<wbr>Core/<wbr>Config/<wbr>Spa<wbr>App<wbr>Config<wbr>Interface&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_core_context_abstractcontext_.html">&quot;<wbr>Core/<wbr>Context/<wbr>Abstract<wbr>Context&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_core_context_appcontext_.html">&quot;<wbr>Core/<wbr>Context/<wbr>App<wbr>Context&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_core_context_contentelementcontext_.html">&quot;<wbr>Core/<wbr>Context/<wbr>Content<wbr>Element<wbr>Context&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_core_context_pagecontext_.html">&quot;<wbr>Core/<wbr>Context/<wbr>Page<wbr>Context&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_core_errorhandling_apperror_.html">&quot;<wbr>Core/<wbr>Error<wbr>Handling/<wbr>App<wbr>Error&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_core_errorhandling_errorhandler_.html">&quot;<wbr>Core/<wbr>Error<wbr>Handling/<wbr>Error<wbr>Handler&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_core_errorhandling_errorhandler_interfaces_.html">&quot;<wbr>Core/<wbr>Error<wbr>Handling/<wbr>Error<wbr>Handler.interfaces&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_core_interface_contentelementcolumnlistinterface_.html">&quot;<wbr>Core/<wbr>Interface/<wbr>Content<wbr>Element<wbr>Column<wbr>List<wbr>Interface&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_core_interface_contentelementcomponentdefinitioninterface_.html">&quot;<wbr>Core/<wbr>Interface/<wbr>Content<wbr>Element<wbr>Component<wbr>Definition<wbr>Interface&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_core_interface_eventlist_.html">&quot;<wbr>Core/<wbr>Interface/<wbr>Event<wbr>List&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_core_interface_pageinterface_.html">&quot;<wbr>Core/<wbr>Interface/<wbr>Page<wbr>Interface&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_core_interface_rootlineelementinterface_.html">&quot;<wbr>Core/<wbr>Interface/<wbr>Root<wbr>Line<wbr>Element<wbr>Interface&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_core_jsonapi_idehelper_.html">&quot;<wbr>Core/<wbr>Json<wbr>Api/<wbr>Ide<wbr>Helper&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_core_module_general_store_.html">&quot;<wbr>Core/<wbr>Module/<wbr>General/<wbr>Store&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_core_module_general_translation_.html">&quot;<wbr>Core/<wbr>Module/<wbr>General/<wbr>Translation&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_core_module_hybrid_hybriderrorhandler_.html">&quot;<wbr>Core/<wbr>Module/<wbr>Hybrid/hybrid<wbr>Error<wbr>Handler&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_core_module_spa_pagemeta_.html">&quot;<wbr>Core/<wbr>Module/<wbr>Spa/<wbr>Page<wbr>Meta&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_core_module_spa_routehandler_.html">&quot;<wbr>Core/<wbr>Module/<wbr>Spa/<wbr>Route<wbr>Handler&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_core_module_spa_spaerrorhandler_.html">&quot;<wbr>Core/<wbr>Module/<wbr>Spa/spa<wbr>Error<wbr>Handler&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_variants_hybridapp_.html">&quot;<wbr>Variants/<wbr>Hybrid<wbr>App&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_variants_spaapp_.html">&quot;<wbr>Variants/<wbr>Spa<wbr>App&quot;</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="assets/js/main.js"></script>
+<script>if (location.protocol == 'file:') document.write('<script src="assets/js/search.js"><' + '/script>');</script>
+</body>
+</html>
