@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.7.0](https://github.com/labor-digital/typo3-vue-framework/compare/v2.6.0...v2.7.0) (2020-03-25)
+
+
+### Features
+
+* pass more environment information to the additional configuration handler ([40f7a2b](https://github.com/labor-digital/typo3-vue-framework/commit/40f7a2b9b18c129fa273cf7c153eb44322d2a2ba))
+
 ## 2.6.0 (2020-03-23)
 
 
