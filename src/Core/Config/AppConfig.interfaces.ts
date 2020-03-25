@@ -17,16 +17,47 @@
  */
 
 import {EventEmitterEvent} from "@labor-digital/helferlein/lib/Events/EventEmitter";
+import {PlainObject} from "@labor-digital/helferlein/lib/Interfaces/PlainObject";
 import {Component, VueConstructor} from "vue";
-import {AppContext, AppEnvironmentType} from "../Context/AppContext";
+import {AppContext, AppEnvironmentType, AppMode} from "../Context/AppContext";
 import {AppError} from "../ErrorHandling/AppError";
 import {ContentElementComponentDefinitionInterface} from "../Interface/ContentElementComponentDefinitionInterface";
 import {BasicAppConfigInterface} from "./BasicAppConfigInterface";
 import {HybridAppConfigInterface} from "./HybridAppConfigInterface";
 import {SpaAppConfigInterface} from "./SpaAppConfigInterface";
 
+export interface AdditionalConfigurationEnvironmentInterface {
+	/**
+	 * The mode the app is currently running in
+	 */
+	mode: AppMode;
+	
+	/**
+	 * The type of the environment the app is currently running in
+	 */
+	type: AppEnvironmentType;
+	
+	/**
+	 * The environment variables that have been passed to the node process.
+	 * When running on a server the env variables are passed from process.env,
+	 * if the script is running on the client side the variables can be passed at:
+	 * window.VUE_ENV -> which is a plain object
+	 *
+	 * Works in combination with expressSsrPlugin and the "envVars" option for the
+	 * frontend as well.
+	 */
+	envVars: PlainObject;
+	
+	/**
+	 * The vue rendering context when running on the server side an empty plain object
+	 * if running on the client side
+	 */
+	vueContext: PlainObject;
+}
+
 export interface AdditionalConfigurationInterface {
-	(environment: AppEnvironmentType, config: BasicAppConfigInterface | SpaAppConfigInterface | HybridAppConfigInterface): void
+	(environment: AdditionalConfigurationEnvironmentInterface,
+	 config: BasicAppConfigInterface | SpaAppConfigInterface | HybridAppConfigInterface): void
 }
 
 export interface VueConfigurationInterface {

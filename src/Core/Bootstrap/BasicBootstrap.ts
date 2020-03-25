@@ -81,7 +81,15 @@ export class BasicBootstrap {
 		
 		// Apply the additional config if it exists
 		if (isFunction(config.additionalConfiguration))
-			config.additionalConfiguration(environment, config);
+			config.additionalConfiguration({
+				type: environment,
+				mode: mode,
+				vueContext: vueRenderContext,
+				envVars: vueEnvironment === "client" ?
+					getPath(window, ["VUE_ENV"], {}) :
+					getPath(vueRenderContext, ["env"],
+						getPath(process, ["env"], {}))
+			}, config);
 		
 		// Prepare the event emitter
 		const eventEmitter: EventEmitter | any = config.vue.vueEnvironment === "client" ?
