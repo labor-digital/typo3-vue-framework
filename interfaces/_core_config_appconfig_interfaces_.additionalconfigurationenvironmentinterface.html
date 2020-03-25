@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>SpaAppLayoutComponentListInterface | @labor-digital/typo3-vue-framework</title>
+	<title>AdditionalConfigurationEnvironmentInterface | @labor-digital/typo3-vue-framework</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -59,10 +59,10 @@
 					<a href="../modules/_core_config_appconfig_interfaces_.html">&quot;Core/Config/AppConfig.interfaces&quot;</a>
 				</li>
 				<li>
-					<a href="_core_config_appconfig_interfaces_.spaapplayoutcomponentlistinterface.html">SpaAppLayoutComponentListInterface</a>
+					<a href="_core_config_appconfig_interfaces_.additionalconfigurationenvironmentinterface.html">AdditionalConfigurationEnvironmentInterface</a>
 				</li>
 			</ul>
-			<h1>Interface SpaAppLayoutComponentListInterface</h1>
+			<h1>Interface AdditionalConfigurationEnvironmentInterface</h1>
 		</div>
 	</div>
 </header>
@@ -73,19 +73,9 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">SpaAppLayoutComponentListInterface</span>
+						<span class="target">AdditionalConfigurationEnvironmentInterface</span>
 					</li>
 				</ul>
-			</section>
-			<section class="tsd-panel tsd-kind-interface tsd-parent-kind-module">
-				<h3 class="tsd-before-signature">Indexable</h3>
-				<div class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">[</span>key: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]: </span><span class="tsd-signature-type">Component</span></div>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>The key/name of the layout has to match the value of the defined
-						layout field of the typo3 backend</p>
-					</div>
-				</div>
 			</section>
 			<section class="tsd-panel-group tsd-index-group">
 				<h2>Index</h2>
@@ -94,7 +84,10 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_core_config_appconfig_interfaces_.spaapplayoutcomponentlistinterface.html#default" class="tsd-kind-icon">default</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_core_config_appconfig_interfaces_.additionalconfigurationenvironmentinterface.html#envvars" class="tsd-kind-icon">env<wbr>Vars</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_core_config_appconfig_interfaces_.additionalconfigurationenvironmentinterface.html#mode" class="tsd-kind-icon">mode</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_core_config_appconfig_interfaces_.additionalconfigurationenvironmentinterface.html#type" class="tsd-kind-icon">type</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_core_config_appconfig_interfaces_.additionalconfigurationenvironmentinterface.html#vuecontext" class="tsd-kind-icon">vue<wbr>Context</a></li>
 							</ul>
 						</section>
 					</div>
@@ -103,17 +96,68 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="default" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> default</h3>
-					<div class="tsd-signature tsd-kind-icon">default<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Component</span></div>
+					<a name="envvars" class="tsd-anchor"></a>
+					<h3>env<wbr>Vars</h3>
+					<div class="tsd-signature tsd-kind-icon">env<wbr>Vars<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">PlainObject</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/1a29a4f/src/Core/Config/AppConfig.interfaces.ts#L81">src/Core/Config/AppConfig.interfaces.ts:81</a></li>
+							<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/1a29a4f/src/Core/Config/AppConfig.interfaces.ts#L49">src/Core/Config/AppConfig.interfaces.ts:49</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>The layout with the key &quot;default&quot; will handle all layouts that are not manually</p>
+							<p>The environment variables that have been passed to the node process.
+								When running on a server the env variables are passed from process.env,
+								if the script is running on the client side the variables can be passed at:
+							window.VUE_ENV -&gt; which is a plain object</p>
+						</div>
+						<p>Works in combination with expressSsrPlugin and the &quot;envVars&quot; option for the
+						frontend as well.</p>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="mode" class="tsd-anchor"></a>
+					<h3>mode</h3>
+					<div class="tsd-signature tsd-kind-icon">mode<span class="tsd-signature-symbol">:</span> <a href="../modules/_core_context_appcontext_.html#appmode" class="tsd-signature-type">AppMode</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/1a29a4f/src/Core/Config/AppConfig.interfaces.ts#L33">src/Core/Config/AppConfig.interfaces.ts:33</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The mode the app is currently running in</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="type" class="tsd-anchor"></a>
+					<h3>type</h3>
+					<div class="tsd-signature tsd-kind-icon">type<span class="tsd-signature-symbol">:</span> <a href="../modules/_core_context_appcontext_.html#appenvironmenttype" class="tsd-signature-type">AppEnvironmentType</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/1a29a4f/src/Core/Config/AppConfig.interfaces.ts#L38">src/Core/Config/AppConfig.interfaces.ts:38</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The type of the environment the app is currently running in</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="vuecontext" class="tsd-anchor"></a>
+					<h3>vue<wbr>Context</h3>
+					<div class="tsd-signature tsd-kind-icon">vue<wbr>Context<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">PlainObject</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/1a29a4f/src/Core/Config/AppConfig.interfaces.ts#L55">src/Core/Config/AppConfig.interfaces.ts:55</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The vue rendering context when running on the server side an empty plain object
+							if running on the client side</p>
 						</div>
 					</div>
 				</section>
@@ -132,9 +176,27 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-interface tsd-parent-kind-module">
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-interface tsd-parent-kind-module">
 						<a href="_core_config_appconfig_interfaces_.additionalconfigurationenvironmentinterface.html" class="tsd-kind-icon">Additional<wbr>Configuration<wbr>Environment<wbr>Interface</a>
+						<ul>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_core_config_appconfig_interfaces_.additionalconfigurationenvironmentinterface.html#envvars" class="tsd-kind-icon">env<wbr>Vars</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_core_config_appconfig_interfaces_.additionalconfigurationenvironmentinterface.html#mode" class="tsd-kind-icon">mode</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_core_config_appconfig_interfaces_.additionalconfigurationenvironmentinterface.html#type" class="tsd-kind-icon">type</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_core_config_appconfig_interfaces_.additionalconfigurationenvironmentinterface.html#vuecontext" class="tsd-kind-icon">vue<wbr>Context</a>
+							</li>
+						</ul>
 					</li>
+				</ul>
+				<ul class="after-current">
 					<li class=" tsd-kind-interface tsd-parent-kind-module">
 						<a href="_core_config_appconfig_interfaces_.additionalconfigurationinterface.html" class="tsd-kind-icon">Additional<wbr>Configuration<wbr>Interface</a>
 					</li>
@@ -150,18 +212,9 @@
 					<li class=" tsd-kind-interface tsd-parent-kind-module">
 						<a href="_core_config_appconfig_interfaces_.appstaticcomponentlistinterface.html" class="tsd-kind-icon">App<wbr>Static<wbr>Component<wbr>List<wbr>Interface</a>
 					</li>
-				</ul>
-				<ul class="current">
-					<li class="current tsd-kind-interface tsd-parent-kind-module">
+					<li class=" tsd-kind-interface tsd-parent-kind-module">
 						<a href="_core_config_appconfig_interfaces_.spaapplayoutcomponentlistinterface.html" class="tsd-kind-icon">Spa<wbr>App<wbr>Layout<wbr>Component<wbr>List<wbr>Interface</a>
-						<ul>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_core_config_appconfig_interfaces_.spaapplayoutcomponentlistinterface.html#default" class="tsd-kind-icon">default</a>
-							</li>
-						</ul>
 					</li>
-				</ul>
-				<ul class="after-current">
 					<li class=" tsd-kind-interface tsd-parent-kind-module">
 						<a href="_core_config_appconfig_interfaces_.vueconfigurationinterface.html" class="tsd-kind-icon">Vue<wbr>Configuration<wbr>Interface</a>
 					</li>
