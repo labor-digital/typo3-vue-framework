@@ -122,6 +122,9 @@ export class RouteHandler {
 						// Update page meta
 						pageContext.pageMeta.setRaw({
 							title: state.get(["data", "title"]),
+							htmlAttrs: {
+								lang: appContext.translation.languageCode
+							},
 							link: [
 								{
 									rel: "canonical", href: state.get(["data", "canonicalUrl"])
