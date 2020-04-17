@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.8.0](https://github.com/labor-digital/typo3-vue-framework/compare/v2.7.0...v2.8.0) (2020-03-30)
+
+
+### Features
+
+* add page language to the html attributes ([61d2826](https://github.com/labor-digital/typo3-vue-framework/commit/61d28269ea693c6e6a2e0545c4565c8db1fdef6e))
+
 ## [2.7.0](https://github.com/labor-digital/typo3-vue-framework/compare/v2.6.0...v2.7.0) (2020-03-25)
 
 
