@@ -18,6 +18,7 @@
 
 import {getPath} from "@labor-digital/helferlein/lib/Lists/Paths/getPath";
 import {hasPath} from "@labor-digital/helferlein/lib/Lists/Paths/hasPath";
+import {isArray} from "@labor-digital/helferlein/lib/Types/isArray";
 import {isFunction} from "@labor-digital/helferlein/lib/Types/isFunction";
 import {isUndefined} from "@labor-digital/helferlein/lib/Types/isUndefined";
 import {Route} from "vue-router";
@@ -176,6 +177,10 @@ export class RouteHandler {
 			query.loadedLanguageCodes = this._appContext.translation.loadedLanguageCodes;
 			query.currentLayout = this._appContext.pageContext.layout;
 			query.include = ["content", "data"];
+			
+			// Check if we have to refresh common objects
+			const refreshCommon = getPath(this._appContext.config, "router.refreshCommonElements");
+			if (isArray(refreshCommon)) query.refreshCommon = refreshCommon.join(",");
 		}
 		
 		// Done

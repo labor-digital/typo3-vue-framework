@@ -107,6 +107,12 @@ export interface SpaAppConfigInterface extends BasicAppConfigInterface {
 		 * Additional configuration for the vue router
 		 */
 		vueRouter?: RouterOptions
+		
+		/**
+		 * A list of common element keys that should be reloaded
+		 * every time a new url is required from the server
+		 */
+		refreshCommonElements?: Array<string>
 	}
 	
 	/**
