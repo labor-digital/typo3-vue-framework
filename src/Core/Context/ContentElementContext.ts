@@ -16,6 +16,7 @@
  * Last modified: 2019.12.12 at 16:55
  */
 
+import {EventEmitter} from "@labor-digital/helferlein/lib/Events/EventEmitter";
 import {PlainObject} from "@labor-digital/helferlein/lib/Interfaces/PlainObject";
 import {getPath} from "@labor-digital/helferlein/lib/Lists/Paths/getPath";
 import {isUndefined} from "@labor-digital/helferlein/lib/Types/isUndefined";
@@ -142,6 +143,14 @@ export class ContentElementContext {
 	 */
 	public get initialType(): string {
 		return this._initialType;
+	}
+	
+	/**
+	 * Returns the instance of the event emitter, for this framework instance
+	 * The event emitter is used for global events that should be handled across multiple components
+	 */
+	public get eventEmitter(): EventEmitter {
+		return this._appContext.eventEmitter;
 	}
 	
 	/**
