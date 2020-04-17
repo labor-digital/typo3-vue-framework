@@ -20,6 +20,7 @@ import {EventEmitter} from "@labor-digital/helferlein/lib/Events/EventEmitter";
 import {PlainObject} from "@labor-digital/helferlein/lib/Interfaces/PlainObject";
 import {forEach} from "@labor-digital/helferlein/lib/Lists/forEach";
 import {isUndefined} from "@labor-digital/helferlein/lib/Types/isUndefined";
+import Vue from "vue";
 import {Route, VueRouter} from "vue-router/types/router";
 import {SpaAppLayoutComponentListInterface} from "../Config/AppConfig.interfaces";
 import {ContentElementColumnListInterface} from "../Interface/ContentElementColumnListInterface";
@@ -62,24 +63,9 @@ export class PageContext extends AbstractContext {
 	 */
 	protected _currentRoute: Route;
 	
-	/**
-	 * Holds the current page information
-	 */
-	protected _page: JsonApiState;
-	
-	/**
-	 * Holds the page data as state object
-	 */
-	protected _data: State;
-	
-	/**
-	 * Holds the common elements as definition object
-	 */
-	protected _commonElements: PlainObject;
-	
 	public constructor(properties: PlainObject) {
 		super(properties);
-		if (isUndefined(this._commonElements)) this._commonElements = {};
+		this.store.set("page:common", {});
 	}
 	
 	/**
@@ -125,6 +111,14 @@ export class PageContext extends AbstractContext {
 	}
 	
 	/**
+	 * Returns the instance of the event emitter, for this framework instance
+	 * The event emitter is used for global events that should be handled across multiple components
+	 */
+	public get eventEmitter(): EventEmitter {
+		return this._appContext.eventEmitter;
+	}
+	
+	/**
 	 * Returns either the currently active route or undefined if this method is called
 	 * before the first page data was received from the server
 	 */
@@ -133,10 +127,33 @@ export class PageContext extends AbstractContext {
 	}
 	
 	/**
+	 * Returns the raw state object which holds the information about the current page
+	 */
+	public get state(): JsonApiState {
+		return this.store.get("page:state");
+	}
+	
+	/**
+	 * Returns the page's meta data that was provided by the backend
+	 */
+	public get data(): State {
+		console.log(this.store.get("page:data"));
+		return this.store.get("page:data");
+	}
+	
+	/**
+	 * Returns the list of the common elements that were registered for this page
+	 */
+	public get commonElements(): PlainObject {
+		console.log("HERE!", this.store.get("page:common"));
+		return this.store.get("page:common");
+	}
+	
+	/**
 	 * Returns the numeric id of the current page
 	 */
 	public get id(): number {
-		return this._page.get("id", 0);
+		return this.state.get("id", 0);
 	}
 	
 	/**
@@ -144,35 +161,21 @@ export class PageContext extends AbstractContext {
 	 * The code is a two char iso-code
 	 */
 	public get languageCode(): string {
-		return this._page.get("languageCode", "en");
+		return this.state.get("languageCode", "en");
 	}
 	
 	/**
 	 * Returns the root line of this page, back to the root page of the tree
 	 */
 	public get rootLine(): Array<RootLineElementInterface> {
-		return this._page.get("rootLine", []);
+		return this.state.get("rootLine", []);
 	}
 	
 	/**
 	 * Returns the layout key/id/name that should be used for the current page
 	 */
 	public get layout(): string {
-		return this._page.get("pageLayout", "default");
-	}
-	
-	/**
-	 * Returns the page's meta data that was provided by the backend
-	 */
-	public get data(): State {
-		return this._data;
-	}
-	
-	/**
-	 * Returns the list of the common elements that were registered for this page
-	 */
-	public get commonElements(): PlainObject {
-		return this._commonElements;
+		return this.state.get("pageLayout", "default");
 	}
 	
 	/**
@@ -182,23 +185,16 @@ export class PageContext extends AbstractContext {
 	public refreshCommonElement(key: string): Promise<any> {
 		return this.appContext.resourceApi.getSingle("commonElement", key)
 			.then((state: JsonApiState) => {
-				this._commonElements[key] = state.get("element", {});
+				Vue.set(this.commonElements, key, state.get("element", {}));
 				return true;
 			});
-	}
-	
-	/**
-	 * Returns the raw state object which holds the information about the current page
-	 */
-	public get state(): JsonApiState {
-		return this._page;
 	}
 	
 	/**
 	 * Returns the child content of this page
 	 */
 	public get children(): ContentElementColumnListInterface {
-		return this._page.get(["content", "children"], {});
+		return this.state.get(["content", "children"], {});
 	}
 	
 	/**
@@ -219,15 +215,8 @@ export class PageContext extends AbstractContext {
 	 * Returns true if the current page is in preview mode
 	 */
 	public get isPreview(): boolean {
-		return this._page.get("isPreview", false);
-	}
-	
-	/**
-	 * Returns the instance of the event emitter, for this framework instance
-	 * The event emitter is used for global events that should be handled across multiple components
-	 */
-	public get eventEmitter(): EventEmitter {
-		return this._appContext.eventEmitter;
+		if (isUndefined(this.state)) return false;
+		return this.state.get("isPreview", false);
 	}
 	
 	/**
@@ -236,20 +225,16 @@ export class PageContext extends AbstractContext {
 	 * @private
 	 */
 	public __setCurrentPage(page: JsonApiState): void {
-		// Store the raw page state
-		this._page = page;
-		
-		// Create the data state object
-		this._data = new State(page.get("data", {}));
+		// Store the raw page state and data
+		this.store.set("page:state", page);
+		this.store.set("page:data", new State(page.get("data", {})));
 		
 		// Update the common elements if there are any
-		if (this._page.has("common")) {
-			forEach(this._page.get("common", {}), el => {
-				this._commonElements[el.id] = el.element;
+		if (page.has("common")) {
+			const common = this.store.get("page:common");
+			forEach(page.get("common", {}), el => {
+				Vue.set(common, el.id, el.element);
 			});
 		}
-		
-		// Update the store
-		this.appContext.store.set("pageIsPreview", this.isPreview);
 	}
 }

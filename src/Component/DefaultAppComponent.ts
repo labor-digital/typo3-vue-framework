@@ -31,7 +31,7 @@ export default <ComponentOptions<Vue>>{
 	},
 	computed: {
 		previewComponent() {
-			if (!this.$root.appContext.store.get("pageIsPreview", false)) return;
+			if (!this.$root.appContext.pageContext.isPreview) return;
 			return getPath(this.$root.appContext.config, ["vue", "staticComponents", "previewModeMarkerComponent"],
 				DefaultPreviewMarkerComponent);
 		}
