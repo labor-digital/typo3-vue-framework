@@ -137,7 +137,6 @@ export class PageContext extends AbstractContext {
 	 * Returns the page's meta data that was provided by the backend
 	 */
 	public get data(): State {
-		console.log(this.store.get("page:data"));
 		return this.store.get("page:data");
 	}
 	
@@ -145,7 +144,6 @@ export class PageContext extends AbstractContext {
 	 * Returns the list of the common elements that were registered for this page
 	 */
 	public get commonElements(): PlainObject {
-		console.log("HERE!", this.store.get("page:common"));
 		return this.store.get("page:common");
 	}
 	
