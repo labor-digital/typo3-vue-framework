@@ -38,7 +38,11 @@ export class PageMeta {
 	protected _staticMeta: MetaInfo;
 	
 	public constructor(staticMeta: MetaInfo) {
-		this._metaInfo = Vue.observable({title: ""});
+		this._metaInfo = Vue.observable({
+			title: "", afterNavigation() {
+				/** Used to force the update on every navigation **/
+			}
+		});
 		this._staticMeta = staticMeta;
 	}
 	
@@ -83,13 +87,25 @@ export class PageMeta {
 	 * @param metaInfo
 	 */
 	public setRaw(metaInfo: MetaInfo): PageMeta {
+		this.__setRawWithoutRefresh(metaInfo);
+		this._vueMetaPlugin.refresh();
+		return this;
+	}
+	
+	/**
+	 * Internal helper to update the meta information without
+	 * executing the refresh method on the plugin.
+	 *
+	 * @param metaInfo
+	 * @private
+	 */
+	public __setRawWithoutRefresh(metaInfo: MetaInfo): void {
 		metaInfo = merge({},
 			JSON.parse(JSON.stringify(this._staticMeta)),
 			JSON.parse(JSON.stringify(metaInfo))) as any;
 		forEach(metaInfo, (v, k) => {
 			Vue.set(this._metaInfo, k, v);
 		});
-		return this;
 	}
 	
 	/**

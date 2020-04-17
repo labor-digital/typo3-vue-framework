@@ -120,7 +120,7 @@ export class RouteHandler {
 						appContext.translation.__setLanguageForPageRoute(state as any);
 						
 						// Update page meta
-						pageContext.pageMeta.setRaw({
+						pageContext.pageMeta.__setRawWithoutRefresh({
 							title: state.get(["data", "title"]),
 							htmlAttrs: {
 								lang: appContext.translation.languageCode
