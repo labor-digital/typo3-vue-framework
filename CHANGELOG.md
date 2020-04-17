@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.9.0](https://github.com/labor-digital/typo3-vue-framework/compare/v2.8.0...v2.9.0) (2020-04-17)
+
+
+### Features
+
+* **PageContext:** make all page related properties watchable ([abae961](https://github.com/labor-digital/typo3-vue-framework/commit/abae9610cd331f292f31c45850d354e784f4b216))
+* **SPA:** add reloadCommonElement option to router configuration ([dcd9b9d](https://github.com/labor-digital/typo3-vue-framework/commit/dcd9b9d04b8dacd0f2caa162dce2bf6ff77c22ba))
+* add event emitter getter to all context types ([958a9b5](https://github.com/labor-digital/typo3-vue-framework/commit/958a9b5a1759d3afdfaa16ae05f13c5cc6721d6e))
+
+
+### Bug Fixes
+
+* **PageContext:** remove unwanted console log spam ([c44c2d5](https://github.com/labor-digital/typo3-vue-framework/commit/c44c2d5c93a040c9b6ce7b3cae74053a724a6517))
+* **PageMeta:** fix missing updates on navigation ([8c82941](https://github.com/labor-digital/typo3-vue-framework/commit/8c82941948dc9ffde4087fbfac93cc76f7b09cdc))
+
 ## [2.8.0](https://github.com/labor-digital/typo3-vue-framework/compare/v2.7.0...v2.8.0) (2020-03-30)
 
 
