@@ -17,6 +17,7 @@
  */
 const fs = require("fs");
 const path = require("path");
+
 function rmdirRecursive(dirname, removeSelf) {
 	if (fs.existsSync(dirname)) {
 		fs.readdirSync(dirname).forEach(function (file, index) {
@@ -30,8 +31,10 @@ function rmdirRecursive(dirname, removeSelf) {
 		if (removeSelf !== false) fs.rmdirSync(dirname);
 	}
 }
+
 try {
-	rmdirRecursive(__dirname + "/lib", false);
+	rmdirRecursive(path.join(__dirname, "lib"), false);
 } catch (e) {
-	console.error("Failed to clear lib!");
+	console.error("Failed to clear lib!", __dirname + "/lib");
+	console.log(e);
 }
