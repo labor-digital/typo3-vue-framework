@@ -24,9 +24,9 @@ import {isUndefined} from "@labor-digital/helferlein/lib/Types/isUndefined";
 import {CreateElement, VNode} from "vue";
 import {Route} from "vue-router";
 import {AppContext} from "../../Context/AppContext";
-import {EventList} from "../../Interface/EventList";
+import {FrameworkEventList} from "../../Interface/FrameworkEventList";
 import {FrameworkStoreKeys} from "../../Interface/FrameworkStoreKeys";
-import {JsonApiGetQuery, JsonApiState} from "../../JsonApi/IdeHelper";
+import {JsonApiGetQuery, JsonApiState, JsonApiStateList} from "../../JsonApi/IdeHelper";
 
 export class RouteHandler {
 	
@@ -58,10 +58,9 @@ export class RouteHandler {
 	 */
 	public handle(to: Route, from: Route, next: Function): void {
 		const appContext = this._appContext;
-		const pageContext = appContext.pageContext;
 		
 		// Emit event
-		appContext.eventEmitter.emit(EventList.EVENT_ROUTE_BEFORE_NAVIGATION, {to, from});
+		appContext.eventEmitter.emit(FrameworkEventList.EVENT_ROUTE_BEFORE_NAVIGATION, {to, from});
 		
 		// Store the navigation
 		appContext.errorHandler.pushNavigationStack(to.fullPath);
@@ -80,107 +79,35 @@ export class RouteHandler {
 				return appContext.resourceApi.getSingle("page/bySlug", null, args.query);
 			})
 			.then((state) => {
-				
 				// Handle special responses
-				if (state.response.status === 203) {
-					// Check if we can handle the special response type
-					switch (state.get("type")) {
-						case "redirect":
-							// Handle redirect
-							
-							// Make sure we don't render the app on the server side
-							if (appContext.isServer) {
-								appContext.store.set(FrameworkStoreKeys.SPA_APP_COMPONENT_OVERWRITE, {
-									render(createElement: CreateElement): VNode {
-										const renderContext = appContext.vueRenderContext;
-										if (!isUndefined(renderContext.serverResponse) &&
-											isFunction(renderContext.serverResponse.redirect)) {
-											renderContext.serverResponse.redirect(
-												state.get("code", 301), state.get("target"));
-										}
-										return createElement("div", ["Redirecting..."]);
-									}
-								});
-							} else {
-								// Update the location
-								window.location.href = state.get("target");
-							}
-							next(false);
-							return Promise.resolve();
-						default:
-							return Promise.reject(new Error("Error while handling special API instructions (code: 203). No valid type was returned!"));
-					}
-				}
+				if (state.response.status === 203)
+					return this.handleSpecialResponse(state, appContext, next);
 				
 				// Allow filtering
-				return appContext.eventEmitter.emitHook(EventList.HOOK_ROUTE_STATE_PRE_PROCESSOR, {
-						state,
-						context: appContext,
-						to,
-						from
+				return appContext.eventEmitter.emitHook(FrameworkEventList.HOOK_ROUTE_STATE_PRE_PROCESSOR, {
+						state, context: appContext.pageContext, to, from
 					})
 					.then(args => {
 						// Mark that we are running a subsequent request
 						this._initialRequest = false;
 						
 						// Special SSR handling on the server side
-						if (appContext.isServer) {
-							
-							// Store the state
-							appContext.vueRenderContext.state = args.state.response;
-							
-							// Disable the browser caching on SSR, if the API responded with a no-cache header
-							const browserCacheState = getPath(args.state, ["response", "headers", "t3fa-browser-cache-enabled"], "yes");
-							const renderContext = appContext.vueRenderContext;
-							if (!isUndefined(renderContext.serverResponse) &&
-								isFunction(renderContext.serverResponse.setHeader)) {
-								const res = renderContext.serverResponse;
-								if (res.headersSent) {
-									console.log("DISABLE CACHE: Headers have already been sent!");
-								} else {
-									if (browserCacheState === "no") {
-										res.setHeader("Expires", "0");
-										res.setHeader("Cache-Control", "no-cache, must-revalidate, max-age=0");
-										res.setHeader("Pragma", "no-cache");
-									}
-									res.setHeader("t3fa-browser-cache-enabled", browserCacheState);
-								}
-							}
-						}
+						if (appContext.isServer)
+							this.handleSsrCacheHeaders(args.state, args.context);
 						
-						// Update the page context using the new state
-						const state: JsonApiState = args.state;
-						pageContext.__setProperty("currentRoute", args.to);
-						pageContext.__setCurrentPage(state);
-						appContext.translation.__setLanguageForPageRoute(state as any);
-						
-						// Update page meta
-						pageContext.pageMeta.__setRawWithoutRefresh({
-							title: state.get(["data", "title"]),
-							htmlAttrs: {
-								lang: appContext.translation.languageCode
-							},
-							link: [
-								{
-									rel: "canonical", href: state.get(["data", "canonicalUrl"])
-								}
-							],
-							meta: state.get(["data", "metaTags"])
+						// Update the framework
+						return appContext.eventEmitter.emitHook(FrameworkEventList.HOOK_UPDATE_FRAMEWORK_AFTER_NAVIGATION, {
+							state: args.state, context: appContext.pageContext, to: args.to, from: args.from
 						});
-						
+					})
+					.then(args => {
 						// Allow filtering
-						return appContext.eventEmitter.emitHook(EventList.HOOK_ROUTE_STATE_POST_PROCESSOR, {
-							state,
-							context: appContext.pageContext,
-							to,
-							from
+						return appContext.eventEmitter.emitHook(FrameworkEventList.HOOK_ROUTE_STATE_POST_PROCESSOR, {
+							state: args.state, context: appContext.pageContext, to: args.to, from: args.from
 						});
 					})
 					.then((args) => {
-						// Emit event
-						appContext.eventEmitter.emit(EventList.EVENT_ROUTE_AFTER_NAVIGATION, args);
-						
-						// Carry on
+						appContext.eventEmitter.emit(FrameworkEventList.EVENT_ROUTE_AFTER_NAVIGATION, args);
 						next();
 					});
 			})
@@ -218,6 +145,78 @@ export class RouteHandler {
 		}
 		
 		// Done
-		return this._appContext.eventEmitter.emitHook(EventList.HOOK_ROUTE_QUERY_FILTER, {query, slug});
+		return this._appContext.eventEmitter.emitHook(FrameworkEventList.HOOK_ROUTE_QUERY_FILTER, {query, slug});
+	}
+	
+	/**
+	 * Internal logic to handle special server responses from the page resource endpoint
+	 * If a 203 status code was returned by the API we expect an object containing a "type" property
+	 * that defines how we should handle the response.
+	 *
+	 * Currently supported types:
+	 * 		"redirect": Redirects a request to another website using a 30x status code
+	 *
+	 * @param state
+	 * @param appContext
+	 * @param next
+	 */
+	protected handleSpecialResponse(state: JsonApiState | JsonApiStateList, appContext: AppContext, next: Function): Promise<any> {
+		// Check if we can handle the special response type
+		switch (state.get("type")) {
+			case "redirect":
+				// Handle redirect
+				
+				// Make sure we don't render the app on the server side
+				if (appContext.isServer) {
+					appContext.store.set(FrameworkStoreKeys.SPA_APP_COMPONENT_OVERWRITE, {
+						render(createElement: CreateElement): VNode {
+							const renderContext = appContext.vueRenderContext;
+							if (!isUndefined(renderContext.serverResponse) &&
+								isFunction(renderContext.serverResponse.redirect)) {
+								renderContext.serverResponse.redirect(
+									state.get("code", 301), state.get("target"));
+							}
+							return createElement("div", ["Redirecting..."]);
+						}
+					});
+				} else {
+					// Update the location
+					window.location.href = state.get("target");
+				}
+				next(false);
+				return Promise.resolve();
+			default:
+				return Promise.reject(new Error("Error while handling special API instructions (code: 203). No valid type was returned!"));
+		}
+	}
+	
+	/**
+	 * Internal logic to update the express server's response headers based on the API headers
+	 * we received from the backend
+	 *
+	 * @param state
+	 * @param appContext
+	 */
+	protected handleSsrCacheHeaders(state: JsonApiState | JsonApiStateList, appContext: AppContext): void {
+		// Store the state
+		appContext.vueRenderContext.state = state.response;
+		
+		// Disable the browser caching on SSR, if the API responded with a no-cache header
+		const browserCacheState = getPath(state, ["response", "headers", "t3fa-browser-cache-enabled"], "yes");
+		const renderContext = appContext.vueRenderContext;
+		if (!isUndefined(renderContext.serverResponse) &&
+			isFunction(renderContext.serverResponse.setHeader)) {
+			const res = renderContext.serverResponse;
+			if (res.headersSent) {
+				console.log("DISABLE CACHE: Headers have already been sent!");
+			} else {
+				if (browserCacheState === "no") {
+					res.setHeader("Expires", "0");
+					res.setHeader("Cache-Control", "no-cache, must-revalidate, max-age=0");
+					res.setHeader("Pragma", "no-cache");
+				}
+				res.setHeader("t3fa-browser-cache-enabled", browserCacheState);
+			}
+		}
 	}
 }

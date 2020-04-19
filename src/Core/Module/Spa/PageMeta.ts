@@ -16,10 +16,14 @@
  * Last modified: 2019.10.23 at 09:59
  */
 
+import {EventEmitter, EventEmitterEvent} from "@labor-digital/helferlein/lib/Events/EventEmitter";
 import {forEach} from "@labor-digital/helferlein/lib/Lists/forEach";
 import {merge} from "@labor-digital/helferlein/lib/Lists/merge";
 import Vue from "vue";
 import {MetaInfo, VueMetaPlugin} from "vue-meta";
+import {PageContext} from "../../Context/PageContext";
+import {FrameworkEventList} from "../../Interface/FrameworkEventList";
+import {JsonApiState} from "../../JsonApi/IdeHelper";
 
 export class PageMeta {
 	/**
@@ -37,13 +41,16 @@ export class PageMeta {
 	 */
 	protected _staticMeta: MetaInfo;
 	
-	public constructor(staticMeta: MetaInfo) {
+	public constructor(staticMeta: MetaInfo, eventEmitter: EventEmitter) {
 		this._metaInfo = Vue.observable({
 			title: "", afterNavigation() {
 				/** Used to force the update on every navigation **/
 			}
 		});
 		this._staticMeta = staticMeta;
+		
+		// Bind events
+		eventEmitter.bind(FrameworkEventList.HOOK_UPDATE_FRAMEWORK_AFTER_NAVIGATION, e => this.afterNavigation(e));
 	}
 	
 	/**
@@ -87,25 +94,9 @@ export class PageMeta {
 	 * @param metaInfo
 	 */
 	public setRaw(metaInfo: MetaInfo): PageMeta {
-		this.__setRawWithoutRefresh(metaInfo);
+		this.setRawWithoutRefresh(metaInfo);
 		this._vueMetaPlugin.refresh();
 		return this;
-	}
-	
-	/**
-	 * Internal helper to update the meta information without
-	 * executing the refresh method on the plugin.
-	 *
-	 * @param metaInfo
-	 * @private
-	 */
-	public __setRawWithoutRefresh(metaInfo: MetaInfo): void {
-		metaInfo = merge({},
-			JSON.parse(JSON.stringify(this._staticMeta)),
-			JSON.parse(JSON.stringify(metaInfo))) as any;
-		forEach(metaInfo, (v, k) => {
-			Vue.set(this._metaInfo, k, v);
-		});
 	}
 	
 	/**
@@ -116,4 +107,43 @@ export class PageMeta {
 	public __setMetaPlugin(plugin: VueMetaPlugin): void {
 		this._vueMetaPlugin = plugin;
 	}
+	
+	/**
+	 * Event handler to update the meta information after a navigation
+	 * @param e
+	 */
+	protected afterNavigation(e: EventEmitterEvent): void {
+		const state: JsonApiState = e.args.state;
+		const context: PageContext = e.args.context;
+		
+		// Merge the meta information with the existing data
+		this.setRawWithoutRefresh({
+			title: state.get(["data", "title"]),
+			htmlAttrs: {
+				lang: context.languageCode
+			},
+			link: [
+				{
+					rel: "canonical", href: state.get(["data", "canonicalUrl"])
+				}
+			],
+			meta: state.get(["data", "metaTags"])
+		});
+	}
+	
+	/**
+	 * Internal helper to update the meta information without
+	 * executing the refresh method on the plugin.
+	 *
+	 * @param metaInfo
+	 */
+	protected setRawWithoutRefresh(metaInfo: MetaInfo): void {
+		metaInfo = merge({},
+			JSON.parse(JSON.stringify(this._staticMeta)),
+			JSON.parse(JSON.stringify(metaInfo))) as any;
+		forEach(metaInfo, (v, k) => {
+			Vue.set(this._metaInfo, k, v);
+		});
+	}
+	
 }

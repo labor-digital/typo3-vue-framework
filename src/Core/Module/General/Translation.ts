@@ -16,10 +16,12 @@
  * Last modified: 2019.09.30 at 11:12
  */
 
+import {EventEmitter, EventEmitterEvent} from "@labor-digital/helferlein/lib/Events/EventEmitter";
 import {PlainObject} from "@labor-digital/helferlein/lib/Interfaces/PlainObject";
 import {isPlainObject} from "@labor-digital/helferlein/lib/Types/isPlainObject";
 import {isString} from "@labor-digital/helferlein/lib/Types/isString";
 import VueI18n, {Values} from "vue-i18n";
+import {FrameworkEventList} from "../../Interface/FrameworkEventList";
 import {JsonApi, JsonApiState} from "../../JsonApi/IdeHelper";
 
 export class Translation {
@@ -44,11 +46,14 @@ export class Translation {
 	 */
 	protected _siteLanguageCodes: Array<string>;
 	
-	public constructor(translator: VueI18n, resourceApi: JsonApi) {
+	public constructor(translator: VueI18n, resourceApi: JsonApi, eventEmitter: EventEmitter) {
 		this._translator = translator;
 		this._loadedLanguageCodes = [];
 		this._siteLanguageCodes = ["en"];
 		this._resourceApi = resourceApi;
+		
+		// Bind event handler
+		eventEmitter.bind(FrameworkEventList.HOOK_UPDATE_FRAMEWORK_AFTER_NAVIGATION, e => this.afterNavigation(e));
 	}
 	
 	/**
@@ -111,22 +116,6 @@ export class Translation {
 	}
 	
 	/**
-	 * This method is used in the route handler to update the localization for the current page
-	 * @param state
-	 * @private
-	 */
-	public __setLanguageForPageRoute(state: JsonApiState) {
-		if (state.has("translation")) {
-			const translation = state.get("translation", {});
-			this._translator.setLocaleMessage(translation.id, translation.message);
-			if (this._loadedLanguageCodes.indexOf(translation.id) === -1)
-				this._loadedLanguageCodes.push(translation.id);
-		}
-		this._translator.locale = state.get("languageCode", "en");
-		this._siteLanguageCodes = state.get("siteLanguageCodes", ["en"]);
-	}
-	
-	/**
 	 * This method is used only in hybrid apps to inject the translations for the content elements on the page
 	 * @param translations
 	 * @private
@@ -136,5 +125,21 @@ export class Translation {
 		this._translator.setLocaleMessage(translations.id, translations.message);
 		this._translator.locale = translations.id;
 		this._siteLanguageCodes = [translations.id];
+	}
+	
+	/**
+	 * Event handler to update the translation storage after navigations
+	 * @param e
+	 */
+	protected afterNavigation(e: EventEmitterEvent): void {
+		const state: JsonApiState = e.args.state;
+		if (state.has("translation")) {
+			const translation = state.get("translation", {});
+			this._translator.setLocaleMessage(translation.id, translation.message);
+			if (this._loadedLanguageCodes.indexOf(translation.id) === -1)
+				this._loadedLanguageCodes.push(translation.id);
+		}
+		this._translator.locale = state.get("languageCode", "en");
+		this._siteLanguageCodes = state.get("siteLanguageCodes", ["en"]);
 	}
 }

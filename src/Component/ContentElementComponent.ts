@@ -29,7 +29,7 @@ import {AppContext} from "../Core/Context/AppContext";
 import {ContentElementContext} from "../Core/Context/ContentElementContext";
 import {ContentElementErrorHandler, ReasonType} from "../Core/ErrorHandling/ErrorHandler.interfaces";
 import {ContentElementComponentDefinitionInterface} from "../Core/Interface/ContentElementComponentDefinitionInterface";
-import {EventList} from "../Core/Interface/EventList";
+import {FrameworkEventList} from "../Core/Interface/FrameworkEventList";
 import DefaultContentElementErrorComponent from "./DefaultContentElementErrorComponent";
 import DefaultContentElementLoaderComponent from "./DefaultContentElementLoaderComponent";
 import StaticHtmlComponent from "./StaticHtmlComponent";
@@ -177,7 +177,7 @@ export default <ComponentOptions<Vue>>{
 			
 			// Allow filtering
 			return appContext.eventEmitter
-				.emitHook(EventList.HOOK_CONTENT_ELEMENT_DEFINITION_FILTER, {definition: that.definition})
+				.emitHook(FrameworkEventList.HOOK_CONTENT_ELEMENT_DEFINITION_FILTER, {definition: that.definition})
 				.then(args => {
 					that.definition = args.definition;
 					
@@ -241,7 +241,7 @@ export default <ComponentOptions<Vue>>{
 						that.componentProps = {context: context};
 						
 						// Emit event
-						appContext.eventEmitter.emit(EventList.EVENT_CONTENT_ELEMENT_LOADED, {
+						appContext.eventEmitter.emit(FrameworkEventList.EVENT_CONTENT_ELEMENT_LOADED, {
 							definition: that.definition,
 							context
 						});

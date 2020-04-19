@@ -35,7 +35,7 @@ import ContentElementComponent from "../../Component/ContentElementComponent";
 import {BasicAppConfigInterface} from "../Config/BasicAppConfigInterface";
 import {AppContext, AppEnvironmentType, AppMode, VueEnvironmentType} from "../Context/AppContext";
 import {ErrorHandler} from "../ErrorHandling/ErrorHandler";
-import {EventList} from "../Interface/EventList";
+import {FrameworkEventList} from "../Interface/FrameworkEventList";
 import {JsonApi} from "../JsonApi/IdeHelper";
 import {Store} from "../Module/General/Store";
 import {Translation} from "../Module/General/Translation";
@@ -97,7 +97,7 @@ export class BasicBootstrap {
 		let context = undefined;
 		if (isPlainObject(config.events))
 			forEach(config.events, (listener, event) => eventEmitter.bind(event, (e) => listener(e, context)));
-		return eventEmitter.emitHook(EventList.HOOK_BEFORE_CONTEXT_CREATE, {config}).then(args => {
+		return eventEmitter.emitHook(FrameworkEventList.HOOK_BEFORE_CONTEXT_CREATE, {config}).then(args => {
 			// Make the app context
 			config = args.config;
 			vueRenderContext = isUndefined(vueRenderContext) ? {} : vueRenderContext;
@@ -124,7 +124,7 @@ export class BasicBootstrap {
 	 * @param appContext
 	 */
 	public static applyContextFilter(appContext: AppContext): Promise<AppContext> {
-		return appContext.eventEmitter.emitHook(EventList.HOOK_CONTEXT_FILTER, {appContext})
+		return appContext.eventEmitter.emitHook(FrameworkEventList.HOOK_CONTEXT_FILTER, {appContext})
 			.then(args => args.appContext);
 	}
 	
@@ -159,7 +159,7 @@ export class BasicBootstrap {
 				en: {}
 			}
 		});
-		appContext.__setProperty("translation", new Translation((vueConfig.i18n as VueI18n), appContext.resourceApi));
+		appContext.__setProperty("translation", new Translation((vueConfig.i18n as VueI18n), appContext.resourceApi, appContext.eventEmitter));
 		
 		// Register the app context in the main component's data list
 		if (isFunction(vueConfig.data)) {
@@ -192,7 +192,7 @@ export class BasicBootstrap {
 	 * @param appContext
 	 */
 	public static applyVueConfigFilter(appContext: AppContext): Promise<AppContext> {
-		return appContext.eventEmitter.emitHook(EventList.HOOK_VUE_CONFIG_FILTER, {
+		return appContext.eventEmitter.emitHook(FrameworkEventList.HOOK_VUE_CONFIG_FILTER, {
 				vueConfig: appContext.config.vue.config, appContext
 			})
 			.then(args => args.appContext);
@@ -225,11 +225,11 @@ export class BasicBootstrap {
 	 * @param appContext
 	 */
 	public static emitInitHook(appContext: AppContext): Promise<AppContext> {
-		return appContext.eventEmitter.emitHook(EventList.HOOK_INIT, {appContext})
+		return appContext.eventEmitter.emitHook(FrameworkEventList.HOOK_INIT, {appContext})
 			.then(args => {
 				appContext = args.appContext;
 				return appContext.eventEmitter.emitHook(
-					appContext.isClient ? EventList.HOOK_INIT_BROWSER : EventList.HOOK_INIT_SERVER, {appContext})
+					appContext.isClient ? FrameworkEventList.HOOK_INIT_BROWSER : FrameworkEventList.HOOK_INIT_SERVER, {appContext})
 					.then(args => args.appContext);
 			});
 	}

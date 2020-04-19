@@ -21,11 +21,11 @@ import {isUndefined} from "@labor-digital/helferlein/lib/Types/isUndefined";
 import {AppContext} from "../../Context/AppContext";
 import {AppError} from "../../ErrorHandling/AppError";
 import {ConcreteErrorHandlerContextInterface} from "../../ErrorHandling/ErrorHandler.interfaces";
-import {EventList} from "../../Interface/EventList";
+import {FrameworkEventList} from "../../Interface/FrameworkEventList";
 
 export default function hybridErrorHandler(handlerContext: ConcreteErrorHandlerContextInterface, appContext: AppContext): Promise<void> {
 	return appContext.eventEmitter
-		.emitHook(EventList.HOOK_ON_ERROR, {
+		.emitHook(FrameworkEventList.HOOK_ON_ERROR, {
 			handlerContext,
 			appContext
 		})

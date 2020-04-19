@@ -25,7 +25,7 @@ import {AppErrorConfigRouteDefinition} from "../../Config/AppConfig.interfaces";
 import {SpaAppErrorConfigInterface} from "../../Config/SpaAppConfigInterface";
 import {AppContext} from "../../Context/AppContext";
 import {ConcreteErrorHandlerContextInterface} from "../../ErrorHandling/ErrorHandler.interfaces";
-import {EventList} from "../../Interface/EventList";
+import {FrameworkEventList} from "../../Interface/FrameworkEventList";
 
 /**
  * The main error handler for spa apps
@@ -52,7 +52,7 @@ export default function (handlerContext: ConcreteErrorHandlerContextInterface, a
 	}
 	
 	return appContext.eventEmitter
-		.emitHook(EventList.HOOK_ON_ERROR, {
+		.emitHook(FrameworkEventList.HOOK_ON_ERROR, {
 			handlerContext,
 			appContext,
 			errorRoute,

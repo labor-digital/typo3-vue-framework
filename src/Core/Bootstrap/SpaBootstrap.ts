@@ -25,15 +25,14 @@ import {isUndefined} from "@labor-digital/helferlein/lib/Types/isUndefined";
 import Vue, {CreateElement, VNode} from "vue";
 import Meta from "vue-meta";
 import VueRouter, {RouterOptions} from "vue-router";
-import DefaultAppComponent from "../../Component/DefaultAppComponent";
 import defaultAppErrorComponent from "../../Component/DefaultAppErrorComponent";
 import DefaultPageLayoutComponent from "../../Component/DefaultPageLayoutComponent";
 import AppWrapperComponent from "../../Component/OuterAppComponent";
 import routeComponent from "../../Component/RouteComponent";
-import {SpaAppConfigInterface, SpaAppVueConfigInterface} from "../Config/SpaAppConfigInterface";
+import {SpaAppConfigInterface} from "../Config/SpaAppConfigInterface";
 import {AppContext} from "../Context/AppContext";
 import {PageContext} from "../Context/PageContext";
-import {EventList} from "../Interface/EventList";
+import {FrameworkEventList} from "../Interface/FrameworkEventList";
 import {PageMeta} from "../Module/Spa/PageMeta";
 import {RouteHandler} from "../Module/Spa/RouteHandler";
 import spaErrorHandler from "../Module/Spa/spaErrorHandler";
@@ -67,9 +66,12 @@ export class SpaBootstrap {
 		if (isUndefined(config.vue.layoutComponents.default)) config.vue.layoutComponents.default = DefaultPageLayoutComponent;
 		const layoutComponents = config.vue.layoutComponents;
 		
+		// Prepare the pid repository
+		//const pidRepository = new PidRepository(appContext.store, appContext.eventEmitter);
+		
 		// Create the page context
 		appContext.__setProperty("pageContext", new PageContext({
-			baseUrl, appContext, layoutComponents
+			baseUrl, appContext, layoutComponents //pidRepository
 		}));
 		
 		// Done
@@ -129,7 +131,7 @@ export class SpaBootstrap {
 		});
 		
 		// Create the new router instance
-		return appContext.eventEmitter.emitHook(EventList.HOOK_ROUTER_CONFIG_FILTER, {
+		return appContext.eventEmitter.emitHook(FrameworkEventList.HOOK_ROUTER_CONFIG_FILTER, {
 				context: appContext,
 				config: routerConfig
 			})
@@ -151,11 +153,6 @@ export class SpaBootstrap {
 		// Prepare mountpoint
 		vueConfig.el = hasPath(config, ["vue", "mountPoint"]) ? config.vue.mountPoint : "#app";
 		
-		// Prepare the app component
-		const appComponent = hasPath(appContext.config, ["vue", "appComponent"]) ?
-			(appContext.config.vue as SpaAppVueConfigInterface).appComponent :
-			DefaultAppComponent;
-		
 		// Register our render method and the router instance
 		Vue.use(VueRouter);
 		vueConfig.render = (createElement: CreateElement): VNode => createElement(AppWrapperComponent);
@@ -164,7 +161,7 @@ export class SpaBootstrap {
 		// Initialize vue meta plugin
 		Vue.use(Meta);
 		const staticMeta = isUndefined(config.staticMeta) ? {} : config.staticMeta;
-		const pageMeta = new PageMeta(staticMeta);
+		const pageMeta = new PageMeta(staticMeta, appContext.eventEmitter);
 		appContext.pageContext.__setProperty("pageMeta", pageMeta);
 		vueConfig.metaInfo = function () {
 			return pageMeta.metaInfo;

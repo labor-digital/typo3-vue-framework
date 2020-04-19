@@ -218,7 +218,6 @@ export class ErrorHandler {
 		if (isBrowser()) console.error(error.message);
 		else console.log(error.message);
 		if (error.code !== 404 || isBrowser()) {
-			// if (!isEmpty(error.additionalPayload)) console.log("Additional data:", error.additionalPayload);
 			if (!isEmpty(error.navigationStack)) console.log("Navigation Stack:", error.navigationStack);
 			if (!isUndefined(error.reason)) console.log("Stack:", error.reason);
 			else console.log("Stack:", error.stack);

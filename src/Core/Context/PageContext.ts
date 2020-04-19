@@ -16,7 +16,7 @@
  * Last modified: 2019.12.12 at 12:53
  */
 
-import {EventEmitter} from "@labor-digital/helferlein/lib/Events/EventEmitter";
+import {EventEmitter, EventEmitterEvent} from "@labor-digital/helferlein/lib/Events/EventEmitter";
 import {PlainObject} from "@labor-digital/helferlein/lib/Interfaces/PlainObject";
 import {forEach} from "@labor-digital/helferlein/lib/Lists/forEach";
 import {isUndefined} from "@labor-digital/helferlein/lib/Types/isUndefined";
@@ -24,11 +24,13 @@ import Vue from "vue";
 import {Route, VueRouter} from "vue-router/types/router";
 import {SpaAppLayoutComponentListInterface} from "../Config/AppConfig.interfaces";
 import {ContentElementColumnListInterface} from "../Interface/ContentElementColumnListInterface";
+import {FrameworkEventList} from "../Interface/FrameworkEventList";
 import {FrameworkStoreKeys} from "../Interface/FrameworkStoreKeys";
 import {RootLineElementInterface} from "../Interface/RootLineElementInterface";
 import {JsonApiState, State} from "../JsonApi/IdeHelper";
 import {Store} from "../Module/General/Store";
 import {PageMeta} from "../Module/Spa/PageMeta";
+import {PidRepository} from "../Module/Spa/PidRepository";
 import {AbstractContext} from "./AbstractContext";
 import {AppContext} from "./AppContext";
 
@@ -60,13 +62,19 @@ export class PageContext extends AbstractContext {
 	protected _baseUrl: string;
 	
 	/**
-	 * The currently active route
+	 * The repository to look up the configured PIDs (page-ids).
+	 * The pid configuration is passed by the frontend api every
+	 * time a page response is requested from the server
 	 */
-	protected _currentRoute: Route;
+	protected _pidRepository: PidRepository;
 	
 	public constructor(properties: PlainObject) {
 		super(properties);
 		this.store.set(FrameworkStoreKeys.SPA_PAGE_COMMON_ELEMENTS, {});
+		this.store.set(FrameworkStoreKeys.SPA_PAGE_STATE, new State({}));
+		this.store.set(FrameworkStoreKeys.SPA_PAGE_DATA, new State({}));
+		this.eventEmitter.bind(FrameworkEventList.HOOK_UPDATE_FRAMEWORK_AFTER_NAVIGATION,
+			e => this.afterNavigation(e));
 	}
 	
 	/**
@@ -124,7 +132,7 @@ export class PageContext extends AbstractContext {
 	 * before the first page data was received from the server
 	 */
 	public get currentRoute(): Route | undefined {
-		return this._currentRoute;
+		return this.store.get(FrameworkStoreKeys.SPA_PAGE_ROUTE);
 	}
 	
 	/**
@@ -154,6 +162,13 @@ export class PageContext extends AbstractContext {
 	public get id(): number {
 		return this.state.get("id", 0);
 	}
+	
+	/**
+	 * Return the repository to look up the configured PIDs (page-ids)
+	 */
+	// public get pidRepository(): PidRepository {
+	// 	return this._pidRepository;
+	// }
 	
 	/**
 	 * Returns the current language code of the page.
@@ -219,20 +234,21 @@ export class PageContext extends AbstractContext {
 	}
 	
 	/**
-	 * Internal helper to update the current page state of the context
-	 * @param page
-	 * @private
+	 * Event handler to update the context after a navigation took place
+	 * @param e
 	 */
-	public __setCurrentPage(page: JsonApiState): void {
-		// Store the raw page state and data
-		this.store.set(FrameworkStoreKeys.SPA_PAGE_STATE, page);
-		this.store.set(FrameworkStoreKeys.SPA_PAGE_DATA,
-			new State(page.get("data", {})));
+	protected afterNavigation(e: EventEmitterEvent): void {
+		// Update the route
+		this.store.set(FrameworkStoreKeys.SPA_PAGE_ROUTE, e.args.to);
 		
+		// Store the raw page state and data
+		const state: JsonApiState = e.args.state;
+		this.store.set(FrameworkStoreKeys.SPA_PAGE_STATE, state);
+		this.store.set(FrameworkStoreKeys.SPA_PAGE_DATA, new State(state.get("data", {})));
 		// Update the common elements if there are any
-		if (page.has("common")) {
+		if (state.has("common")) {
 			const common = this.store.get(FrameworkStoreKeys.SPA_PAGE_COMMON_ELEMENTS);
-			forEach(page.get("common", {}), el => {
+			forEach(state.get("common", {}), el => {
 				Vue.set(common, el.id, el.element);
 			});
 		}

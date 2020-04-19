@@ -37,5 +37,15 @@ export enum FrameworkStoreKeys {
 	/**
 	 * Contains the list of loaded common elements
 	 */
-	SPA_PAGE_COMMON_ELEMENTS = "framework:spaPage:common"
+	SPA_PAGE_COMMON_ELEMENTS = "framework:spaPage:common",
+	
+	/**
+	 * The pid configuration provided by the api
+	 */
+	SPA_PAGE_PID_CONFIGURATION = "framework:spaPage:pid",
+	
+	/**
+	 * The current route when the app is running in SPA mode
+	 */
+	SPA_PAGE_ROUTE = "framework:spaPage:route"
 }
