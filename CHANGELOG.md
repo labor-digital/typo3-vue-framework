@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.10.0](https://github.com/labor-digital/typo3-vue-framework/compare/v2.9.1...v2.10.0) (2020-04-19)
+
+
+### Features
+
+* deprecate EventList in favour of FrameworkEventList + clean up route handler ([ab010f0](https://github.com/labor-digital/typo3-vue-framework/commit/ab010f0bd72faa450c9e81a395c980a6664b57c3))
+* implement pid repository to access new frontend API pid bridge feature ([b51cd09](https://github.com/labor-digital/typo3-vue-framework/commit/b51cd09d9f46d55da4b40fe879ec0052e7f3773e))
+* implement support for Typo3 based redirects ([ba47db3](https://github.com/labor-digital/typo3-vue-framework/commit/ba47db31b055944074522f5877a2848fb3477e04))
+* update dependencies ([5966598](https://github.com/labor-digital/typo3-vue-framework/commit/5966598959e163a15853ae1dd397be877b8214d4))
+
+
+### Bug Fixes
+
+* **RouteHandler:** make sure the correct context is given ([1e3a7f9](https://github.com/labor-digital/typo3-vue-framework/commit/1e3a7f9e82ec41333763a3246467fc5e92ecc2d7))
+
 ### [2.9.1](https://github.com/labor-digital/typo3-vue-framework/compare/v2.9.0...v2.9.1) (2020-04-17)
 
 ## [2.9.0](https://github.com/labor-digital/typo3-vue-framework/compare/v2.8.0...v2.9.0) (2020-04-17)
