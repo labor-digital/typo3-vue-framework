@@ -21,9 +21,11 @@ import {hasPath} from "@labor-digital/helferlein/lib/Lists/Paths/hasPath";
 import {isArray} from "@labor-digital/helferlein/lib/Types/isArray";
 import {isFunction} from "@labor-digital/helferlein/lib/Types/isFunction";
 import {isUndefined} from "@labor-digital/helferlein/lib/Types/isUndefined";
+import {CreateElement, VNode} from "vue";
 import {Route} from "vue-router";
 import {AppContext} from "../../Context/AppContext";
 import {EventList} from "../../Interface/EventList";
+import {FrameworkStoreKeys} from "../../Interface/FrameworkStoreKeys";
 import {JsonApiGetQuery, JsonApiState} from "../../JsonApi/IdeHelper";
 
 export class RouteHandler {
@@ -78,6 +80,38 @@ export class RouteHandler {
 				return appContext.resourceApi.getSingle("page/bySlug", null, args.query);
 			})
 			.then((state) => {
+				
+				// Handle special responses
+				if (state.response.status === 203) {
+					// Check if we can handle the special response type
+					switch (state.get("type")) {
+						case "redirect":
+							// Handle redirect
+							
+							// Make sure we don't render the app on the server side
+							if (appContext.isServer) {
+								appContext.store.set(FrameworkStoreKeys.SPA_APP_COMPONENT_OVERWRITE, {
+									render(createElement: CreateElement): VNode {
+										const renderContext = appContext.vueRenderContext;
+										if (!isUndefined(renderContext.serverResponse) &&
+											isFunction(renderContext.serverResponse.redirect)) {
+											renderContext.serverResponse.redirect(
+												state.get("code", 301), state.get("target"));
+										}
+										return createElement("div", ["Redirecting..."]);
+									}
+								});
+							} else {
+								// Update the location
+								window.location.href = state.get("target");
+							}
+							next(false);
+							return Promise.resolve();
+						default:
+							return Promise.reject(new Error("Error while handling special API instructions (code: 203). No valid type was returned!"));
+					}
+				}
+				
 				// Allow filtering
 				return appContext.eventEmitter.emitHook(EventList.HOOK_ROUTE_STATE_PRE_PROCESSOR, {
 						state,

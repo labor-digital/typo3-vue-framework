@@ -24,6 +24,7 @@ import Vue from "vue";
 import {Route, VueRouter} from "vue-router/types/router";
 import {SpaAppLayoutComponentListInterface} from "../Config/AppConfig.interfaces";
 import {ContentElementColumnListInterface} from "../Interface/ContentElementColumnListInterface";
+import {FrameworkStoreKeys} from "../Interface/FrameworkStoreKeys";
 import {RootLineElementInterface} from "../Interface/RootLineElementInterface";
 import {JsonApiState, State} from "../JsonApi/IdeHelper";
 import {Store} from "../Module/General/Store";
@@ -65,7 +66,7 @@ export class PageContext extends AbstractContext {
 	
 	public constructor(properties: PlainObject) {
 		super(properties);
-		this.store.set("page:common", {});
+		this.store.set(FrameworkStoreKeys.SPA_PAGE_COMMON_ELEMENTS, {});
 	}
 	
 	/**
@@ -130,21 +131,21 @@ export class PageContext extends AbstractContext {
 	 * Returns the raw state object which holds the information about the current page
 	 */
 	public get state(): JsonApiState {
-		return this.store.get("page:state");
+		return this.store.get(FrameworkStoreKeys.SPA_PAGE_STATE);
 	}
 	
 	/**
 	 * Returns the page's meta data that was provided by the backend
 	 */
 	public get data(): State {
-		return this.store.get("page:data");
+		return this.store.get(FrameworkStoreKeys.SPA_PAGE_DATA);
 	}
 	
 	/**
 	 * Returns the list of the common elements that were registered for this page
 	 */
 	public get commonElements(): PlainObject {
-		return this.store.get("page:common");
+		return this.store.get(FrameworkStoreKeys.SPA_PAGE_COMMON_ELEMENTS);
 	}
 	
 	/**
@@ -224,12 +225,13 @@ export class PageContext extends AbstractContext {
 	 */
 	public __setCurrentPage(page: JsonApiState): void {
 		// Store the raw page state and data
-		this.store.set("page:state", page);
-		this.store.set("page:data", new State(page.get("data", {})));
+		this.store.set(FrameworkStoreKeys.SPA_PAGE_STATE, page);
+		this.store.set(FrameworkStoreKeys.SPA_PAGE_DATA,
+			new State(page.get("data", {})));
 		
 		// Update the common elements if there are any
 		if (page.has("common")) {
-			const common = this.store.get("page:common");
+			const common = this.store.get(FrameworkStoreKeys.SPA_PAGE_COMMON_ELEMENTS);
 			forEach(page.get("common", {}), el => {
 				Vue.set(common, el.id, el.element);
 			});

@@ -45,7 +45,7 @@ export interface SpaAppVueConfigInterface extends AppVueConfigInterface {
 	
 	/**
 	 * Defines the app/root component where the <router-view> should be defined
-	 * If not given we use a lightweight default instead
+	 * If not given we just call router-view on our own
 	 */
 	appComponent?: Component
 	

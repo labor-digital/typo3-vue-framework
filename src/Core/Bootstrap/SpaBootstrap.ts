@@ -28,6 +28,7 @@ import VueRouter, {RouterOptions} from "vue-router";
 import DefaultAppComponent from "../../Component/DefaultAppComponent";
 import defaultAppErrorComponent from "../../Component/DefaultAppErrorComponent";
 import DefaultPageLayoutComponent from "../../Component/DefaultPageLayoutComponent";
+import AppWrapperComponent from "../../Component/OuterAppComponent";
 import routeComponent from "../../Component/RouteComponent";
 import {SpaAppConfigInterface, SpaAppVueConfigInterface} from "../Config/SpaAppConfigInterface";
 import {AppContext} from "../Context/AppContext";
@@ -157,7 +158,7 @@ export class SpaBootstrap {
 		
 		// Register our render method and the router instance
 		Vue.use(VueRouter);
-		vueConfig.render = (createElement: CreateElement): VNode => createElement(appComponent);
+		vueConfig.render = (createElement: CreateElement): VNode => createElement(AppWrapperComponent);
 		vueConfig.router = appContext.pageContext.router;
 		
 		// Initialize vue meta plugin

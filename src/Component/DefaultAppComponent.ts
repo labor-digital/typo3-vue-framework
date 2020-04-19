@@ -16,25 +16,11 @@
  * Last modified: 2020.01.10 at 14:14
  */
 
-import {getPath} from "@labor-digital/helferlein/lib/Lists/Paths/getPath";
-import {isUndefined} from "@labor-digital/helferlein/lib/Types/isUndefined";
 import {ComponentOptions, CreateElement, VNode} from "vue";
 import {Vue} from "vue/types/vue";
-import DefaultPreviewMarkerComponent from "./DefaultPreviewMarkerComponent";
 
 export default <ComponentOptions<Vue>>{
 	render(createElement: CreateElement): VNode {
-		return createElement("div", {
-			staticClass: "typo3-spa-app"
-		}, [createElement("router-view"),
-			isUndefined(this.previewComponent) ? undefined : createElement(this.previewComponent)]);
-	},
-	computed: {
-		previewComponent() {
-			if (!this.$root.appContext.pageContext.isPreview) return;
-			return getPath(this.$root.appContext.config, ["vue", "staticComponents", "previewModeMarkerComponent"],
-				DefaultPreviewMarkerComponent);
-		}
+		return createElement("router-view");
 	}
-	
 };
