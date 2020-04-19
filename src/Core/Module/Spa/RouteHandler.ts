@@ -93,7 +93,7 @@ export class RouteHandler {
 						
 						// Special SSR handling on the server side
 						if (appContext.isServer)
-							this.handleSsrCacheHeaders(args.state, args.context);
+							this.handleSsrCacheHeaders(args.state, args.context.appContext);
 						
 						// Update the framework
 						return appContext.eventEmitter.emitHook(FrameworkEventList.HOOK_UPDATE_FRAMEWORK_AFTER_NAVIGATION, {
