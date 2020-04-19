@@ -58,6 +58,7 @@ export class RouteHandler {
 	 */
 	public handle(to: Route, from: Route, next: Function): void {
 		const appContext = this._appContext;
+		const isInitialRequest = this._initialRequest;
 		
 		// Emit event
 		appContext.eventEmitter.emit(FrameworkEventList.EVENT_ROUTE_BEFORE_NAVIGATION, {to, from});
@@ -119,6 +120,11 @@ export class RouteHandler {
 					const nextValue = getPath(err.additionalPayload, ["routerNextValue"], context.routerNextValue);
 					next(nextValue);
 				});
+			})
+			.finally(() => {
+				// Activate the app rendering as we now have content to show...
+				if (isInitialRequest)
+					appContext.store.set(FrameworkStoreKeys.SPA_APP_HAS_CONTENT, true);
 			});
 	}
 	

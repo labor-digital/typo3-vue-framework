@@ -21,11 +21,13 @@ import {getPath} from "@labor-digital/helferlein/lib/Lists/Paths/getPath";
 import {isArray} from "@labor-digital/helferlein/lib/Types/isArray";
 import {isFunction} from "@labor-digital/helferlein/lib/Types/isFunction";
 import {isUndefined} from "@labor-digital/helferlein/lib/Types/isUndefined";
+import DefaultAppErrorComponent from "../../../Component/DefaultAppErrorComponent";
 import {AppErrorConfigRouteDefinition} from "../../Config/AppConfig.interfaces";
 import {SpaAppErrorConfigInterface} from "../../Config/SpaAppConfigInterface";
 import {AppContext} from "../../Context/AppContext";
 import {ConcreteErrorHandlerContextInterface} from "../../ErrorHandling/ErrorHandler.interfaces";
 import {FrameworkEventList} from "../../Interface/FrameworkEventList";
+import {FrameworkStoreKeys} from "../../Interface/FrameworkStoreKeys";
 
 /**
  * The main error handler for spa apps
@@ -37,12 +39,14 @@ export default function (handlerContext: ConcreteErrorHandlerContextInterface, a
 	const config: SpaAppErrorConfigInterface = handlerContext.config;
 	
 	// Check if we have to redirect the user
-	let errorRoute = "/error";
-	let redirect = error.type !== "contentElement";
+	const isGlobalError = error.type !== "contentElement";
+	let errorRoute = "/";
+	let redirect = false;
 	if (isArray(config.routes)) {
 		const code = error.code;
 		forEach(config.routes, (route: AppErrorConfigRouteDefinition) => {
 			if (route.code === code) {
+				if (isGlobalError) redirect = true;
 				errorRoute = route.route;
 				if (route.sendToLogger === false) handlerContext.sendToLogger = false;
 				if (route.printToConsole === false) handlerContext.printToConsole = false;
@@ -64,7 +68,7 @@ export default function (handlerContext: ConcreteErrorHandlerContextInterface, a
 			
 			// Check if we should handle a content element error
 			error = args.handlerContext.error;
-			if (error.type === "contentElement") {
+			if (!isGlobalError) {
 				const component = getPath(error.additionalPayload, ["component"]);
 				if (!isUndefined(component)) component.componentFailed = true;
 			}
@@ -93,7 +97,16 @@ export default function (handlerContext: ConcreteErrorHandlerContextInterface, a
 							console.error(e);
 						}).then(() => {
 						});
-				} else return Promise.resolve();
+				} else {
+					// Get the app error component
+					const appErrorComponent = getPath(appContext.config, ["vue", "staticComponents", "appErrorComponent"],
+						DefaultAppErrorComponent);
+					
+					// Set the error component
+					appContext.store.set(FrameworkStoreKeys.SPA_APP_ERROR_COMPONENT, appErrorComponent);
+					
+					return Promise.resolve();
+				}
 			})().then(() => {
 				// Disable the browser caching on SSR
 				if (appContext.isServer) {

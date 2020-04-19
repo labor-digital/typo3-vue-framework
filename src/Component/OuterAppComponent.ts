@@ -33,8 +33,18 @@ import DefaultPreviewMarkerComponent from "./DefaultPreviewMarkerComponent";
  * It is used to serve all the framework related stuff, like the preview marker
  * or the rendering of the app component
  */
-export default <ComponentOptions<Vue>>{
+export default <ComponentOptions<Vue | any>>{
 	render(createElement: CreateElement): VNode {
+		
+		// Handle an app with global errors
+		if (!isUndefined(this.errorComponent))
+			return this.createErrorComponent(createElement);
+		
+		// Don't render anything before we got our first data
+		if (!this.appContext.store.get(FrameworkStoreKeys.SPA_APP_HAS_CONTENT, false))
+			return createElement("div", ["..."]);
+		
+		// Handle the default app scaffold
 		return createElement("div", {
 			staticClass: "typo3-spa-app"
 		}, [
@@ -55,6 +65,9 @@ export default <ComponentOptions<Vue>>{
 		store(): Store {
 			return this.appContext.store;
 		},
+		errorComponent() {
+			return this.store.get(FrameworkStoreKeys.SPA_APP_ERROR_COMPONENT, undefined);
+		},
 		appComponent() {
 			// Check if we got an app component override
 			const componentOverride = this.store.get(FrameworkStoreKeys.SPA_APP_COMPONENT_OVERWRITE, null);
@@ -70,6 +83,26 @@ export default <ComponentOptions<Vue>>{
 			return getPath(this.$root.appContext.config, ["vue", "staticComponents", "previewModeMarkerComponent"],
 				DefaultPreviewMarkerComponent);
 		}
+	},
+	methods: {
+		/**
+		 * Builds the error component to be rendered
+		 * @param createElement
+		 */
+		createErrorComponent(createElement: CreateElement): VNode {
+			return createElement(this.errorComponent, {
+				props: {
+					context: this.appContext,
+					error: this.appContext.errorHandler.lastError
+				}
+			});
+		}
+	},
+	mounted(): void {
+		this.$watch(() => this.$route.fullPath, () => {
+			// Reset the error component on navigation
+			if (!isUndefined(this.errorComponent))
+				this.store.set(FrameworkStoreKeys.SPA_APP_ERROR_COMPONENT, undefined);
+		});
 	}
-	
 };

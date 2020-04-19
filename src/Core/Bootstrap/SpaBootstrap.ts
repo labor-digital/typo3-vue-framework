@@ -25,9 +25,8 @@ import {isUndefined} from "@labor-digital/helferlein/lib/Types/isUndefined";
 import Vue, {CreateElement, VNode} from "vue";
 import Meta from "vue-meta";
 import VueRouter, {RouterOptions} from "vue-router";
-import defaultAppErrorComponent from "../../Component/DefaultAppErrorComponent";
 import DefaultPageLayoutComponent from "../../Component/DefaultPageLayoutComponent";
-import AppWrapperComponent from "../../Component/OuterAppComponent";
+import OuterAppComponent from "../../Component/OuterAppComponent";
 import routeComponent from "../../Component/RouteComponent";
 import {SpaAppConfigInterface} from "../Config/SpaAppConfigInterface";
 import {AppContext} from "../Context/AppContext";
@@ -97,27 +96,6 @@ export class SpaBootstrap {
 		if (!isArray(routerConfig.routes))
 			routerConfig.routes = [];
 		
-		// Get the app error component
-		const appErrorComponent = getPath(config, ["vue", "staticComponents", "appErrorComponent"],
-			defaultAppErrorComponent);
-		
-		// Create error route
-		routerConfig.routes.push({
-			name: "error",
-			path: "/error",
-			component: appErrorComponent,
-			props: () => {
-				return {
-					context: appContext,
-					error: appContext.errorHandler.lastError
-				};
-			},
-			beforeEnter(to, from, next) {
-				if (isUndefined(appContext.errorHandler.lastError)) next("/");
-				else next();
-			}
-		});
-		
 		// Create global route
 		routerConfig.routes.push({
 			name: "cmsRouter",
@@ -156,7 +134,7 @@ export class SpaBootstrap {
 		
 		// Register our render method and the router instance
 		Vue.use(VueRouter);
-		vueConfig.render = (createElement: CreateElement): VNode => createElement(AppWrapperComponent);
+		vueConfig.render = (createElement: CreateElement): VNode => createElement(OuterAppComponent);
 		vueConfig.router = appContext.pageContext.router;
 		
 		// Initialize vue meta plugin

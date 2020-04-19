@@ -19,10 +19,22 @@
 export enum FrameworkStoreKeys {
 	
 	/**
+	 * Contains true after the app has received the first response from the page API
+	 * Only if this is true the app wrapper will render anything
+	 */
+	SPA_APP_HAS_CONTENT = "framework:spa:hasContent",
+	
+	/**
 	 * Can be used to overwrite the configured app component with something else
 	 * This is mostly an internal feature
 	 */
-	SPA_APP_COMPONENT_OVERWRITE = "framework:spaAppComponentOverwrite",
+	SPA_APP_COMPONENT_OVERWRITE = "framework:spa:appComponentOverwrite",
+	
+	/**
+	 * The currently shown error component
+	 * Can be either a component definition or null/undefined
+	 */
+	SPA_APP_ERROR_COMPONENT = "framework:spa:errorComponent",
 	
 	/**
 	 * Contains the raw JsonApiState for the currently served page
