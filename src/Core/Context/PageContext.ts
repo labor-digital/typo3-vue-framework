@@ -166,9 +166,9 @@ export class PageContext extends AbstractContext {
 	/**
 	 * Return the repository to look up the configured PIDs (page-ids)
 	 */
-	// public get pidRepository(): PidRepository {
-	// 	return this._pidRepository;
-	// }
+	public get pidRepository(): PidRepository {
+		return this._pidRepository;
+	}
 	
 	/**
 	 * Returns the current language code of the page.
