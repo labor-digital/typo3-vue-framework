@@ -20,6 +20,7 @@ import {EventEmitter, EventEmitterEvent} from "@labor-digital/helferlein/lib/Eve
 import {PlainObject} from "@labor-digital/helferlein/lib/Interfaces/PlainObject";
 import {forEach} from "@labor-digital/helferlein/lib/Lists/forEach";
 import {isUndefined} from "@labor-digital/helferlein/lib/Types/isUndefined";
+import {AxiosInstance} from "axios";
 import Vue from "vue";
 import {Route, VueRouter} from "vue-router/types/router";
 import {SpaAppLayoutComponentListInterface} from "../Config/AppConfig.interfaces";
@@ -27,8 +28,9 @@ import {ContentElementColumnListInterface} from "../Interface/ContentElementColu
 import {FrameworkEventList} from "../Interface/FrameworkEventList";
 import {FrameworkStoreKeys} from "../Interface/FrameworkStoreKeys";
 import {RootLineElementInterface} from "../Interface/RootLineElementInterface";
-import {JsonApiState, State} from "../JsonApi/IdeHelper";
+import {JsonApi, JsonApiState, State} from "../JsonApi/IdeHelper";
 import {Store} from "../Module/General/Store";
+import {Translation} from "../Module/General/Translation";
 import {PageMeta} from "../Module/Spa/PageMeta";
 import {PidRepository} from "../Module/Spa/PidRepository";
 import {AbstractContext} from "./AbstractContext";
@@ -117,6 +119,27 @@ export class PageContext extends AbstractContext {
 	 */
 	public get store(): Store {
 		return this.appContext.store;
+	}
+	
+	/**
+	 * Returns the axios instance to communicate with api endpoint's that are not considered a "resource"
+	 */
+	public get axios(): AxiosInstance {
+		return this._appContext.axios;
+	}
+	
+	/**
+	 * Returns the resource api axios wrapper that handles communication with the TYPO3 resource api
+	 */
+	public get resourceApi(): JsonApi {
+		return this._appContext.resourceApi;
+	}
+	
+	/**
+	 * Returns the translation class with information about the current localization of the framework instance
+	 */
+	public get translation(): Translation | undefined {
+		return this._appContext.translation;
 	}
 	
 	/**

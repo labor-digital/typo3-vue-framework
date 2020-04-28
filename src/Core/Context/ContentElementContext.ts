@@ -20,12 +20,15 @@ import {EventEmitter} from "@labor-digital/helferlein/lib/Events/EventEmitter";
 import {PlainObject} from "@labor-digital/helferlein/lib/Interfaces/PlainObject";
 import {getPath} from "@labor-digital/helferlein/lib/Lists/Paths/getPath";
 import {isUndefined} from "@labor-digital/helferlein/lib/Types/isUndefined";
+import {AxiosInstance} from "axios";
 import {ContentElementErrorHandler, ReasonType} from "../ErrorHandling/ErrorHandler.interfaces";
 import {ContentElementColumnListInterface} from "../Interface/ContentElementColumnListInterface";
 import {ContentElementComponentDefinitionInterface} from "../Interface/ContentElementComponentDefinitionInterface";
-import {JsonApiGetQuery, JsonApiState, JsonApiStateList, State} from "../JsonApi/IdeHelper";
+import {JsonApi, JsonApiGetQuery, JsonApiState, JsonApiStateList, State} from "../JsonApi/IdeHelper";
 import {Store} from "../Module/General/Store";
+import {Translation} from "../Module/General/Translation";
 import {AppContext} from "./AppContext";
+import {PageContext} from "./PageContext";
 
 export class ContentElementContext {
 	
@@ -118,6 +121,14 @@ export class ContentElementContext {
 	}
 	
 	/**
+	 * Returns the page context object.
+	 * Note: This only works for SPA apps!
+	 */
+	public get pageContext(): PageContext {
+		return this._appContext.pageContext;
+	}
+	
+	/**
 	 * Returns the unique id of the content element this context belongs to
 	 */
 	public get id(): number | string {
@@ -143,6 +154,27 @@ export class ContentElementContext {
 	 */
 	public get initialType(): string {
 		return this._initialType;
+	}
+	
+	/**
+	 * Returns the axios instance to communicate with api endpoint's that are not considered a "resource"
+	 */
+	public get axios(): AxiosInstance {
+		return this._appContext.axios;
+	}
+	
+	/**
+	 * Returns the resource api axios wrapper that handles communication with the TYPO3 resource api
+	 */
+	public get resourceApi(): JsonApi {
+		return this._appContext.resourceApi;
+	}
+	
+	/**
+	 * Returns the translation class with information about the current localization of the framework instance
+	 */
+	public get translation(): Translation | undefined {
+		return this._appContext.translation;
 	}
 	
 	/**
