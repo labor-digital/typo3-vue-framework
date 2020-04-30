@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.11.0](https://github.com/labor-digital/typo3-vue-framework/compare/v2.10.0...v2.11.0) (2020-04-19)
+
+
+### Features
+
+* implement more reliable error handling in the OuterAppComponent instead of depending on the routerView component ([ffb4c8d](https://github.com/labor-digital/typo3-vue-framework/commit/ffb4c8daf470c16d4ab6ef97a9e416b24e566d88))
+
 ## [2.10.0](https://github.com/labor-digital/typo3-vue-framework/compare/v2.9.1...v2.10.0) (2020-04-19)
 
 
