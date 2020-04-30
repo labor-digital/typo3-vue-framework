@@ -37,6 +37,11 @@ export enum FrameworkStoreKeys {
 	SPA_APP_ERROR_COMPONENT = "framework:spa:errorComponent",
 	
 	/**
+	 * The site's base url for the current page
+	 */
+	SPA_PAGE_SITE_URL = "framework:spaPage:siteUrl",
+	
+	/**
 	 * Contains the raw JsonApiState for the currently served page
 	 */
 	SPA_PAGE_STATE = "framework:spaPage:state",

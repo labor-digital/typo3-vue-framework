@@ -71,7 +71,7 @@ export class SpaBootstrap {
 		
 		// Create the page context
 		appContext.__setProperty("pageContext", new PageContext({
-			baseUrl, appContext, layoutComponents, pidRepository
+			siteUrl: baseUrl, appContext, layoutComponents, pidRepository
 		}));
 		
 		// Done

@@ -59,11 +59,6 @@ export class PageContext extends AbstractContext {
 	protected _pageMeta: PageMeta;
 	
 	/**
-	 * The base url of the current application
-	 */
-	protected _baseUrl: string;
-	
-	/**
 	 * The repository to look up the configured PIDs (page-ids).
 	 * The pid configuration is passed by the frontend api every
 	 * time a page response is requested from the server
@@ -72,6 +67,7 @@ export class PageContext extends AbstractContext {
 	
 	public constructor(properties: PlainObject) {
 		super(properties);
+		this.store.set(FrameworkStoreKeys.SPA_PAGE_SITE_URL, properties.siteUrl);
 		this.store.set(FrameworkStoreKeys.SPA_PAGE_COMMON_ELEMENTS, {});
 		this.store.set(FrameworkStoreKeys.SPA_PAGE_STATE, new State({}));
 		this.store.set(FrameworkStoreKeys.SPA_PAGE_DATA, new State({}));
@@ -242,10 +238,18 @@ export class PageContext extends AbstractContext {
 	}
 	
 	/**
-	 * Returns the base url that was configured for this framework instance
+	 * Alias for baseUrl
+	 * @see siteUrl
+	 */
+	public get siteUrl(): string {
+		return this.baseUrl;
+	}
+	
+	/**
+	 * Returns the site's base url for the current page
 	 */
 	public get baseUrl(): string {
-		return this._baseUrl;
+		return this.store.get(FrameworkStoreKeys.SPA_PAGE_SITE_URL);
 	}
 	
 	/**
