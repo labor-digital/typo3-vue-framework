@@ -96,7 +96,6 @@
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><a href="_core_context_pagecontext_.pagecontext.html#_appcontext" class="tsd-kind-icon">_app<wbr>Context</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><a href="_core_context_pagecontext_.pagecontext.html#_baseurl" class="tsd-kind-icon">_base<wbr>Url</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><a href="_core_context_pagecontext_.pagecontext.html#_layoutcomponents" class="tsd-kind-icon">_layout<wbr>Components</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><a href="_core_context_pagecontext_.pagecontext.html#_pagemeta" class="tsd-kind-icon">_page<wbr>Meta</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><a href="_core_context_pagecontext_.pagecontext.html#_pidrepository" class="tsd-kind-icon">_pid<wbr>Repository</a></li>
@@ -107,6 +106,7 @@
 							<h3>Accessors</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="_core_context_pagecontext_.pagecontext.html#appcontext" class="tsd-kind-icon">app<wbr>Context</a></li>
+								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="_core_context_pagecontext_.pagecontext.html#axios" class="tsd-kind-icon">axios</a></li>
 								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="_core_context_pagecontext_.pagecontext.html#baseurl" class="tsd-kind-icon">base<wbr>Url</a></li>
 								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="_core_context_pagecontext_.pagecontext.html#children" class="tsd-kind-icon">children</a></li>
 								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="_core_context_pagecontext_.pagecontext.html#commonelements" class="tsd-kind-icon">common<wbr>Elements</a></li>
@@ -121,10 +121,13 @@
 								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="_core_context_pagecontext_.pagecontext.html#layoutcomponents" class="tsd-kind-icon">layout<wbr>Components</a></li>
 								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="_core_context_pagecontext_.pagecontext.html#pagemeta" class="tsd-kind-icon">page<wbr>Meta</a></li>
 								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="_core_context_pagecontext_.pagecontext.html#pidrepository" class="tsd-kind-icon">pid<wbr>Repository</a></li>
+								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="_core_context_pagecontext_.pagecontext.html#resourceapi" class="tsd-kind-icon">resource<wbr>Api</a></li>
 								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="_core_context_pagecontext_.pagecontext.html#rootline" class="tsd-kind-icon">root<wbr>Line</a></li>
 								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="_core_context_pagecontext_.pagecontext.html#router" class="tsd-kind-icon">router</a></li>
+								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="_core_context_pagecontext_.pagecontext.html#siteurl" class="tsd-kind-icon">site<wbr>Url</a></li>
 								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="_core_context_pagecontext_.pagecontext.html#state" class="tsd-kind-icon">state</a></li>
 								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="_core_context_pagecontext_.pagecontext.html#store" class="tsd-kind-icon">store</a></li>
+								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="_core_context_pagecontext_.pagecontext.html#translation" class="tsd-kind-icon">translation</a></li>
 								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="_core_context_pagecontext_.pagecontext.html#type" class="tsd-kind-icon">type</a></li>
 							</ul>
 						</section>
@@ -152,7 +155,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides <a href="_core_context_abstractcontext_.abstractcontext.html">AbstractContext</a>.<a href="_core_context_abstractcontext_.abstractcontext.html#constructor">constructor</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/2c8eb26/src/Core/Context/PageContext.ts#L69">src/Core/Context/PageContext.ts:69</a></li>
+									<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/afdeba1/src/Core/Context/PageContext.ts#L66">src/Core/Context/PageContext.ts:66</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -174,7 +177,7 @@
 					<div class="tsd-signature tsd-kind-icon">_app<wbr>Context<span class="tsd-signature-symbol">:</span> <a href="_core_context_appcontext_.appcontext.html" class="tsd-signature-type">AppContext</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/2c8eb26/src/Core/Context/PageContext.ts#L42">src/Core/Context/PageContext.ts:42</a></li>
+							<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/afdeba1/src/Core/Context/PageContext.ts#L44">src/Core/Context/PageContext.ts:44</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -184,27 +187,12 @@
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-protected">
-					<a name="_baseurl" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagProtected">Protected</span> _base<wbr>Url</h3>
-					<div class="tsd-signature tsd-kind-icon">_base<wbr>Url<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/2c8eb26/src/Core/Context/PageContext.ts#L62">src/Core/Context/PageContext.ts:62</a></li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>The base url of the current application</p>
-						</div>
-					</div>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-protected">
 					<a name="_layoutcomponents" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagProtected">Protected</span> _layout<wbr>Components</h3>
 					<div class="tsd-signature tsd-kind-icon">_layout<wbr>Components<span class="tsd-signature-symbol">:</span> <a href="../interfaces/_core_config_appconfig_interfaces_.spaapplayoutcomponentlistinterface.html" class="tsd-signature-type">SpaAppLayoutComponentListInterface</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/2c8eb26/src/Core/Context/PageContext.ts#L47">src/Core/Context/PageContext.ts:47</a></li>
+							<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/afdeba1/src/Core/Context/PageContext.ts#L49">src/Core/Context/PageContext.ts:49</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -219,7 +207,7 @@
 					<div class="tsd-signature tsd-kind-icon">_page<wbr>Meta<span class="tsd-signature-symbol">:</span> <a href="_core_module_spa_pagemeta_.pagemeta.html" class="tsd-signature-type">PageMeta</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/2c8eb26/src/Core/Context/PageContext.ts#L57">src/Core/Context/PageContext.ts:57</a></li>
+							<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/afdeba1/src/Core/Context/PageContext.ts#L59">src/Core/Context/PageContext.ts:59</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -234,7 +222,7 @@
 					<div class="tsd-signature tsd-kind-icon">_pid<wbr>Repository<span class="tsd-signature-symbol">:</span> <a href="_core_module_spa_pidrepository_.pidrepository.html" class="tsd-signature-type">PidRepository</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/2c8eb26/src/Core/Context/PageContext.ts#L69">src/Core/Context/PageContext.ts:69</a></li>
+							<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/afdeba1/src/Core/Context/PageContext.ts#L66">src/Core/Context/PageContext.ts:66</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -251,7 +239,7 @@
 					<div class="tsd-signature tsd-kind-icon">_router<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">VueRouter</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/2c8eb26/src/Core/Context/PageContext.ts#L52">src/Core/Context/PageContext.ts:52</a></li>
+							<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/afdeba1/src/Core/Context/PageContext.ts#L54">src/Core/Context/PageContext.ts:54</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -273,7 +261,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/2c8eb26/src/Core/Context/PageContext.ts#L90">src/Core/Context/PageContext.ts:90</a></li>
+									<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/afdeba1/src/Core/Context/PageContext.ts#L88">src/Core/Context/PageContext.ts:88</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -282,6 +270,28 @@
 								</div>
 							</div>
 							<h4 class="tsd-returns-title">Returns <a href="_core_context_appcontext_.appcontext.html" class="tsd-signature-type">AppContext</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class">
+					<a name="axios" class="tsd-anchor"></a>
+					<h3>axios</h3>
+					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> axios<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">AxiosInstance</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/afdeba1/src/Core/Context/PageContext.ts#L123">src/Core/Context/PageContext.ts:123</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Returns the axios instance to communicate with api endpoint&#39;s that are not considered a &quot;resource&quot;</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">AxiosInstance</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -295,12 +305,12 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/2c8eb26/src/Core/Context/PageContext.ts#L224">src/Core/Context/PageContext.ts:224</a></li>
+									<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/afdeba1/src/Core/Context/PageContext.ts#L251">src/Core/Context/PageContext.ts:251</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Returns the base url that was configured for this framework instance</p>
+									<p>Returns the site&#39;s base url for the current page</p>
 								</div>
 							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
@@ -317,7 +327,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/2c8eb26/src/Core/Context/PageContext.ts#L210">src/Core/Context/PageContext.ts:210</a></li>
+									<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/afdeba1/src/Core/Context/PageContext.ts#L229">src/Core/Context/PageContext.ts:229</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -339,7 +349,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/2c8eb26/src/Core/Context/PageContext.ts#L155">src/Core/Context/PageContext.ts:155</a></li>
+									<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/afdeba1/src/Core/Context/PageContext.ts#L174">src/Core/Context/PageContext.ts:174</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -361,7 +371,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/2c8eb26/src/Core/Context/PageContext.ts#L217">src/Core/Context/PageContext.ts:217</a></li>
+									<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/afdeba1/src/Core/Context/PageContext.ts#L236">src/Core/Context/PageContext.ts:236</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -383,7 +393,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/2c8eb26/src/Core/Context/PageContext.ts#L134">src/Core/Context/PageContext.ts:134</a></li>
+									<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/afdeba1/src/Core/Context/PageContext.ts#L153">src/Core/Context/PageContext.ts:153</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -406,7 +416,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/2c8eb26/src/Core/Context/PageContext.ts#L148">src/Core/Context/PageContext.ts:148</a></li>
+									<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/afdeba1/src/Core/Context/PageContext.ts#L167">src/Core/Context/PageContext.ts:167</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -428,7 +438,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/2c8eb26/src/Core/Context/PageContext.ts#L126">src/Core/Context/PageContext.ts:126</a></li>
+									<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/afdeba1/src/Core/Context/PageContext.ts#L145">src/Core/Context/PageContext.ts:145</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -451,7 +461,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/2c8eb26/src/Core/Context/PageContext.ts#L162">src/Core/Context/PageContext.ts:162</a></li>
+									<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/afdeba1/src/Core/Context/PageContext.ts#L181">src/Core/Context/PageContext.ts:181</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -473,7 +483,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/2c8eb26/src/Core/Context/PageContext.ts#L231">src/Core/Context/PageContext.ts:231</a></li>
+									<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/afdeba1/src/Core/Context/PageContext.ts#L258">src/Core/Context/PageContext.ts:258</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -495,7 +505,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/2c8eb26/src/Core/Context/PageContext.ts#L177">src/Core/Context/PageContext.ts:177</a></li>
+									<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/afdeba1/src/Core/Context/PageContext.ts#L196">src/Core/Context/PageContext.ts:196</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -518,7 +528,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/2c8eb26/src/Core/Context/PageContext.ts#L191">src/Core/Context/PageContext.ts:191</a></li>
+									<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/afdeba1/src/Core/Context/PageContext.ts#L210">src/Core/Context/PageContext.ts:210</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -540,7 +550,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/2c8eb26/src/Core/Context/PageContext.ts#L104">src/Core/Context/PageContext.ts:104</a></li>
+									<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/afdeba1/src/Core/Context/PageContext.ts#L102">src/Core/Context/PageContext.ts:102</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -562,7 +572,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/2c8eb26/src/Core/Context/PageContext.ts#L111">src/Core/Context/PageContext.ts:111</a></li>
+									<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/afdeba1/src/Core/Context/PageContext.ts#L109">src/Core/Context/PageContext.ts:109</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -584,7 +594,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/2c8eb26/src/Core/Context/PageContext.ts#L169">src/Core/Context/PageContext.ts:169</a></li>
+									<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/afdeba1/src/Core/Context/PageContext.ts#L188">src/Core/Context/PageContext.ts:188</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -593,6 +603,28 @@
 								</div>
 							</div>
 							<h4 class="tsd-returns-title">Returns <a href="_core_module_spa_pidrepository_.pidrepository.html" class="tsd-signature-type">PidRepository</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class">
+					<a name="resourceapi" class="tsd-anchor"></a>
+					<h3>resource<wbr>Api</h3>
+					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> resourceApi<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_core_jsonapi_idehelper_.jsonapi.html" class="tsd-signature-type">JsonApi</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/afdeba1/src/Core/Context/PageContext.ts#L130">src/Core/Context/PageContext.ts:130</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Returns the resource api axios wrapper that handles communication with the TYPO3 resource api</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <a href="_core_jsonapi_idehelper_.jsonapi.html" class="tsd-signature-type">JsonApi</a></h4>
 						</li>
 					</ul>
 				</section>
@@ -606,7 +638,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/2c8eb26/src/Core/Context/PageContext.ts#L184">src/Core/Context/PageContext.ts:184</a></li>
+									<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/afdeba1/src/Core/Context/PageContext.ts#L203">src/Core/Context/PageContext.ts:203</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -628,7 +660,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/2c8eb26/src/Core/Context/PageContext.ts#L97">src/Core/Context/PageContext.ts:97</a></li>
+									<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/afdeba1/src/Core/Context/PageContext.ts#L95">src/Core/Context/PageContext.ts:95</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -637,6 +669,33 @@
 								</div>
 							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">VueRouter</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class">
+					<a name="siteurl" class="tsd-anchor"></a>
+					<h3>site<wbr>Url</h3>
+					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> siteUrl<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/afdeba1/src/Core/Context/PageContext.ts#L244">src/Core/Context/PageContext.ts:244</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Alias for baseUrl</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>see</dt>
+									<dd><p>siteUrl</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -650,7 +709,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/2c8eb26/src/Core/Context/PageContext.ts#L141">src/Core/Context/PageContext.ts:141</a></li>
+									<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/afdeba1/src/Core/Context/PageContext.ts#L160">src/Core/Context/PageContext.ts:160</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -672,7 +731,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/2c8eb26/src/Core/Context/PageContext.ts#L118">src/Core/Context/PageContext.ts:118</a></li>
+									<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/afdeba1/src/Core/Context/PageContext.ts#L116">src/Core/Context/PageContext.ts:116</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -681,6 +740,28 @@
 								</div>
 							</div>
 							<h4 class="tsd-returns-title">Returns <a href="_core_module_general_store_.store.html" class="tsd-signature-type">Store</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class">
+					<a name="translation" class="tsd-anchor"></a>
+					<h3>translation</h3>
+					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> translation<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_core_module_general_translation_.translation.html" class="tsd-signature-type">Translation</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/afdeba1/src/Core/Context/PageContext.ts#L137">src/Core/Context/PageContext.ts:137</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Returns the translation class with information about the current localization of the framework instance</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <a href="_core_module_general_translation_.translation.html" class="tsd-signature-type">Translation</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -694,7 +775,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/2c8eb26/src/Core/Context/PageContext.ts#L83">src/Core/Context/PageContext.ts:83</a></li>
+									<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/afdeba1/src/Core/Context/PageContext.ts#L81">src/Core/Context/PageContext.ts:81</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -720,7 +801,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_core_context_abstractcontext_.abstractcontext.html">AbstractContext</a>.<a href="_core_context_abstractcontext_.abstractcontext.html#__setproperty">__setProperty</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/2c8eb26/src/Core/Context/AbstractContext.ts#L37">src/Core/Context/AbstractContext.ts:37</a></li>
+									<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/afdeba1/src/Core/Context/AbstractContext.ts#L37">src/Core/Context/AbstractContext.ts:37</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -753,7 +834,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/2c8eb26/src/Core/Context/PageContext.ts#L240">src/Core/Context/PageContext.ts:240</a></li>
+									<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/afdeba1/src/Core/Context/PageContext.ts#L267">src/Core/Context/PageContext.ts:267</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -783,7 +864,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/2c8eb26/src/Core/Context/PageContext.ts#L199">src/Core/Context/PageContext.ts:199</a></li>
+									<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/afdeba1/src/Core/Context/PageContext.ts#L218">src/Core/Context/PageContext.ts:218</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -830,9 +911,6 @@
 								<a href="_core_context_pagecontext_.pagecontext.html#_appcontext" class="tsd-kind-icon">_app<wbr>Context</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-protected">
-								<a href="_core_context_pagecontext_.pagecontext.html#_baseurl" class="tsd-kind-icon">_base<wbr>Url</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-protected">
 								<a href="_core_context_pagecontext_.pagecontext.html#_layoutcomponents" class="tsd-kind-icon">_layout<wbr>Components</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-protected">
@@ -846,6 +924,9 @@
 							</li>
 							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
 								<a href="_core_context_pagecontext_.pagecontext.html#appcontext" class="tsd-kind-icon">app<wbr>Context</a>
+							</li>
+							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
+								<a href="_core_context_pagecontext_.pagecontext.html#axios" class="tsd-kind-icon">axios</a>
 							</li>
 							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
 								<a href="_core_context_pagecontext_.pagecontext.html#baseurl" class="tsd-kind-icon">base<wbr>Url</a>
@@ -890,16 +971,25 @@
 								<a href="_core_context_pagecontext_.pagecontext.html#pidrepository" class="tsd-kind-icon">pid<wbr>Repository</a>
 							</li>
 							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
+								<a href="_core_context_pagecontext_.pagecontext.html#resourceapi" class="tsd-kind-icon">resource<wbr>Api</a>
+							</li>
+							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
 								<a href="_core_context_pagecontext_.pagecontext.html#rootline" class="tsd-kind-icon">root<wbr>Line</a>
 							</li>
 							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
 								<a href="_core_context_pagecontext_.pagecontext.html#router" class="tsd-kind-icon">router</a>
 							</li>
 							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
+								<a href="_core_context_pagecontext_.pagecontext.html#siteurl" class="tsd-kind-icon">site<wbr>Url</a>
+							</li>
+							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
 								<a href="_core_context_pagecontext_.pagecontext.html#state" class="tsd-kind-icon">state</a>
 							</li>
 							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
 								<a href="_core_context_pagecontext_.pagecontext.html#store" class="tsd-kind-icon">store</a>
+							</li>
+							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
+								<a href="_core_context_pagecontext_.pagecontext.html#translation" class="tsd-kind-icon">translation</a>
 							</li>
 							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
 								<a href="_core_context_pagecontext_.pagecontext.html#type" class="tsd-kind-icon">type</a>

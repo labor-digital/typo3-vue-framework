@@ -98,16 +98,21 @@
 						<section class="tsd-index-section tsd-is-private-protected">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><a href="_core_module_general_store_.store.html#_emitter" class="tsd-kind-icon">_emitter</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><a href="_core_module_general_store_.store.html#_store" class="tsd-kind-icon">_store</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><a href="_core_module_general_store_.store.html#_watched" class="tsd-kind-icon">_watched</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_core_module_general_store_.store.html#bind" class="tsd-kind-icon">bind</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_core_module_general_store_.store.html#get" class="tsd-kind-icon">get</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_core_module_general_store_.store.html#getraw" class="tsd-kind-icon">get<wbr>Raw</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_core_module_general_store_.store.html#has" class="tsd-kind-icon">has</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_core_module_general_store_.store.html#set" class="tsd-kind-icon">set</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_core_module_general_store_.store.html#unbind" class="tsd-kind-icon">unbind</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_core_module_general_store_.store.html#watch" class="tsd-kind-icon">watch</a></li>
 							</ul>
 						</section>
 					</div>
@@ -125,7 +130,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/2c8eb26/src/Core/Module/General/Store.ts#L39">src/Core/Module/General/Store.ts:39</a></li>
+									<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/afdeba1/src/Core/Module/General/Store.ts#L57">src/Core/Module/General/Store.ts:57</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -145,12 +150,27 @@
 			<section class="tsd-panel-group tsd-member-group tsd-is-private-protected">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-protected">
-					<a name="_store" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagProtected">Protected</span> _store</h3>
-					<div class="tsd-signature tsd-kind-icon">_store<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<a name="_emitter" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagProtected">Protected</span> _emitter</h3>
+					<div class="tsd-signature tsd-kind-icon">_emitter<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventEmitter</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/2c8eb26/src/Core/Module/General/Store.ts#L39">src/Core/Module/General/Store.ts:39</a></li>
+							<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/afdeba1/src/Core/Module/General/Store.ts#L47">src/Core/Module/General/Store.ts:47</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The event emitter to perform the binding proxy with</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-protected">
+					<a name="_store" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagProtected">Protected</span> _store</h3>
+					<div class="tsd-signature tsd-kind-icon">_store<span class="tsd-signature-symbol">:</span> <a href="../interfaces/_core_module_general_store_.storevue.html" class="tsd-signature-type">StoreVue</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/afdeba1/src/Core/Module/General/Store.ts#L52">src/Core/Module/General/Store.ts:52</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -159,20 +179,73 @@
 						</div>
 					</div>
 				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-protected">
+					<a name="_watched" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagProtected">Protected</span> _watched</h3>
+					<div class="tsd-signature tsd-kind-icon">_watched<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Set</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/afdeba1/src/Core/Module/General/Store.ts#L57">src/Core/Module/General/Store.ts:57</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The list of already watched properties inside the store</p>
+						</div>
+					</div>
+				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Methods</h2>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="get" class="tsd-anchor"></a>
-					<h3>get</h3>
+					<a name="bind" class="tsd-anchor"></a>
+					<h3>bind</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">get<span class="tsd-signature-symbol">(</span>key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span>, defaultValue<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+						<li class="tsd-signature tsd-kind-icon">bind<span class="tsd-signature-symbol">(</span>key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, callback<span class="tsd-signature-symbol">: </span><a href="../interfaces/_core_module_general_store_.storewatcher.html" class="tsd-signature-type">StoreWatcher</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_core_module_general_store_.store.html" class="tsd-signature-type">Store</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/2c8eb26/src/Core/Module/General/Store.ts#L72">src/Core/Module/General/Store.ts:72</a></li>
+									<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/afdeba1/src/Core/Module/General/Store.ts#L125">src/Core/Module/General/Store.ts:125</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Used to watch a certain store property for changes. Works in the same way your
+									normal vue watchers work, the callback receives two values, the first is the new the second the previous value.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>key: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The key of the property to watch</p>
+									</div>
+								</li>
+								<li>
+									<h5>callback: <a href="../interfaces/_core_module_general_store_.storewatcher.html" class="tsd-signature-type">StoreWatcher</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The callback to execute when a property changes</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="_core_module_general_store_.store.html" class="tsd-signature-type">Store</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="get" class="tsd-anchor"></a>
+					<h3>get</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">get<span class="tsd-signature-symbol">(</span>key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ListPath</span>, defaultValue<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/afdeba1/src/Core/Module/General/Store.ts#L94">src/Core/Module/General/Store.ts:94</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -183,7 +256,7 @@
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>key: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h5>
+									<h5>key: <span class="tsd-signature-type">ListPath</span></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>The name of the stored value to extract</p>
 									</div>
@@ -209,7 +282,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/2c8eb26/src/Core/Module/General/Store.ts#L91">src/Core/Module/General/Store.ts:91</a></li>
+									<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/afdeba1/src/Core/Module/General/Store.ts#L154">src/Core/Module/General/Store.ts:154</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -226,13 +299,13 @@
 					<a name="has" class="tsd-anchor"></a>
 					<h3>has</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">has<span class="tsd-signature-symbol">(</span>key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+						<li class="tsd-signature tsd-kind-icon">has<span class="tsd-signature-symbol">(</span>key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ListPath</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/2c8eb26/src/Core/Module/General/Store.ts#L62">src/Core/Module/General/Store.ts:62</a></li>
+									<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/afdeba1/src/Core/Module/General/Store.ts#L85">src/Core/Module/General/Store.ts:85</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -243,7 +316,7 @@
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>key: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h5>
+									<h5>key: <span class="tsd-signature-type">ListPath</span></h5>
 									<div class="tsd-comment tsd-typography">
 									</div>
 								</li>
@@ -262,7 +335,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/2c8eb26/src/Core/Module/General/Store.ts#L82">src/Core/Module/General/Store.ts:82</a></li>
+									<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/afdeba1/src/Core/Module/General/Store.ts#L103">src/Core/Module/General/Store.ts:103</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -283,6 +356,80 @@
 									<div class="tsd-comment tsd-typography">
 										<p>The value to set for the given key</p>
 									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="_core_module_general_store_.store.html" class="tsd-signature-type">Store</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="unbind" class="tsd-anchor"></a>
+					<h3>unbind</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">unbind<span class="tsd-signature-symbol">(</span>key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, callback<span class="tsd-signature-symbol">?: </span><a href="../interfaces/_core_module_general_store_.storewatcher.html" class="tsd-signature-type">StoreWatcher</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_core_module_general_store_.store.html" class="tsd-signature-type">Store</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/afdeba1/src/Core/Module/General/Store.ts#L145">src/Core/Module/General/Store.ts:145</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Used to unbind a previously bound callback from watching a property.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>key: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The key of the property to unbind the given callback from</p>
+									</div>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> callback: <a href="../interfaces/_core_module_general_store_.storewatcher.html" class="tsd-signature-type">StoreWatcher</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The callback to unbind from watching a property. If this is not given
+										all callbacks are removed for the given property</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="_core_module_general_store_.store.html" class="tsd-signature-type">Store</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="watch" class="tsd-anchor"></a>
+					<h3>watch</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">watch<span class="tsd-signature-symbol">(</span>key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, callback<span class="tsd-signature-symbol">: </span><a href="../interfaces/_core_module_general_store_.storewatcher.html" class="tsd-signature-type">StoreWatcher</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_core_module_general_store_.store.html" class="tsd-signature-type">Store</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/afdeba1/src/Core/Module/General/Store.ts#L114">src/Core/Module/General/Store.ts:114</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>An alias for bind()</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>see</dt>
+									<dd><p>Store.bind()</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>key: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5>callback: <a href="../interfaces/_core_module_general_store_.storewatcher.html" class="tsd-signature-type">StoreWatcher</a></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="_core_module_general_store_.store.html" class="tsd-signature-type">Store</a></h4>
@@ -313,7 +460,16 @@
 								<a href="_core_module_general_store_.store.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-protected">
+								<a href="_core_module_general_store_.store.html#_emitter" class="tsd-kind-icon">_emitter</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-protected">
 								<a href="_core_module_general_store_.store.html#_store" class="tsd-kind-icon">_store</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-protected">
+								<a href="_core_module_general_store_.store.html#_watched" class="tsd-kind-icon">_watched</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_core_module_general_store_.store.html#bind" class="tsd-kind-icon">bind</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="_core_module_general_store_.store.html#get" class="tsd-kind-icon">get</a>
@@ -327,10 +483,22 @@
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="_core_module_general_store_.store.html#set" class="tsd-kind-icon">set</a>
 							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_core_module_general_store_.store.html#unbind" class="tsd-kind-icon">unbind</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_core_module_general_store_.store.html#watch" class="tsd-kind-icon">watch</a>
+							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
+					<li class=" tsd-kind-interface tsd-parent-kind-module tsd-is-not-exported">
+						<a href="../interfaces/_core_module_general_store_.storevue.html" class="tsd-kind-icon">Store<wbr>Vue</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-module">
+						<a href="../interfaces/_core_module_general_store_.storewatcher.html" class="tsd-kind-icon">Store<wbr>Watcher</a>
+					</li>
 				</ul>
 			</nav>
 		</div>
