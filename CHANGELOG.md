@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.12.0](https://github.com/labor-digital/typo3-vue-framework/compare/v2.11.0...v2.12.0) (2020-04-30)
+
+
+### Features
+
+* **PageContext:** use the real site url from the TYPO3 backend instead of the API url to allow the app to run on different domains on the frontend and the backend ([3daf425](https://github.com/labor-digital/typo3-vue-framework/commit/3daf425a7f2ecef37365f410628541be60ccb7bc))
+* **Store:** make the store instance watchable ([b0f45d2](https://github.com/labor-digital/typo3-vue-framework/commit/b0f45d2491b3cb3f5386328621ae8f4b6f42088e))
+* add more shortcuts to connect the contexts better with each other ([6f9e50d](https://github.com/labor-digital/typo3-vue-framework/commit/6f9e50dfa967874576c89c2283a5b32d44339f7b))
+
 ## [2.11.0](https://github.com/labor-digital/typo3-vue-framework/compare/v2.10.0...v2.11.0) (2020-04-19)
 
 
