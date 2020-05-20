@@ -19,6 +19,7 @@
 import {EventEmitter, EventEmitterEvent} from "@labor-digital/helferlein/lib/Events/EventEmitter";
 import {PlainObject} from "@labor-digital/helferlein/lib/Interfaces/PlainObject";
 import {forEach} from "@labor-digital/helferlein/lib/Lists/forEach";
+import {isString} from "@labor-digital/helferlein/lib/Types/isString";
 import {isUndefined} from "@labor-digital/helferlein/lib/Types/isUndefined";
 import {AxiosInstance} from "axios";
 import Vue from "vue";
@@ -272,6 +273,11 @@ export class PageContext extends AbstractContext {
 		const state: JsonApiState = e.args.state;
 		this.store.set(FrameworkStoreKeys.SPA_PAGE_STATE, state);
 		this.store.set(FrameworkStoreKeys.SPA_PAGE_DATA, new State(state.get("data", {})));
+		
+		// Update site url if required
+		if (state.get("siteUrl") !== this.siteUrl && isString(state.get("siteUrl")) && state.get("siteUrl").trim() === "")
+			this.store.set(FrameworkStoreKeys.SPA_PAGE_SITE_URL, state.get("siteUrl"));
+		
 		// Update the common elements if there are any
 		if (state.has("common")) {
 			const common = this.store.get(FrameworkStoreKeys.SPA_PAGE_COMMON_ELEMENTS);
