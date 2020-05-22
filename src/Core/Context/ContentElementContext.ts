@@ -24,7 +24,7 @@ import {AxiosInstance} from "axios";
 import {ContentElementErrorHandler, ReasonType} from "../ErrorHandling/ErrorHandler.interfaces";
 import {ContentElementColumnListInterface} from "../Interface/ContentElementColumnListInterface";
 import {ContentElementComponentDefinitionInterface} from "../Interface/ContentElementComponentDefinitionInterface";
-import {JsonApi, JsonApiGetQuery, JsonApiState, JsonApiStateList, State} from "../JsonApi/IdeHelper";
+import {Collection, JsonApi, JsonApiGetQuery, Resource, State} from "../JsonApi/IdeHelper";
 import {Store} from "../Module/General/Store";
 import {Translation} from "../Module/General/Translation";
 import {AppContext} from "./AppContext";
@@ -50,7 +50,7 @@ export class ContentElementContext {
 	/**
 	 * The initial state object (only if configured from the backend element)
 	 */
-	protected _initialState: JsonApiState | JsonApiStateList;
+	protected _initialState: Resource | Collection;
 	
 	/**
 	 * The initial state query object (only if configured from the backend element)
@@ -72,7 +72,7 @@ export class ContentElementContext {
 	 */
 	protected _errorHandler: ContentElementErrorHandler;
 	
-	public constructor(context: AppContext, initialState: JsonApiState | JsonApiStateList,
+	public constructor(context: AppContext, initialState: Resource | Collection,
 					   definition: ContentElementComponentDefinitionInterface, errorHandler: ContentElementErrorHandler) {
 		this._id = definition.id;
 		this._children = definition.children;
@@ -138,7 +138,7 @@ export class ContentElementContext {
 	/**
 	 * Returns the initial state object (only if configured from the backend element)
 	 */
-	public get initialState(): JsonApiState | JsonApiStateList {
+	public get initialState(): Resource | Collection {
 		return this._initialState;
 	}
 	

@@ -29,7 +29,7 @@ import {ContentElementColumnListInterface} from "../Interface/ContentElementColu
 import {FrameworkEventList} from "../Interface/FrameworkEventList";
 import {FrameworkStoreKeys} from "../Interface/FrameworkStoreKeys";
 import {RootLineElementInterface} from "../Interface/RootLineElementInterface";
-import {JsonApi, JsonApiState, State} from "../JsonApi/IdeHelper";
+import {JsonApi, Resource, State} from "../JsonApi/IdeHelper";
 import {Store} from "../Module/General/Store";
 import {Translation} from "../Module/General/Translation";
 import {PageMeta} from "../Module/Spa/PageMeta";
@@ -158,7 +158,7 @@ export class PageContext extends AbstractContext {
 	/**
 	 * Returns the raw state object which holds the information about the current page
 	 */
-	public get state(): JsonApiState {
+	public get state(): Resource {
 		return this.store.get(FrameworkStoreKeys.SPA_PAGE_STATE);
 	}
 	
@@ -217,8 +217,8 @@ export class PageContext extends AbstractContext {
 	 * @param key
 	 */
 	public refreshCommonElement(key: string): Promise<any> {
-		return this.appContext.resourceApi.getSingle("commonElement", key)
-			.then((state: JsonApiState) => {
+		return this.appContext.resourceApi.getResource("commonElement", key)
+			.then((state: Resource) => {
 				Vue.set(this.commonElements, key, state.get("element", {}));
 				return true;
 			});
@@ -270,7 +270,7 @@ export class PageContext extends AbstractContext {
 		this.store.set(FrameworkStoreKeys.SPA_PAGE_ROUTE, e.args.to);
 		
 		// Store the raw page state and data
-		const state: JsonApiState = e.args.state;
+		const state: Resource = e.args.state;
 		this.store.set(FrameworkStoreKeys.SPA_PAGE_STATE, state);
 		this.store.set(FrameworkStoreKeys.SPA_PAGE_DATA, new State(state.get("data", {})));
 		

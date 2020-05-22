@@ -42,12 +42,12 @@ export enum FrameworkStoreKeys {
 	SPA_PAGE_SITE_URL = "framework:spaPage:siteUrl",
 	
 	/**
-	 * Contains the raw JsonApiState for the currently served page
+	 * Contains the raw resource for the currently served page
 	 */
 	SPA_PAGE_STATE = "framework:spaPage:state",
 	
 	/**
-	 * Contains the page data as a State object
+	 * Contains the page data as a resource object
 	 */
 	SPA_PAGE_DATA = "framework:spaPage:data",
 	

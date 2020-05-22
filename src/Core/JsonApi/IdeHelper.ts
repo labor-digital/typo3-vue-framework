@@ -16,35 +16,49 @@
  * Last modified: 2019.12.12 at 13:22
  */
 
-import {JsonApi as RootJsonApi} from "@labor-digital/json-api/lib/JsonApi";
+import {Collection as RootCollection} from "@labor-digital/json-api/lib/Elements/Collection";
+import {Resource as RootResource} from "@labor-digital/json-api/lib/Elements/Resource";
 import {
-	ApiPagination,
 	JsonApiGetQuery as RootJsonApiGetQuery,
+	JsonApiPagination as RootJsonApiPagination,
 	JsonApiResponse as RootJsonApiResponse
 } from "@labor-digital/json-api/lib/JsonApi.interfaces";
 import {JsonApiState as RootJsonApiState} from "@labor-digital/json-api/lib/JsonApiState";
 import {JsonApiStateList as RootJsonApiStateList} from "@labor-digital/json-api/lib/JsonApiStateList";
 import {State as RootState} from "@labor-digital/json-api/lib/State";
+import {TypoJsonApi} from "./TypoJsonApi";
 
 // I just pass those classes and interfaces through to help IDEs like phpstorm to resolve them correctly.
 
 export class State extends RootState {
 }
 
-export class JsonApi extends RootJsonApi {
+export class JsonApi extends TypoJsonApi {
 }
 
 export interface JsonApiGetQuery extends RootJsonApiGetQuery {
 }
 
-export interface JsonApiPagination extends ApiPagination {
+export interface JsonApiPagination extends RootJsonApiPagination {
 }
 
 export interface JsonApiResponse extends RootJsonApiResponse {
 }
 
+export interface Resource extends RootResource {
+}
+
+export interface Collection extends RootCollection {
+}
+
+/**
+ * @deprecated will be removed in v3.0 - Use "Resource" instead
+ */
 export interface JsonApiState extends RootJsonApiState {
 }
 
+/**
+ * @deprecated will be removed in v3.0 - Use "Collection" instead
+ */
 export interface JsonApiStateList extends RootJsonApiStateList {
 }

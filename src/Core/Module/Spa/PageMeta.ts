@@ -23,7 +23,7 @@ import Vue from "vue";
 import {MetaInfo, VueMetaPlugin} from "vue-meta";
 import {PageContext} from "../../Context/PageContext";
 import {FrameworkEventList} from "../../Interface/FrameworkEventList";
-import {JsonApiState} from "../../JsonApi/IdeHelper";
+import {Resource} from "../../JsonApi/IdeHelper";
 
 export class PageMeta {
 	/**
@@ -113,7 +113,7 @@ export class PageMeta {
 	 * @param e
 	 */
 	protected afterNavigation(e: EventEmitterEvent): void {
-		const state: JsonApiState = e.args.state;
+		const state: Resource = e.args.state;
 		const context: PageContext = e.args.context;
 		
 		// Merge the meta information with the existing data

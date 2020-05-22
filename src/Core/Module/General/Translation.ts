@@ -22,7 +22,7 @@ import {isPlainObject} from "@labor-digital/helferlein/lib/Types/isPlainObject";
 import {isString} from "@labor-digital/helferlein/lib/Types/isString";
 import VueI18n, {Values} from "vue-i18n";
 import {FrameworkEventList} from "../../Interface/FrameworkEventList";
-import {JsonApi, JsonApiState} from "../../JsonApi/IdeHelper";
+import {JsonApi, Resource} from "../../JsonApi/IdeHelper";
 
 export class Translation {
 	
@@ -99,7 +99,7 @@ export class Translation {
 		}
 		
 		// Load the messages from the api
-		this._resourceApi.getSingle("pageTranslation", languageCode).then((state) => {
+		this._resourceApi.getResource("pageTranslation", languageCode).then((state) => {
 			this._translator.setLocaleMessage(languageCode, state.get("message", {}));
 			this.translator.locale = languageCode;
 			return Promise.resolve(languageCode);
@@ -132,7 +132,7 @@ export class Translation {
 	 * @param e
 	 */
 	protected afterNavigation(e: EventEmitterEvent): void {
-		const state: JsonApiState = e.args.state;
+		const state: Resource = e.args.state;
 		if (state.has("translation")) {
 			const translation = state.get("translation", {});
 			this._translator.setLocaleMessage(translation.id, translation.message);

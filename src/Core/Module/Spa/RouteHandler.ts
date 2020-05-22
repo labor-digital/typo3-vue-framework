@@ -26,7 +26,7 @@ import {Route} from "vue-router";
 import {AppContext} from "../../Context/AppContext";
 import {FrameworkEventList} from "../../Interface/FrameworkEventList";
 import {FrameworkStoreKeys} from "../../Interface/FrameworkStoreKeys";
-import {JsonApiGetQuery, JsonApiState, JsonApiStateList} from "../../JsonApi/IdeHelper";
+import {Collection, JsonApiGetQuery, Resource} from "../../JsonApi/IdeHelper";
 
 export class RouteHandler {
 	
@@ -73,11 +73,11 @@ export class RouteHandler {
 				// when the framework was rendered by the SSR counterpart
 				if (this._initialRequest && appContext.isClient &&
 					hasPath(window, ["__INITIAL_STATE__"]))
-					return appContext.resourceApi.makeStateOrStateList(
+					return appContext.resourceApi.makeResourceOrCollection(
 						getPath(window, ["__INITIAL_STATE__"], {}));
 				
 				// Request the information using the api
-				return appContext.resourceApi.getSingle("page/bySlug", null, args.query);
+				return appContext.resourceApi.getAdditional("page", "bySlug", args.query);
 			})
 			.then((state) => {
 				// Handle special responses
@@ -166,7 +166,7 @@ export class RouteHandler {
 	 * @param appContext
 	 * @param next
 	 */
-	protected handleSpecialResponse(state: JsonApiState | JsonApiStateList, appContext: AppContext, next: Function): Promise<any> {
+	protected handleSpecialResponse(state: Resource | Collection, appContext: AppContext, next: Function): Promise<any> {
 		// Check if we can handle the special response type
 		switch (state.get("type")) {
 			case "redirect":
@@ -203,7 +203,7 @@ export class RouteHandler {
 	 * @param state
 	 * @param appContext
 	 */
-	protected handleSsrCacheHeaders(state: JsonApiState | JsonApiStateList, appContext: AppContext): void {
+	protected handleSsrCacheHeaders(state: Resource | Collection, appContext: AppContext): void {
 		// Store the state
 		appContext.vueRenderContext.state = state.response;
 		

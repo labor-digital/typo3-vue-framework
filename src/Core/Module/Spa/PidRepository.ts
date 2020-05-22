@@ -25,7 +25,7 @@ import {isNumeric} from "@labor-digital/helferlein/lib/Types/isNumeric";
 import {isUndefined} from "@labor-digital/helferlein/lib/Types/isUndefined";
 import {FrameworkEventList} from "../../Interface/FrameworkEventList";
 import {FrameworkStoreKeys} from "../../Interface/FrameworkStoreKeys";
-import {JsonApiState} from "../../JsonApi/IdeHelper";
+import {Resource} from "../../JsonApi/IdeHelper";
 import {Store} from "../General/Store";
 
 export class PidRepository {
@@ -84,7 +84,7 @@ export class PidRepository {
 	 * Returns -1 if there is currently no TYPO3 page in the page context
 	 */
 	public getCurrentPid(): number {
-		const state: JsonApiState | undefined = this._store.get(FrameworkStoreKeys.SPA_PAGE_STATE);
+		const state: Resource | undefined = this._store.get(FrameworkStoreKeys.SPA_PAGE_STATE);
 		if (isUndefined(state)) return -1;
 		return state.get("id", -1);
 	}
@@ -94,7 +94,7 @@ export class PidRepository {
 	 * @param e
 	 */
 	protected afterNavigation(e: EventEmitterEvent): void {
-		const state: JsonApiState = e.args.state;
+		const state: Resource = e.args.state;
 		this._store.set(FrameworkStoreKeys.SPA_PAGE_PID_CONFIGURATION, state.get("pidConfig", {}));
 	}
 }
