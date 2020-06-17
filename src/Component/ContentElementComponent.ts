@@ -209,8 +209,10 @@ export default <ComponentOptions<Vue>>{
 						else if (!isUndefined(appContext.dynamicComponentResolver)) {
 							const resolver = appContext.dynamicComponentResolver;
 							return resolver(componentType, componentKey, that.definition)
-								.catch(() => {
-									// If we fail... try it again -> We probably had an network issue
+								.catch((e) => {
+									console.log("Caught error: retry...", e);
+									
+									// If we fail... try it again -> We probably had a network issue
 									return resolver(componentType, componentKey, that.definition);
 								})
 								.then(c => {
