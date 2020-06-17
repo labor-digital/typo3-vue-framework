@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.13.0](https://github.com/labor-digital/typo3-vue-framework/compare/v2.12.1...v2.13.0) (2020-05-25)
+
+
+### Features
+
+* remove deprecated JsonApiState and JsonApiStateList references + add getAdditional() method to the json api class + update dependencies ([393397b](https://github.com/labor-digital/typo3-vue-framework/commit/393397bb46f21869b25b0bd5d3d8762338c8ac55))
+
 ### [2.12.1](https://github.com/labor-digital/typo3-vue-framework/compare/v2.12.0...v2.12.1) (2020-05-20)
 
 
