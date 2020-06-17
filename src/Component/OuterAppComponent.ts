@@ -41,8 +41,13 @@ export default <ComponentOptions<Vue | any>>{
 			return this.createErrorComponent(createElement);
 		
 		// Don't render anything before we got our first data
-		if (!this.appContext.store.get(FrameworkStoreKeys.SPA_APP_HAS_CONTENT, false))
-			return createElement("div", ["..."]);
+		if (!this.appContext.store.get(FrameworkStoreKeys.SPA_APP_HAS_CONTENT, false)) {
+			if (this.appPreloadComponent === null) {
+				return createElement("div", ["..."]);
+			} else {
+				createElement(this.appPreloadComponent);
+			}
+		}
 		
 		// Handle the default app scaffold
 		return createElement("div", {
@@ -67,6 +72,10 @@ export default <ComponentOptions<Vue | any>>{
 		},
 		errorComponent() {
 			return this.store.get(FrameworkStoreKeys.SPA_APP_ERROR_COMPONENT, undefined);
+		},
+		appPreloadComponent() {
+			return hasPath(this.appContext.config, ["vue", "staticComponents", "preloader"]) ?
+				(this.appContext.config.vue as SpaAppVueConfigInterface).staticComponents.preloader : null;
 		},
 		appComponent() {
 			// Check if we got an app component override

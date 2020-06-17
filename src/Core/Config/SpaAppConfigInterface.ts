@@ -34,6 +34,11 @@ export interface SpaAppStaticComponentListInterface extends AppStaticComponentLi
 	 * The component that should be displayed when a page is rendered in preview mode
 	 */
 	previewModeMarkerComponent?: Component
+	
+	/**
+	 * The component that is shown until the page receives it's first content
+	 */
+	preloader?: Component
 }
 
 export interface SpaAppVueConfigInterface extends AppVueConfigInterface {
