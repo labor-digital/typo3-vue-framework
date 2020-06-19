@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.14.0](https://github.com/labor-digital/typo3-vue-framework/compare/v2.13.0...v2.14.0) (2020-06-17)
+
+
+### Features
+
+* implement option to register app preloader component ([9224829](https://github.com/labor-digital/typo3-vue-framework/commit/922482928eb3337f8f40a919522f27935c9befa6))
+* update dependencies ([e13e72b](https://github.com/labor-digital/typo3-vue-framework/commit/e13e72bf98c186ff1a80d2d16b4c976555600e97))
+* **Store:** allow store watchers to accept vue watcher options ([7726788](https://github.com/labor-digital/typo3-vue-framework/commit/77267885ab640d82ee24d8d5a28e5f7605353e2e))
+
+
+### Bug Fixes
+
+* **ContentElementComponent:** retry if the network crashed when loading a component ([a21b4c5](https://github.com/labor-digital/typo3-vue-framework/commit/a21b4c5f2411d60c1611144504c1c0a7b6b25571))
+
 ## [2.13.0](https://github.com/labor-digital/typo3-vue-framework/compare/v2.12.1...v2.13.0) (2020-05-25)
 
 
