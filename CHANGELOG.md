@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.15.0](https://github.com/labor-digital/typo3-vue-framework/compare/v2.14.0...v2.15.0) (2020-06-19)
+
+
+### Features
+
+* update dependencies ([b011174](https://github.com/labor-digital/typo3-vue-framework/commit/b011174ac648285ac68a268111324b389c0762e1))
+
+
+### Bug Fixes
+
+* **TypoJsonApi:** make sure different requests don't cancel each other out ([1da9d02](https://github.com/labor-digital/typo3-vue-framework/commit/1da9d02b6bad0c9f409e17eab414e1d254274e8a))
+
 ## [2.14.0](https://github.com/labor-digital/typo3-vue-framework/compare/v2.13.0...v2.14.0) (2020-06-17)
 
 
