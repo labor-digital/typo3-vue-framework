@@ -40,9 +40,10 @@ export class TypoJsonApi extends JsonApi {
 	 *                      for text inputs or similar occurrences.
 	 */
 	public getAdditional(resourceType: string, uriFragment: string, query?: JsonApiGetQuery, debounceLimit?: number): Promise<Resource | Collection | any> {
+		const queryString = this.makeQueryString(query);
+		const guid = this._guid + "-" + resourceType + "-" + uriFragment + "-" + this.makeQueryString(query);
 		debounceLimit = isNumber(debounceLimit) ? debounceLimit : 0;
-		return debouncePromise(this._guid, () => {
-			const queryString = this.makeQueryString(query);
+		return debouncePromise(guid, () => {
 			return this.axios
 				.get("/" + resourceType + "/" + uriFragment + queryString)
 				.then((response): Promise<Resource | Collection | any> => {

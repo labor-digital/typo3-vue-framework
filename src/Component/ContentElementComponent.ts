@@ -235,6 +235,7 @@ export default <ComponentOptions<Vue>>{
 					that.component = component;
 					
 					// Deserialize the initial state
+					// @todo update this
 					return appContext.resourceApi.makeStateOrStateList(
 						getPath(that.definition, ["initialState", "data"], {})
 					).then(initialState => {
