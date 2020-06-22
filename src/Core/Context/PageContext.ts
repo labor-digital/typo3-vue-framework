@@ -275,8 +275,11 @@ export class PageContext extends AbstractContext {
 		this.store.set(FrameworkStoreKeys.SPA_PAGE_DATA, new State(state.get("data", {})));
 		
 		// Update site url if required
-		if (state.get("siteUrl") !== this.siteUrl && isString(state.get("siteUrl")) && state.get("siteUrl").trim() === "")
+		if (state.get("siteUrl") !== this.siteUrl &&
+			isString(state.get("siteUrl")) &&
+			state.get("siteUrl").trim() !== "") {
 			this.store.set(FrameworkStoreKeys.SPA_PAGE_SITE_URL, state.get("siteUrl"));
+		}
 		
 		// Update the common elements if there are any
 		if (state.has("common")) {
