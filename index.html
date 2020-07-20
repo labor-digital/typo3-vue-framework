@@ -83,27 +83,27 @@
 				<p>Install the dependencies for building the script:</p>
 				<pre><code><span class="hljs-built_in">npm</span> install @labor-digital/asset-building @labor-digital/asset-building-dev-server @labor-digital/asset-building-env-vuejs nodemon</code></pre><p>Update your package json:</p>
 				<pre><code>{
-    <span class="hljs-string">"name"</span>: <span class="hljs-string">"@your-vendor/your-project"</span>,
+    <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;@your-vendor/your-project&quot;</span>,
     ...
-    <span class="hljs-string">"scripts"</span>: {
-        <span class="hljs-string">"start"</span>: <span class="hljs-string">"node index.js"</span>,
-        <span class="hljs-string">"start:development"</span>: <span class="hljs-string">"nodemon -L index.js"</span>,
-        <span class="hljs-string">"build"</span>: <span class="hljs-string">"labor-asset-building build"</span>
+    <span class="hljs-string">&quot;scripts&quot;</span>: {
+        <span class="hljs-string">&quot;start&quot;</span>: <span class="hljs-string">&quot;node index.js&quot;</span>,
+        <span class="hljs-string">&quot;start:development&quot;</span>: <span class="hljs-string">&quot;nodemon -L index.js&quot;</span>,
+        <span class="hljs-string">&quot;build&quot;</span>: <span class="hljs-string">&quot;labor-asset-building build&quot;</span>
     },
-    <span class="hljs-string">"labor"</span>: {
-        <span class="hljs-string">"apps"</span>: [
+    <span class="hljs-string">&quot;labor&quot;</span>: {
+        <span class="hljs-string">&quot;apps&quot;</span>: [
             {
-                <span class="hljs-string">"entry"</span>: <span class="hljs-string">"./src/App.ts"</span>,
-                <span class="hljs-string">"output"</span>: <span class="hljs-string">"./dist/bundle.js"</span>,
-                <span class="hljs-string">"useSsr"</span>: <span class="hljs-literal">true</span>,
-                <span class="hljs-string">"htmlTemplate"</span>: <span class="hljs-literal">true</span>,
-                <span class="hljs-string">"extensions"</span>: [
-                    <span class="hljs-string">"@labor/asset-building-env-vuejs"</span>
+                <span class="hljs-string">&quot;entry&quot;</span>: <span class="hljs-string">&quot;./src/App.ts&quot;</span>,
+                <span class="hljs-string">&quot;output&quot;</span>: <span class="hljs-string">&quot;./dist/bundle.js&quot;</span>,
+                <span class="hljs-string">&quot;useSsr&quot;</span>: <span class="hljs-literal">true</span>,
+                <span class="hljs-string">&quot;htmlTemplate&quot;</span>: <span class="hljs-literal">true</span>,
+                <span class="hljs-string">&quot;extensions&quot;</span>: [
+                    <span class="hljs-string">&quot;@labor/asset-building-env-vuejs&quot;</span>
                 ]
             }
         ],
-        <span class="hljs-string">"extensions"</span>: [
-            <span class="hljs-string">"@labor/asset-building-dev-server"</span>
+        <span class="hljs-string">&quot;extensions&quot;</span>: [
+            <span class="hljs-string">&quot;@labor/asset-building-dev-server&quot;</span>
         ]
     }
 }</code></pre><p>Create the following folder structure at the folder where your package.json lives:</p>
@@ -114,32 +114,32 @@ src<span class="hljs-tag">\<span class="hljs-name">ContentElement</span></span><
 src<span class="hljs-tag">\<span class="hljs-name">ContentElement</span></span><span class="hljs-tag">\<span class="hljs-name">TypoExtensionVendor</span></span><span class="hljs-tag">\<span class="hljs-name">ContentElementKey</span></span></code></pre><p>These directories should store your content elements will reside. This is the recommended way
 					but you can adjust this in the following step. Now we create the your main application file a
 				at <code>src\App.ts</code></p>
-				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> {ucFirst} <span class="hljs-keyword">from</span> <span class="hljs-string">"@labor-digital/helferlein/lib/Strings/ucFirst"</span>;
-<span class="hljs-keyword">import</span> {SpaApp} <span class="hljs-keyword">from</span> <span class="hljs-string">"@labor-digital/typo3-vue-framework/lib/Variants/SpaApp"</span>;
-<span class="hljs-keyword">import</span> <span class="hljs-string">"./App.sass"</span>;
+				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> {ucFirst} <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@labor-digital/helferlein/lib/Strings/ucFirst&quot;</span>;
+<span class="hljs-keyword">import</span> {SpaApp} <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@labor-digital/typo3-vue-framework/lib/Variants/SpaApp&quot;</span>;
+<span class="hljs-keyword">import</span> <span class="hljs-string">&quot;./App.sass&quot;</span>;
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> SpaApp.init({
     api: {
         <span class="hljs-comment">// Define the api endpoint root that is used to resolve the resources</span>
-        baseUrl: <span class="hljs-string">"https://www.example.org"</span>,
+        baseUrl: <span class="hljs-string">&quot;https://www.example.org&quot;</span>,
     },
     vue: {
         <span class="hljs-comment">// This part is important: This tells webpack how it should include your components.</span>
         <span class="hljs-comment">// If you create the folder structure as described above you can simply copy and paste this,</span>
         <span class="hljs-comment">// it will take care that all content elements will be linked to your correct .vue files</span>
         dynamicComponentResolver: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"><span class="hljs-keyword">type</span>: <span class="hljs-built_in">string</span></span>) </span>{
-            <span class="hljs-keyword">const</span> parts = <span class="hljs-keyword">type</span>.split(<span class="hljs-string">"/"</span>);
+            <span class="hljs-keyword">const</span> parts = <span class="hljs-keyword">type</span>.split(<span class="hljs-string">&quot;/&quot;</span>);
             <span class="hljs-keyword">const</span> isPlugin = parts.length === <span class="hljs-number">4</span>;
-            <span class="hljs-keyword">if</span> (isPlugin) <span class="hljs-keyword">return</span> <span class="hljs-keyword">import</span>(<span class="hljs-string">"./ContentElement/"</span> + ucFirst(parts[<span class="hljs-number">0</span>]) + <span class="hljs-string">"/"</span> + ucFirst(parts[<span class="hljs-number">1</span>]) + <span class="hljs-string">"/"</span> + ucFirst(parts[<span class="hljs-number">2</span>]) + <span class="hljs-string">"/"</span> + ucFirst(parts[<span class="hljs-number">3</span>]) + <span class="hljs-string">".vue"</span>);
-            <span class="hljs-keyword">else</span> <span class="hljs-keyword">return</span> <span class="hljs-keyword">import</span>(<span class="hljs-string">"./ContentElement/"</span> + ucFirst(parts[<span class="hljs-number">0</span>]) + <span class="hljs-string">"/"</span> + ucFirst(parts[<span class="hljs-number">1</span>]) + <span class="hljs-string">"/"</span> + ucFirst(parts[<span class="hljs-number">1</span>]) + <span class="hljs-string">".vue"</span>);
+            <span class="hljs-keyword">if</span> (isPlugin) <span class="hljs-keyword">return</span> <span class="hljs-keyword">import</span>(<span class="hljs-string">&quot;./ContentElement/&quot;</span> + ucFirst(parts[<span class="hljs-number">0</span>]) + <span class="hljs-string">&quot;/&quot;</span> + ucFirst(parts[<span class="hljs-number">1</span>]) + <span class="hljs-string">&quot;/&quot;</span> + ucFirst(parts[<span class="hljs-number">2</span>]) + <span class="hljs-string">&quot;/&quot;</span> + ucFirst(parts[<span class="hljs-number">3</span>]) + <span class="hljs-string">&quot;.vue&quot;</span>);
+            <span class="hljs-keyword">else</span> <span class="hljs-keyword">return</span> <span class="hljs-keyword">import</span>(<span class="hljs-string">&quot;./ContentElement/&quot;</span> + ucFirst(parts[<span class="hljs-number">0</span>]) + <span class="hljs-string">&quot;/&quot;</span> + ucFirst(parts[<span class="hljs-number">1</span>]) + <span class="hljs-string">&quot;/&quot;</span> + ucFirst(parts[<span class="hljs-number">1</span>]) + <span class="hljs-string">&quot;.vue&quot;</span>);
         }
     }
 });</code></pre>
 				<p>This is enough if you don&#39;t want server side rendering. For the use of a server-side-renderer you need to create an node server.
 				I tried to keep the creation as simple as possible: Create a new index.js file:</p>
-				<pre><code class="language-javascript"><span class="hljs-keyword">const</span> expressAssetBuildingPlugin = <span class="hljs-built_in">require</span>(<span class="hljs-string">"@labor-digital/asset-building/dist/Express/expressAssetBuildingPlugin.js"</span>);
-<span class="hljs-keyword">const</span> expressDevServerPlugin = <span class="hljs-built_in">require</span>(<span class="hljs-string">"@labor-digital/asset-building-dev-server/dist/expressDevServerPlugin.js"</span>);
-<span class="hljs-keyword">const</span> expressSsrPlugin = <span class="hljs-built_in">require</span>(<span class="hljs-string">"@labor-digital/asset-building-env-vuejs/dist/expressSsrPlugin.js"</span>);
-<span class="hljs-keyword">const</span> express = <span class="hljs-built_in">require</span>(<span class="hljs-string">"express"</span>);
+				<pre><code class="language-javascript"><span class="hljs-keyword">const</span> expressAssetBuildingPlugin = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@labor-digital/asset-building/dist/Express/expressAssetBuildingPlugin.js&quot;</span>);
+<span class="hljs-keyword">const</span> expressDevServerPlugin = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@labor-digital/asset-building-dev-server/dist/expressDevServerPlugin.js&quot;</span>);
+<span class="hljs-keyword">const</span> expressSsrPlugin = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@labor-digital/asset-building-env-vuejs/dist/expressSsrPlugin.js&quot;</span>);
+<span class="hljs-keyword">const</span> express = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;express&quot;</span>);
 <span class="hljs-keyword">const</span> app = express();
 <span class="hljs-keyword">const</span> port = <span class="hljs-number">8000</span>;
 
@@ -149,7 +149,7 @@ expressAssetBuildingPlugin(app)
 <span class="hljs-comment">// Register your custom routes, those will not reach the expressSsrPlugin!</span>
     .then(<span class="hljs-function"><span class="hljs-params">context</span> =&gt;</span> {
         <span class="hljs-comment">// Add static resources to express handling</span>
-        context.registerPublicAssets(<span class="hljs-string">"public"</span>);
+        context.registerPublicAssets(<span class="hljs-string">&quot;public&quot;</span>);
 
         <span class="hljs-comment">// Return the context</span>
         <span class="hljs-keyword">return</span> context;
@@ -163,7 +163,7 @@ expressAssetBuildingPlugin(app)
 
     <span class="hljs-comment">// Create the app</span>
     .then(<span class="hljs-function"><span class="hljs-params">context</span> =&gt;</span> {
-        context.expressApp.listen(port, () =&gt; <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`\r\nThe frontend is listening on port <span class="hljs-subst">${port}</span>!`</span>));
+        context.expressApp.listen(port, <span class="hljs-function">() =&gt;</span> <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`\r\nThe frontend is listening on port <span class="hljs-subst">${port}</span>!`</span>));
     });</code></pre>
 				<p>With this the main setup should be done, now you can create your first content element. First create the content element following
 				the frontend-api documentation and set up your site for using SPA rendering.</p>
@@ -379,6 +379,5 @@ expressAssetBuildingPlugin(app)
 </div>
 <div class="overlay"></div>
 <script src="assets/js/main.js"></script>
-<script>if (location.protocol == 'file:') document.write('<script src="assets/js/search.js"><' + '/script>');</script>
 </body>
 </html>
