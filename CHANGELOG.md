@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.15.2](https://github.com/labor-digital/typo3-vue-framework/compare/v2.15.1...v2.15.2) (2020-07-20)
+
+
+### Bug Fixes
+
+* update dependencies ([f0d3538](https://github.com/labor-digital/typo3-vue-framework/commit/f0d3538823bd2dbfbff9c5fddb33a57c82375749))
+
 ### [2.15.1](https://github.com/labor-digital/typo3-vue-framework/compare/v2.15.0...v2.15.1) (2020-06-22)
 
 
