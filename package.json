@@ -17,7 +17,7 @@
 	"author": "m.neundorfer@labor.digital",
 	"license": "Apache-2.0",
 	"dependencies": {
-		"@labor-digital/json-api": "3.6.2",
+		"@labor-digital/json-api": "3.6.3",
 		"vue-i18n": "8.18.2",
 		"vue-meta": "2.4.0"
 	},
