@@ -36,6 +36,7 @@ export class AppError extends Error {
 	protected _additionalPayload: PlainObject;
 	protected _navigationStack: Array<string>;
 	protected _handled: boolean;
+	protected _outerStack: string;
 	
 	public constructor(type: AppErrorType, reason: ReasonType, message: string, navigationStack: Array<string>) {
 		super(message);
@@ -47,7 +48,10 @@ export class AppError extends Error {
 		this._navigationStack = navigationStack;
 		this._handled = false;
 		this.name = ucFirst(type) + "Error";
-		if (isString(reason.stack)) this.stack = reason.stack;
+		if (isString(reason.stack)) {
+			this._outerStack = this.stack;
+			this.stack = reason.stack;
+		}
 	}
 	
 	/**
@@ -115,6 +119,13 @@ export class AppError extends Error {
 	public setCode(code: number): AppError {
 		this._code = code;
 		return this;
+	}
+	
+	/**
+	 * Returns the outer stack to track where the AppError was generated
+	 */
+	public get outerStack(): string {
+		return this._outerStack ?? this.stack;
 	}
 	
 	/**

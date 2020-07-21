@@ -18,6 +18,7 @@
 
 import {isBrowser} from "@labor-digital/helferlein/lib/Environment/isBrowser";
 import {PlainObject} from "@labor-digital/helferlein/lib/Interfaces/PlainObject";
+import {maxLength} from "@labor-digital/helferlein/lib/Strings/maxLength";
 import {ucFirst} from "@labor-digital/helferlein/lib/Strings/ucFirst";
 import {isEmpty} from "@labor-digital/helferlein/lib/Types/isEmpty";
 import {isFunction} from "@labor-digital/helferlein/lib/Types/isFunction";
@@ -25,6 +26,7 @@ import {isNumber} from "@labor-digital/helferlein/lib/Types/isNumber";
 import {isObject} from "@labor-digital/helferlein/lib/Types/isObject";
 import {isString} from "@labor-digital/helferlein/lib/Types/isString";
 import {isUndefined} from "@labor-digital/helferlein/lib/Types/isUndefined";
+import PrettyError from "pretty-error";
 import {Component} from "vue";
 import {AppErrorConfigInterface} from "../Config/BasicAppConfigInterface";
 import {ContentElementComponentDefinitionInterface} from "../Interface/ContentElementComponentDefinitionInterface";
@@ -122,6 +124,7 @@ export class ErrorHandler {
 	 * @param code
 	 */
 	public makeNetworkError(reason: ReasonType, code?: number): AppError {
+		console.log((new Error()).stack);
 		return this.makeError("network", reason, code);
 	}
 	
@@ -214,15 +217,86 @@ export class ErrorHandler {
 		if (this._config.printErrorToConsole === false) return;
 		
 		// Render the message
-		if (isFunction(console.group)) console.group(ucFirst(error.type) + " error!");
-		if (isBrowser()) console.error(error.message);
-		else console.log(error.message);
-		if (error.code !== 404 || isBrowser()) {
+		if (isBrowser()) {
+			// Render the message for a browser
+			if (isFunction(console.group)) console.group(ucFirst(error.type) + " error!");
+			console.error(error.message);
+			if (error.outerStack !== error.stack) {
+				const e = new Error("The outer stack that created the AppError");
+				e.stack = error.outerStack;
+				console.log("Outer stack", e);
+			}
 			if (!isEmpty(error.navigationStack)) console.log("Navigation Stack:", error.navigationStack);
-			if (!isUndefined(error.reason)) console.log("Stack:", error.reason);
-			else console.log("Stack:", error.stack);
-			console.log("Internal Stack:", (new Error()).stack);
+			if (!isUndefined(error.reason)) {
+				if (isObject(error.reason)) {
+					console.log(error.reason);
+				} else {
+					console.log(new Error(error.reason));
+				}
+			}
+			if (!isEmpty(error.additionalPayload)) {
+				console.log("Additional payload", error.additionalPayload);
+			}
+			if (isFunction(console.groupEnd)) console.groupEnd();
+		} else {
+			// Render the message for the cli
+			const output = [];
+			output.push("=".repeat(80));
+			output.push(ucFirst(error.type) + " error: " + maxLength(error.message, 4096));
+			output.push("-".repeat(80));
+			if (error.code !== 404) {
+				const prettyError = new PrettyError();
+				output.push(prettyError.render(error));
+				
+				if (error.outerStack !== error.stack) {
+					output.push("Outer stack:");
+					const e = new Error("The outer stack that created the AppError");
+					e.stack = error.outerStack;
+					output.push(prettyError.render(e));
+				}
+				
+				if (error.navigationStack.length > 0) {
+					output.push("Navigation stack:");
+					output.push("   - " + error.navigationStack.join("   - "));
+				}
+				
+				if (!isUndefined(error.reason) && !isObject(error.reason)) {
+					output.push("Reason:");
+					output.push(prettyError.render(
+						new Error(maxLength(error.reason + "", 4096)))
+					);
+				}
+				
+				if (!isEmpty(error.additionalPayload)) {
+					output.push("Additional payload:");
+					
+					// Make sure we don't overflow the console by trimming down the data
+					const seen = [];
+					const objDepth = [];
+					const level = 2;
+					output.push(JSON.stringify(
+						error.additionalPayload,
+						function (_, value) {
+							if (typeof value === "object" && value !== null) {
+								if (seen.indexOf(value) !== -1) return;
+								else seen.push(value);
+							}
+							if (isString(value)) {
+								return maxLength(value, 512);
+							}
+							if (objDepth.indexOf(this) === -1)
+								objDepth.push(this);
+							else while (objDepth[objDepth.length - 1] !== this)
+								objDepth.pop();
+							
+							if (objDepth.length > level)
+								return undefined;
+							return value;
+						}, 3));
+				}
+			}
+			output.push("");
+			console.log(output.join("\n"));
 		}
-		if (isFunction(console.groupEnd)) console.groupEnd();
 	}
 }

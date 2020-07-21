@@ -114,7 +114,13 @@ export class RouteHandler {
 			})
 			.catch(e => {
 				const err = appContext.errorHandler.makeNetworkError(e);
-				const context = {to, from, routerNextValue: false};
+				const context = {
+					reason: (new Error("RouteHandler navigation failed!")).stack,
+					response: e.response ? e.response.data.errors : null,
+					to,
+					from,
+					routerNextValue: false
+				};
 				err.addAdditionalPayload(context);
 				return appContext.errorHandler.emitError(err).then(() => {
 					const nextValue = getPath(err.additionalPayload, ["routerNextValue"], context.routerNextValue);
