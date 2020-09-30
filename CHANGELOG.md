@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.16.0](https://github.com/labor-digital/typo3-vue-framework/compare/v2.15.3...v2.16.0) (2020-07-21)
+
+
+### Features
+
+* more readable error reporting for the browser and your cli ([338bbfa](https://github.com/labor-digital/typo3-vue-framework/commit/338bbfa15deb094d5863439fb64b88ba69c3e930))
+
 ### [2.15.3](https://github.com/labor-digital/typo3-vue-framework/compare/v2.15.2...v2.15.3) (2020-07-20)
 
 
