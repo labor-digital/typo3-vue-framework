@@ -92,10 +92,6 @@ export class RouteHandler {
 						// Mark that we are running a subsequent request
 						this._initialRequest = false;
 						
-						// Special SSR handling on the server side
-						if (appContext.isServer)
-							this.handleSsrCacheHeaders(args.state, args.context.appContext);
-						
 						// Update the framework
 						return appContext.eventEmitter.emitHook(FrameworkEventList.HOOK_UPDATE_FRAMEWORK_AFTER_NAVIGATION, {
 							state: args.state, context: appContext.pageContext, to: args.to, from: args.from
@@ -202,33 +198,4 @@ export class RouteHandler {
 		}
 	}
 	
-	/**
-	 * Internal logic to update the express server's response headers based on the API headers
-	 * we received from the backend
-	 *
-	 * @param state
-	 * @param appContext
-	 */
-	protected handleSsrCacheHeaders(state: Resource | Collection, appContext: AppContext): void {
-		// Store the state
-		appContext.vueRenderContext.state = state.response;
-		
-		// Disable the browser caching on SSR, if the API responded with a no-cache header
-		const browserCacheState = getPath(state, ["response", "headers", "t3fa-browser-cache-enabled"], "yes");
-		const renderContext = appContext.vueRenderContext;
-		if (!isUndefined(renderContext.serverResponse) &&
-			isFunction(renderContext.serverResponse.setHeader)) {
-			const res = renderContext.serverResponse;
-			if (res.headersSent) {
-				console.log("DISABLE CACHE: Headers have already been sent!");
-			} else {
-				if (browserCacheState === "no") {
-					res.setHeader("Expires", "0");
-					res.setHeader("Cache-Control", "no-cache, must-revalidate, max-age=0");
-					res.setHeader("Pragma", "no-cache");
-				}
-				res.setHeader("t3fa-browser-cache-enabled", browserCacheState);
-			}
-		}
-	}
 }
