@@ -81,7 +81,8 @@
 				</a>
 				<p>For the moment the simplest way to set up the framework is by creating a new package json using the labor <a href="https://github.com/labor-digital/asset-building">asset builder webpack</a> bundle.</p>
 				<p>Install the dependencies for building the script:</p>
-				<pre><code><span class="hljs-built_in">npm</span> install @labor-digital/asset-building @labor-digital/asset-building-dev-server @labor-digital/asset-building-env-vuejs nodemon</code></pre><p>Update your package json:</p>
+				<pre><code><span class="hljs-built_in">npm</span> install @labor-digital/asset-building @labor-digital/asset-building-dev-server @labor-digital/asset-building-env-vuejs nodemon</code></pre>
+				<p>Update your package json:</p>
 				<pre><code>{
     <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;@your-vendor/your-project&quot;</span>,
     ...
@@ -106,12 +107,14 @@
             <span class="hljs-string">&quot;@labor/asset-building-dev-server&quot;</span>
         ]
     }
-}</code></pre><p>Create the following folder structure at the folder where your package.json lives:</p>
+}</code></pre>
+				<p>Create the following folder structure at the folder where your package.json lives:</p>
 				<pre><code>package.json
 src
 src<span class="hljs-tag">\<span class="hljs-name">ContentElement</span></span>
 src<span class="hljs-tag">\<span class="hljs-name">ContentElement</span></span><span class="hljs-tag">\<span class="hljs-name">TypoExtensionVendor</span></span>
-src<span class="hljs-tag">\<span class="hljs-name">ContentElement</span></span><span class="hljs-tag">\<span class="hljs-name">TypoExtensionVendor</span></span><span class="hljs-tag">\<span class="hljs-name">ContentElementKey</span></span></code></pre><p>These directories should store your content elements will reside. This is the recommended way
+src<span class="hljs-tag">\<span class="hljs-name">ContentElement</span></span><span class="hljs-tag">\<span class="hljs-name">TypoExtensionVendor</span></span><span class="hljs-tag">\<span class="hljs-name">ContentElementKey</span></span></code></pre>
+				<p>These directories should store your content elements will reside. This is the recommended way
 					but you can adjust this in the following step. Now we create the your main application file a
 				at <code>src\App.ts</code></p>
 				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> {ucFirst} <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@labor-digital/helferlein/lib/Strings/ucFirst&quot;</span>;
