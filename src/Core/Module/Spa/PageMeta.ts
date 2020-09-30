@@ -16,6 +16,7 @@
  * Last modified: 2019.10.23 at 09:59
  */
 
+import {isBrowser} from "@labor-digital/helferlein/lib/Environment/isBrowser";
 import {EventEmitter, EventEmitterEvent} from "@labor-digital/helferlein/lib/Events/EventEmitter";
 import {forEach} from "@labor-digital/helferlein/lib/Lists/forEach";
 import {merge} from "@labor-digital/helferlein/lib/Lists/merge";
@@ -95,7 +96,9 @@ export class PageMeta {
 	 */
 	public setRaw(metaInfo: MetaInfo): PageMeta {
 		this.setRawWithoutRefresh(metaInfo);
-		this._vueMetaPlugin.refresh();
+		if (isBrowser()) {
+			this._vueMetaPlugin.refresh();
+		}
 		return this;
 	}
 	
