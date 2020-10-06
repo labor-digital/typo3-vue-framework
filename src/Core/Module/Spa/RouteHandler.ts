@@ -143,8 +143,11 @@ export class RouteHandler {
 		if (this._initialRequest) query.include = "*";
 		else {
 			// Handle subsequent query
-			query.loadedLanguageCodes = this._appContext.translation.loadedLanguageCodes;
 			query.currentLayout = this._appContext.pageContext.layout;
+			query.loadedLanguages = this._appContext.translation.loadedLanguageCodes;
+			// @todo remove this when updating to v10
+			query.loadedLanguageCodes = query.loadedLanguages;
+			query.currentLanguage = this._appContext.translation.languageCode;
 			query.include = ["content", "data"];
 			
 			// Check if we have to refresh common objects
