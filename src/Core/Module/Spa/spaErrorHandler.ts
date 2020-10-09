@@ -22,7 +22,7 @@ import {isArray} from "@labor-digital/helferlein/lib/Types/isArray";
 import {isFunction} from "@labor-digital/helferlein/lib/Types/isFunction";
 import {isUndefined} from "@labor-digital/helferlein/lib/Types/isUndefined";
 import DefaultAppErrorComponent from "../../../Component/DefaultAppErrorComponent";
-import {AppErrorConfigRouteDefinition} from "../../Config/AppConfig.interfaces";
+import {AppErrorConfigRouteDefinition, AppErrorRouteResolver} from "../../Config/AppConfig.interfaces";
 import {SpaAppErrorConfigInterface} from "../../Config/SpaAppConfigInterface";
 import {AppContext} from "../../Context/AppContext";
 import {ConcreteErrorHandlerContextInterface} from "../../ErrorHandling/ErrorHandler.interfaces";
@@ -47,12 +47,30 @@ export default function (handlerContext: ConcreteErrorHandlerContextInterface, a
 		forEach(config.routes, (route: AppErrorConfigRouteDefinition) => {
 			if (route.code === code) {
 				if (isGlobalError) redirect = true;
-				errorRoute = route.route;
+				if (isFunction(route.route)) {
+					errorRoute = (route.route as AppErrorRouteResolver)(error, appContext);
+				} else {
+					errorRoute = route.route as string;
+				}
 				if (route.sendToLogger === false) handlerContext.sendToLogger = false;
 				if (route.printToConsole === false) handlerContext.printToConsole = false;
 				return false;
 			}
 		});
+	}
+	
+	// Prevent infinite loops
+	const lastRoutes = appContext.errorHandler.navigationStack.slice(-2);
+	console.log(lastRoutes, errorRoute);
+	if (lastRoutes.indexOf(errorRoute) !== -1) {
+		console.error("Failed to redirect! It seems there would be an infinite loop between: " + lastRoutes[1] + " -> " + errorRoute);
+		if (lastRoutes.indexOf("/") === -1) {
+			console.info("Trying to redirect to root page...");
+			errorRoute = "/";
+		} else {
+			console.error("I stay here!");
+			redirect = false;
+		}
 	}
 	
 	return appContext.eventEmitter

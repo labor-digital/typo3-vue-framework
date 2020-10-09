@@ -145,6 +145,13 @@ export class ErrorHandler {
 	}
 	
 	/**
+	 * Returns the navigation stack, containing the previously opened pages
+	 */
+	public get navigationStack(): Array<string> {
+		return this._navigationStack;
+	}
+	
+	/**
 	 * Adds a new location to the navigation stack
 	 * @param location
 	 */
