@@ -126,6 +126,7 @@ export class PageMeta {
 				lang: context.languageCode
 			},
 			link: [
+				...state.get(["data", "hrefLang"], []),
 				{
 					rel: "canonical", href: state.get(["data", "canonicalUrl"])
 				}
