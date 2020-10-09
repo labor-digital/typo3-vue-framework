@@ -96,5 +96,10 @@ export enum FrameworkEventList {
 	/**
 	 * This hook is emitted in the error handler and can hold different arguments based on the mode you are running in
 	 */
-	HOOK_ON_ERROR = "framework:onError"
+	HOOK_ON_ERROR = "framework:onError",
+	
+	/**
+	 * This event is emitted when the language of the page changed
+	 */
+	EVENT_LANGUAGE_CHANGED = "framework:onLanguageChange"
 }
