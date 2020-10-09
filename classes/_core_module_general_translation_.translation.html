@@ -90,6 +90,8 @@
 						<section class="tsd-index-section tsd-is-private-protected">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><a href="_core_module_general_translation_.translation.html#_axiosinstances" class="tsd-kind-icon">_axios<wbr>Instances</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><a href="_core_module_general_translation_.translation.html#_eventemitter" class="tsd-kind-icon">_event<wbr>Emitter</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><a href="_core_module_general_translation_.translation.html#_loadedlanguagecodes" class="tsd-kind-icon">_loaded<wbr>Language<wbr>Codes</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><a href="_core_module_general_translation_.translation.html#_resourceapi" class="tsd-kind-icon">_resource<wbr>Api</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><a href="_core_module_general_translation_.translation.html#_sitelanguagecodes" class="tsd-kind-icon">_site<wbr>Language<wbr>Codes</a></li>
@@ -112,6 +114,7 @@
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><a href="_core_module_general_translation_.translation.html#afternavigation" class="tsd-kind-icon">after<wbr>Navigation</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_core_module_general_translation_.translation.html#setlanguagecode" class="tsd-kind-icon">set<wbr>Language<wbr>Code</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_core_module_general_translation_.translation.html#translate" class="tsd-kind-icon">translate</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><a href="_core_module_general_translation_.translation.html#updateaxioslanguageheader" class="tsd-kind-icon">update<wbr>Axios<wbr>Language<wbr>Header</a></li>
 							</ul>
 						</section>
 					</div>
@@ -123,13 +126,13 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Translation<span class="tsd-signature-symbol">(</span>translator<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">VueI18n</span>, resourceApi<span class="tsd-signature-symbol">: </span><a href="_core_jsonapi_idehelper_.jsonapi.html" class="tsd-signature-type">JsonApi</a>, eventEmitter<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">EventEmitter</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_core_module_general_translation_.translation.html" class="tsd-signature-type">Translation</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Translation<span class="tsd-signature-symbol">(</span>translator<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">VueI18n</span>, resourceApi<span class="tsd-signature-symbol">: </span><a href="_core_jsonapi_idehelper_.jsonapi.html" class="tsd-signature-type">JsonApi</a>, eventEmitter<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">EventEmitter</span>, axiosInstances<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">AxiosInstance</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_core_module_general_translation_.translation.html" class="tsd-signature-type">Translation</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/ff6b305/src/Core/Module/General/Translation.ts#L47">src/Core/Module/General/Translation.ts:47</a></li>
+									<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/440b64f/src/Core/Module/General/Translation.ts#L61">src/Core/Module/General/Translation.ts:61</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -143,6 +146,9 @@
 								<li>
 									<h5>eventEmitter: <span class="tsd-signature-type">EventEmitter</span></h5>
 								</li>
+								<li>
+									<h5>axiosInstances: <span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">AxiosInstance</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="_core_module_general_translation_.translation.html" class="tsd-signature-type">Translation</a></h4>
 						</li>
@@ -152,12 +158,42 @@
 			<section class="tsd-panel-group tsd-member-group tsd-is-private-protected">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-protected">
+					<a name="_axiosinstances" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagProtected">Protected</span> _axios<wbr>Instances</h3>
+					<div class="tsd-signature tsd-kind-icon">_axios<wbr>Instances<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">AxiosInstance</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/440b64f/src/Core/Module/General/Translation.ts#L55">src/Core/Module/General/Translation.ts:55</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The list of existing axios instance so we can update the language header</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-protected">
+					<a name="_eventemitter" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagProtected">Protected</span> _event<wbr>Emitter</h3>
+					<div class="tsd-signature tsd-kind-icon">_event<wbr>Emitter<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventEmitter</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/440b64f/src/Core/Module/General/Translation.ts#L61">src/Core/Module/General/Translation.ts:61</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The event emitter instance</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-protected">
 					<a name="_loadedlanguagecodes" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagProtected">Protected</span> _loaded<wbr>Language<wbr>Codes</h3>
 					<div class="tsd-signature tsd-kind-icon">_loaded<wbr>Language<wbr>Codes<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/ff6b305/src/Core/Module/General/Translation.ts#L42">src/Core/Module/General/Translation.ts:42</a></li>
+							<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/440b64f/src/Core/Module/General/Translation.ts#L44">src/Core/Module/General/Translation.ts:44</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -172,7 +208,7 @@
 					<div class="tsd-signature tsd-kind-icon">_resource<wbr>Api<span class="tsd-signature-symbol">:</span> <a href="_core_jsonapi_idehelper_.jsonapi.html" class="tsd-signature-type">JsonApi</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/ff6b305/src/Core/Module/General/Translation.ts#L37">src/Core/Module/General/Translation.ts:37</a></li>
+							<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/440b64f/src/Core/Module/General/Translation.ts#L39">src/Core/Module/General/Translation.ts:39</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -187,7 +223,7 @@
 					<div class="tsd-signature tsd-kind-icon">_site<wbr>Language<wbr>Codes<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/ff6b305/src/Core/Module/General/Translation.ts#L47">src/Core/Module/General/Translation.ts:47</a></li>
+							<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/440b64f/src/Core/Module/General/Translation.ts#L49">src/Core/Module/General/Translation.ts:49</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -202,7 +238,7 @@
 					<div class="tsd-signature tsd-kind-icon">_translator<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">VueI18n</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/ff6b305/src/Core/Module/General/Translation.ts#L32">src/Core/Module/General/Translation.ts:32</a></li>
+							<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/440b64f/src/Core/Module/General/Translation.ts#L34">src/Core/Module/General/Translation.ts:34</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -224,7 +260,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/ff6b305/src/Core/Module/General/Translation.ts#L62">src/Core/Module/General/Translation.ts:62</a></li>
+									<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/440b64f/src/Core/Module/General/Translation.ts#L83">src/Core/Module/General/Translation.ts:83</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -246,7 +282,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/ff6b305/src/Core/Module/General/Translation.ts#L69">src/Core/Module/General/Translation.ts:69</a></li>
+									<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/440b64f/src/Core/Module/General/Translation.ts#L90">src/Core/Module/General/Translation.ts:90</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -268,7 +304,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/ff6b305/src/Core/Module/General/Translation.ts#L76">src/Core/Module/General/Translation.ts:76</a></li>
+									<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/440b64f/src/Core/Module/General/Translation.ts#L97">src/Core/Module/General/Translation.ts:97</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -290,7 +326,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/ff6b305/src/Core/Module/General/Translation.ts#L83">src/Core/Module/General/Translation.ts:83</a></li>
+									<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/440b64f/src/Core/Module/General/Translation.ts#L104">src/Core/Module/General/Translation.ts:104</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -315,7 +351,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/ff6b305/src/Core/Module/General/Translation.ts#L123">src/Core/Module/General/Translation.ts:123</a></li>
+									<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/440b64f/src/Core/Module/General/Translation.ts#L148">src/Core/Module/General/Translation.ts:148</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -343,7 +379,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/ff6b305/src/Core/Module/General/Translation.ts#L134">src/Core/Module/General/Translation.ts:134</a></li>
+									<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/440b64f/src/Core/Module/General/Translation.ts#L159">src/Core/Module/General/Translation.ts:159</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -373,7 +409,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/ff6b305/src/Core/Module/General/Translation.ts#L91">src/Core/Module/General/Translation.ts:91</a></li>
+									<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/440b64f/src/Core/Module/General/Translation.ts#L112">src/Core/Module/General/Translation.ts:112</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -403,7 +439,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/ff6b305/src/Core/Module/General/Translation.ts#L114">src/Core/Module/General/Translation.ts:114</a></li>
+									<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/440b64f/src/Core/Module/General/Translation.ts#L139">src/Core/Module/General/Translation.ts:139</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -423,6 +459,34 @@
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-protected">
+					<a name="updateaxioslanguageheader" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagProtected">Protected</span> update<wbr>Axios<wbr>Language<wbr>Header</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-protected">
+						<li class="tsd-signature tsd-kind-icon">update<wbr>Axios<wbr>Language<wbr>Header<span class="tsd-signature-symbol">(</span>languageCode<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/440b64f/src/Core/Module/General/Translation.ts#L183">src/Core/Module/General/Translation.ts:183</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Updates all registered axios instances with the current language code</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>languageCode: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -448,6 +512,12 @@
 						<ul>
 							<li class=" tsd-kind-constructor tsd-parent-kind-class">
 								<a href="_core_module_general_translation_.translation.html#constructor" class="tsd-kind-icon">constructor</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-protected">
+								<a href="_core_module_general_translation_.translation.html#_axiosinstances" class="tsd-kind-icon">_axios<wbr>Instances</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-protected">
+								<a href="_core_module_general_translation_.translation.html#_eventemitter" class="tsd-kind-icon">_event<wbr>Emitter</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-protected">
 								<a href="_core_module_general_translation_.translation.html#_loadedlanguagecodes" class="tsd-kind-icon">_loaded<wbr>Language<wbr>Codes</a>
@@ -484,6 +554,9 @@
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="_core_module_general_translation_.translation.html#translate" class="tsd-kind-icon">translate</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-protected">
+								<a href="_core_module_general_translation_.translation.html#updateaxioslanguageheader" class="tsd-kind-icon">update<wbr>Axios<wbr>Language<wbr>Header</a>
 							</li>
 						</ul>
 					</li>

@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>VueDynamicComponentResolverInterface | @labor-digital/typo3-vue-framework</title>
+	<title>AppErrorRouteResolver | @labor-digital/typo3-vue-framework</title>
 	<meta name="description" content="Documentation for @labor-digital/typo3-vue-framework">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -59,10 +59,10 @@
 					<a href="../modules/_core_config_appconfig_interfaces_.html">&quot;Core/Config/AppConfig.interfaces&quot;</a>
 				</li>
 				<li>
-					<a href="_core_config_appconfig_interfaces_.vuedynamiccomponentresolverinterface.html">VueDynamicComponentResolverInterface</a>
+					<a href="_core_config_appconfig_interfaces_.apperrorrouteresolver.html">AppErrorRouteResolver</a>
 				</li>
 			</ul>
-			<h1>Interface VueDynamicComponentResolverInterface</h1>
+			<h1>Interface AppErrorRouteResolver</h1>
 		</div>
 	</div>
 </header>
@@ -73,35 +73,32 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">VueDynamicComponentResolverInterface</span>
+						<span class="target">AppErrorRouteResolver</span>
 					</li>
 				</ul>
 			</section>
 			<section class="tsd-panel">
 				<h3 class="tsd-before-signature">Callable</h3>
 				<ul class="tsd-signatures tsd-kind-interface tsd-parent-kind-module">
-					<li class="tsd-signature tsd-kind-icon">__call<span class="tsd-signature-symbol">(</span>componentType<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, componentKey<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, definition<span class="tsd-signature-symbol">: </span><a href="_core_interface_contentelementcomponentdefinitioninterface_.contentelementcomponentdefinitioninterface.html" class="tsd-signature-type">ContentElementComponentDefinitionInterface</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span>default<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">&gt;</span></li>
+					<li class="tsd-signature tsd-kind-icon">__call<span class="tsd-signature-symbol">(</span>error<span class="tsd-signature-symbol">: </span><a href="../classes/_core_errorhandling_apperror_.apperror.html" class="tsd-signature-type">AppError</a>, appContext<span class="tsd-signature-symbol">: </span><a href="../classes/_core_context_appcontext_.appcontext.html" class="tsd-signature-type">AppContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/440b64f/src/Core/Config/AppConfig.interfaces.ts#L67">src/Core/Config/AppConfig.interfaces.ts:67</a></li>
+								<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/440b64f/src/Core/Config/AppConfig.interfaces.ts#L105">src/Core/Config/AppConfig.interfaces.ts:105</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
-								<h5>componentType: <span class="tsd-signature-type">string</span></h5>
+								<h5>error: <a href="../classes/_core_errorhandling_apperror_.apperror.html" class="tsd-signature-type">AppError</a></h5>
 							</li>
 							<li>
-								<h5>componentKey: <span class="tsd-signature-type">string</span></h5>
-							</li>
-							<li>
-								<h5>definition: <a href="_core_interface_contentelementcomponentdefinitioninterface_.contentelementcomponentdefinitioninterface.html" class="tsd-signature-type">ContentElementComponentDefinitionInterface</a></h5>
+								<h5>appContext: <a href="../classes/_core_context_appcontext_.appcontext.html" class="tsd-signature-type">AppContext</a></h5>
 							</li>
 						</ul>
-						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span>default<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
 					</li>
 				</ul>
 			</section>
@@ -131,9 +128,13 @@
 					<li class=" tsd-kind-interface tsd-parent-kind-module">
 						<a href="_core_config_appconfig_interfaces_.apperrorlogger.html" class="tsd-kind-icon">App<wbr>Error<wbr>Logger</a>
 					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-module">
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-interface tsd-parent-kind-module">
 						<a href="_core_config_appconfig_interfaces_.apperrorrouteresolver.html" class="tsd-kind-icon">App<wbr>Error<wbr>Route<wbr>Resolver</a>
 					</li>
+				</ul>
+				<ul class="after-current">
 					<li class=" tsd-kind-interface tsd-parent-kind-module">
 						<a href="_core_config_appconfig_interfaces_.appeventlistener.html" class="tsd-kind-icon">App<wbr>Event<wbr>Listener</a>
 					</li>
@@ -146,13 +147,9 @@
 					<li class=" tsd-kind-interface tsd-parent-kind-module">
 						<a href="_core_config_appconfig_interfaces_.vueconfigurationinterface.html" class="tsd-kind-icon">Vue<wbr>Configuration<wbr>Interface</a>
 					</li>
-				</ul>
-				<ul class="current">
-					<li class="current tsd-kind-interface tsd-parent-kind-module">
+					<li class=" tsd-kind-interface tsd-parent-kind-module">
 						<a href="_core_config_appconfig_interfaces_.vuedynamiccomponentresolverinterface.html" class="tsd-kind-icon">Vue<wbr>Dynamic<wbr>Component<wbr>Resolver<wbr>Interface</a>
 					</li>
-				</ul>
-				<ul class="after-current">
 				</ul>
 			</nav>
 		</div>
