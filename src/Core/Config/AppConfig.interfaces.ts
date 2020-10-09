@@ -102,6 +102,10 @@ export interface AppEventListener {
 	(evt: EventEmitterEvent, appContext: AppContext): void;
 }
 
+export interface AppErrorRouteResolver {
+	(error: AppError, appContext: AppContext): string;
+}
+
 export interface AppErrorConfigRouteDefinition {
 	/**
 	 * The error code that triggers a redirect to the given route
@@ -111,7 +115,7 @@ export interface AppErrorConfigRouteDefinition {
 	/**
 	 * The route with a leading slash that should be redirected to when the error code occurs
 	 */
-	route: string,
+	route: string | AppErrorRouteResolver,
 	
 	/**
 	 * By default all errors will be send to the registered logger function.
