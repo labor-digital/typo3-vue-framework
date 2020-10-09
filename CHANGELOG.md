@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.17.0](https://github.com/labor-digital/typo3-vue-framework/compare/v2.16.0...v2.17.0) (2020-09-30)
+
+
+### Features
+
+* update dependencies ([38f47f3](https://github.com/labor-digital/typo3-vue-framework/commit/38f47f3321948f95a92dd4b372bd5015483d5597))
+* **RouteHandler:** remove SSR cache handling, as it is no longer supported in the TYPO3 extension ([1d90c4c](https://github.com/labor-digital/typo3-vue-framework/commit/1d90c4c71d13e0a1e8427a08a4c688ea697ae2f6))
+
+
+### Bug Fixes
+
+* **PageMeta:** don't call vue-meta.refresh() when rendering ssr ([03bce4f](https://github.com/labor-digital/typo3-vue-framework/commit/03bce4f9c1b089a33dad50e68a045d9bbc78bc6f))
+
 ## [2.16.0](https://github.com/labor-digital/typo3-vue-framework/compare/v2.15.3...v2.16.0) (2020-07-21)
 
 
