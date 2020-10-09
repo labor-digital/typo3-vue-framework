@@ -32,6 +32,7 @@ import {RootLineElementInterface} from "../Interface/RootLineElementInterface";
 import {JsonApi, Resource, State} from "../JsonApi/IdeHelper";
 import {Store} from "../Module/General/Store";
 import {Translation} from "../Module/General/Translation";
+import {LinkRepository} from "../Module/Spa/LinkRepository";
 import {PageMeta} from "../Module/Spa/PageMeta";
 import {PidRepository} from "../Module/Spa/PidRepository";
 import {AbstractContext} from "./AbstractContext";
@@ -65,6 +66,12 @@ export class PageContext extends AbstractContext {
 	 * time a page response is requested from the server
 	 */
 	protected _pidRepository: PidRepository;
+	
+	/**
+	 * Allows to access all links that have been given by the current page
+	 * @protected
+	 */
+	protected _linkRepository: LinkRepository;
 	
 	public constructor(properties: PlainObject) {
 		super(properties);
@@ -188,6 +195,13 @@ export class PageContext extends AbstractContext {
 	 */
 	public get pidRepository(): PidRepository {
 		return this._pidRepository;
+	}
+	
+	/**
+	 * Returns the repository which allows to access all links that have been given by the current page
+	 */
+	public get linkRepository(): LinkRepository {
+		return this._linkRepository;
 	}
 	
 	/**

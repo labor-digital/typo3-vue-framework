@@ -32,6 +32,7 @@ import {SpaAppConfigInterface} from "../Config/SpaAppConfigInterface";
 import {AppContext} from "../Context/AppContext";
 import {PageContext} from "../Context/PageContext";
 import {FrameworkEventList} from "../Interface/FrameworkEventList";
+import {LinkRepository} from "../Module/Spa/LinkRepository";
 import {PageMeta} from "../Module/Spa/PageMeta";
 import {PidRepository} from "../Module/Spa/PidRepository";
 import {RouteHandler} from "../Module/Spa/RouteHandler";
@@ -66,12 +67,13 @@ export class SpaBootstrap {
 		if (isUndefined(config.vue.layoutComponents.default)) config.vue.layoutComponents.default = DefaultPageLayoutComponent;
 		const layoutComponents = config.vue.layoutComponents;
 		
-		// Prepare the pid repository
-		const pidRepository = new PidRepository(appContext.store, appContext.eventEmitter);
-		
 		// Create the page context
 		appContext.__setProperty("pageContext", new PageContext({
-			siteUrl: baseUrl, appContext, layoutComponents, pidRepository
+			siteUrl: baseUrl,
+			appContext,
+			layoutComponents,
+			pidRepository: new PidRepository(appContext.store, appContext.eventEmitter),
+			linkRepository: new LinkRepository(appContext.store, appContext.eventEmitter)
 		}));
 		
 		// Done

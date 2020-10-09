@@ -64,5 +64,10 @@ export enum FrameworkStoreKeys {
 	/**
 	 * The current route when the app is running in SPA mode
 	 */
-	SPA_PAGE_ROUTE = "framework:spaPage:route"
+	SPA_PAGE_ROUTE = "framework:spaPage:route",
+	
+	/**
+	 * The list of links the backend put together for this page
+	 */
+	SPA_PAGE_LINKS = "framework:spaPage:links"
 }
