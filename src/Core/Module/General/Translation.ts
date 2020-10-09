@@ -18,8 +18,10 @@
 
 import {EventEmitter, EventEmitterEvent} from "@labor-digital/helferlein/lib/Events/EventEmitter";
 import {PlainObject} from "@labor-digital/helferlein/lib/Interfaces/PlainObject";
+import {forEach} from "@labor-digital/helferlein/lib/Lists/forEach";
 import {isPlainObject} from "@labor-digital/helferlein/lib/Types/isPlainObject";
 import {isString} from "@labor-digital/helferlein/lib/Types/isString";
+import {AxiosInstance} from "axios";
 import VueI18n, {Values} from "vue-i18n";
 import {FrameworkEventList} from "../../Interface/FrameworkEventList";
 import {JsonApi, Resource} from "../../JsonApi/IdeHelper";
@@ -46,11 +48,30 @@ export class Translation {
 	 */
 	protected _siteLanguageCodes: Array<string>;
 	
-	public constructor(translator: VueI18n, resourceApi: JsonApi, eventEmitter: EventEmitter) {
+	/**
+	 * The list of existing axios instance so we can update the language header
+	 * @protected
+	 */
+	protected _axiosInstances: Array<AxiosInstance>;
+	
+	/**
+	 * The event emitter instance
+	 * @protected
+	 */
+	protected _eventEmitter: EventEmitter;
+	
+	public constructor(
+		translator: VueI18n,
+		resourceApi: JsonApi,
+		eventEmitter: EventEmitter,
+		axiosInstances: Array<AxiosInstance>
+	) {
 		this._translator = translator;
 		this._loadedLanguageCodes = [];
 		this._siteLanguageCodes = ["en"];
 		this._resourceApi = resourceApi;
+		this._axiosInstances = axiosInstances;
+		this._eventEmitter = eventEmitter;
 		
 		// Bind event handler
 		eventEmitter.bind(FrameworkEventList.HOOK_UPDATE_FRAMEWORK_AFTER_NAVIGATION, e => this.afterNavigation(e));
@@ -91,6 +112,10 @@ export class Translation {
 	public setLanguageCode(languageCode: string): Promise<string> {
 		// Ignore if this is already the same language
 		if (this.languageCode === languageCode) return Promise.resolve(languageCode);
+		
+		// Notify everyone about the change
+		this.updateAxiosLanguageHeader(languageCode);
+		this._eventEmitter.emit(FrameworkEventList.EVENT_LANGUAGE_CHANGED, {lang: languageCode});
 		
 		// Check if we already know the language
 		if (this._loadedLanguageCodes.indexOf(languageCode) !== -1) {
@@ -139,7 +164,25 @@ export class Translation {
 			if (this._loadedLanguageCodes.indexOf(translation.id) === -1)
 				this._loadedLanguageCodes.push(translation.id);
 		}
-		this._translator.locale = state.get("languageCode", "en");
+		
+		// Check if the language changed
+		const languageCode = state.get("languageCode", "en");
+		if (this.languageCode === languageCode) return;
+		
+		this._translator.locale = languageCode;
+		this.updateAxiosLanguageHeader(languageCode);
 		this._siteLanguageCodes = state.get("siteLanguageCodes", ["en"]);
+		this._eventEmitter.emit(FrameworkEventList.EVENT_LANGUAGE_CHANGED, {lang: languageCode});
+	}
+	
+	/**
+	 * Updates all registered axios instances with the current language code
+	 * @param languageCode
+	 * @protected
+	 */
+	protected updateAxiosLanguageHeader(languageCode: string): void {
+		forEach(this._axiosInstances, (i: AxiosInstance) => {
+			i.defaults.headers.common["x-t3fa-language"] = languageCode;
+		});
 	}
 }

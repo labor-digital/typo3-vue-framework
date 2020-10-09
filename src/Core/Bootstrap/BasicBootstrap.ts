@@ -24,6 +24,7 @@ import {merge} from "@labor-digital/helferlein/lib/Lists/merge";
 import {getPath} from "@labor-digital/helferlein/lib/Lists/Paths/getPath";
 import {hasPath} from "@labor-digital/helferlein/lib/Lists/Paths/hasPath";
 import {isFunction} from "@labor-digital/helferlein/lib/Types/isFunction";
+import {isObject} from "@labor-digital/helferlein/lib/Types/isObject";
 import {isPlainObject} from "@labor-digital/helferlein/lib/Types/isPlainObject";
 import {isString} from "@labor-digital/helferlein/lib/Types/isString";
 import {isUndefined} from "@labor-digital/helferlein/lib/Types/isUndefined";
@@ -43,6 +44,12 @@ import {Translation} from "../Module/General/Translation";
 const axios = require("axios").default;
 
 export class BasicBootstrap {
+	/**
+	 * The list of created axios instances to pass to other services
+	 *
+	 * @protected
+	 */
+	protected static _axiosInstances: Array<AxiosInstance> = [];
 	
 	/**
 	 * Creates the app context object and returns it as a promise
@@ -96,7 +103,20 @@ export class BasicBootstrap {
 			EventBus.getEmitter() : new EventEmitter();
 		let context = undefined;
 		if (isPlainObject(config.events))
-			forEach(config.events, (listener, event) => eventEmitter.bind(event, (e) => listener(e, context)));
+			forEach(config.events, (listener, event) => {
+				eventEmitter.bind(event, (e) => {
+					const res = listener(e, context);
+					if (isObject(res) && isFunction(res.catch)) {
+						res.catch((err) => {
+							return errorHandler.emitError(
+								err.isAxiosError === true ?
+									errorHandler.makeNetworkError(err) :
+									errorHandler.makeGlobalError(err)
+							);
+						});
+					}
+				});
+			});
 		return eventEmitter.emitHook(FrameworkEventList.HOOK_BEFORE_CONTEXT_CREATE, {config}).then(args => {
 			// Make the app context
 			config = args.config;
@@ -159,7 +179,14 @@ export class BasicBootstrap {
 				en: {}
 			}
 		});
-		appContext.__setProperty("translation", new Translation((vueConfig.i18n as VueI18n), appContext.resourceApi, appContext.eventEmitter));
+		appContext.__setProperty("translation",
+			new Translation(
+				(vueConfig.i18n as VueI18n),
+				appContext.resourceApi,
+				appContext.eventEmitter,
+				BasicBootstrap._axiosInstances
+			)
+		);
 		
 		// Register the app context in the main component's data list
 		if (isFunction(vueConfig.data)) {
@@ -276,7 +303,9 @@ export class BasicBootstrap {
 			process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 		
 		// Create a new instance
-		return axios.create(axiosConfig);
+		const i = axios.create(axiosConfig);
+		BasicBootstrap._axiosInstances.push(i);
+		return i;
 	}
 	
 	/**

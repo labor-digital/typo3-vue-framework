@@ -147,7 +147,6 @@ export class RouteHandler {
 			query.loadedLanguages = this._appContext.translation.loadedLanguageCodes;
 			// @todo remove this when updating to v10
 			query.loadedLanguageCodes = query.loadedLanguages;
-			query.currentLanguage = this._appContext.translation.languageCode;
 			query.include = ["content", "data"];
 			
 			// Check if we have to refresh common objects
