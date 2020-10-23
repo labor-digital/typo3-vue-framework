@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.18.0](https://github.com/labor-digital/typo3-vue-framework/compare/v2.17.0...v2.18.0) (2020-10-09)
+
+
+### Features
+
+* update dependencies ([e8563f7](https://github.com/labor-digital/typo3-vue-framework/commit/e8563f7901bf38e63739dd826cd0bc4cd09c141f))
+* **ErrorHandling:** allow dynamic error route resolving ([b79b040](https://github.com/labor-digital/typo3-vue-framework/commit/b79b040a70aed0a09e0ac8c9ab8f7acb791b0694))
+* **PageMeta:** implement support for new "hrefLang" data node ([737d65c](https://github.com/labor-digital/typo3-vue-framework/commit/737d65c2ca330638a827cbd1d6c294fefa002db8))
+* **RouteHandler:** tell the backend about the current language code ([f2e2446](https://github.com/labor-digital/typo3-vue-framework/commit/f2e24462578ca47960d56b8ea26d317299d98ee2))
+* **SPA:** implement LinkRepository to fetch registered page links ([ff7a586](https://github.com/labor-digital/typo3-vue-framework/commit/ff7a5868070e7faf489af04c5625ce6b5591eb24))
+* **Translation:** implement EVENT_LANGUAGE_CHANGED ([e3e99dc](https://github.com/labor-digital/typo3-vue-framework/commit/e3e99dca59962990b4355ae481dbf17b510ac1fa))
+* **Translation:** transport current language as header instead of query parameter ([a67d9cf](https://github.com/labor-digital/typo3-vue-framework/commit/a67d9cf44176cdd9481d28d090e7896023af56f8))
+
+
+### Bug Fixes
+
+* **ErrorHandling:** prevent infinite redirects ([7e01b21](https://github.com/labor-digital/typo3-vue-framework/commit/7e01b21dc72aa06377acfac4a0993de7e9303b95))
+
 ## [2.17.0](https://github.com/labor-digital/typo3-vue-framework/compare/v2.16.0...v2.17.0) (2020-09-30)
 
 
