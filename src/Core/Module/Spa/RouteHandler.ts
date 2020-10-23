@@ -69,6 +69,7 @@ export class RouteHandler {
 		// Make the request
 		this.buildQuery(to.path)
 			.then(args => {
+				
 				// Check if we are running in the browser and may fetch the initial request from the global marker
 				// when the framework was rendered by the SSR counterpart
 				if (this._initialRequest && appContext.isClient &&
@@ -91,6 +92,11 @@ export class RouteHandler {
 					.then(args => {
 						// Mark that we are running a subsequent request
 						this._initialRequest = false;
+						
+						// Inject the initial state when running in a server context
+						if (appContext.isServer) {
+							appContext.vueRenderContext.state = state.response;
+						}
 						
 						// Update the framework
 						return appContext.eventEmitter.emitHook(FrameworkEventList.HOOK_UPDATE_FRAMEWORK_AFTER_NAVIGATION, {
