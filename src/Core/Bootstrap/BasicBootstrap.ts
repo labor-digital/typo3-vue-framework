@@ -115,6 +115,7 @@ export class BasicBootstrap {
 							);
 						});
 					}
+					return res;
 				});
 			});
 		return eventEmitter.emitHook(FrameworkEventList.HOOK_BEFORE_CONTEXT_CREATE, {config}).then(args => {
