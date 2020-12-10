@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.18.2](https://github.com/labor-digital/typo3-vue-framework/compare/v2.18.1...v2.18.2) (2020-12-10)
+
+
+### Bug Fixes
+
+* **BasicBootstrap:** wait for the app event hooks to resolve their promises ([a4eff99](https://github.com/labor-digital/typo3-vue-framework/commit/a4eff9979494ae5983d30f311459ca948a3575f5))
+
 ### [2.18.1](https://github.com/labor-digital/typo3-vue-framework/compare/v2.18.0...v2.18.1) (2020-10-23)
 
 
