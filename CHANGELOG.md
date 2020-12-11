@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.18.3](https://github.com/labor-digital/typo3-vue-framework/compare/v2.18.2...v2.18.3) (2020-12-11)
+
+
+### Bug Fixes
+
+* **RouteHandler:** call error routes directly on SSR ([d6abe5e](https://github.com/labor-digital/typo3-vue-framework/commit/d6abe5eee46a04e2dc8e41b4b2460439a355b201))
+
 ### [2.18.2](https://github.com/labor-digital/typo3-vue-framework/compare/v2.18.1...v2.18.2) (2020-12-10)
 
 
