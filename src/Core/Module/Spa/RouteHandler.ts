@@ -20,6 +20,7 @@ import {getPath} from "@labor-digital/helferlein/lib/Lists/Paths/getPath";
 import {hasPath} from "@labor-digital/helferlein/lib/Lists/Paths/hasPath";
 import {isArray} from "@labor-digital/helferlein/lib/Types/isArray";
 import {isFunction} from "@labor-digital/helferlein/lib/Types/isFunction";
+import {isString} from "@labor-digital/helferlein/lib/Types/isString";
 import {isUndefined} from "@labor-digital/helferlein/lib/Types/isUndefined";
 import {CreateElement, VNode} from "vue";
 import {Route} from "vue-router";
@@ -126,7 +127,20 @@ export class RouteHandler {
 				err.addAdditionalPayload(context);
 				return appContext.errorHandler.emitError(err).then(() => {
 					const nextValue = getPath(err.additionalPayload, ["routerNextValue"], context.routerNextValue);
-					next(nextValue);
+					
+					// Let the vue router handle the 404 redirect
+					if (appContext.isClient || !isString(nextValue)) {
+						return next(nextValue);
+					}
+					
+					// On the server side we have to request the content of different routes ourselves
+					const to = appContext.vue.$router.resolve(nextValue, from).route;
+					return new Promise(resolve => {
+						this.handle(to, from, (a, b, c) => {
+							resolve();
+							next(a, b, c);
+						});
+					});
 				});
 			})
 			.finally(() => {

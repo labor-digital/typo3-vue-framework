@@ -90,7 +90,7 @@ export class AppError extends Error {
 	}
 	
 	/**
-	 * Returns an array of the last 5 url's that were served before this error was thrown.
+	 * Returns an array of the last 5 urls which were served before this error was thrown.
 	 */
 	public get navigationStack(): Array<string> {
 		return this._navigationStack;
