@@ -124,7 +124,6 @@ export class ErrorHandler {
 	 * @param code
 	 */
 	public makeNetworkError(reason: ReasonType, code?: number): AppError {
-		console.log((new Error()).stack);
 		return this.makeError("network", reason, code);
 	}
 	
