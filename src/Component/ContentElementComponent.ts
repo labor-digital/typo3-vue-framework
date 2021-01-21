@@ -21,6 +21,8 @@ import {forEach} from "@labor-digital/helferlein/lib/Lists/forEach";
 import {getPath} from "@labor-digital/helferlein/lib/Lists/Paths/getPath";
 import {inflectToCamelCase} from "@labor-digital/helferlein/lib/Strings/Inflector/inflectToCamelCase";
 import {isArray} from "@labor-digital/helferlein/lib/Types/isArray";
+import {isFunction} from "@labor-digital/helferlein/lib/Types/isFunction";
+import {isPlainObject} from "@labor-digital/helferlein/lib/Types/isPlainObject";
 import {isUndefined} from "@labor-digital/helferlein/lib/Types/isUndefined";
 import {ComponentOptions, CreateElement, VNode} from "vue";
 import {Component} from "vue/types/options";
@@ -192,6 +194,12 @@ export default <ComponentOptions<Vue>>{
 						return false;
 					}
 					
+					// Handle error in definition
+					if (componentType === "serverError") {
+						that.componentFailed = true;
+						return errorHandler(new Error(that.definition.data));
+					}
+					
 					// Handle content element component import
 					const componentKey = inflectToCamelCase(componentType.replace(/[^a-zA-Z0-9]/g, "-"));
 					
@@ -216,16 +224,21 @@ export default <ComponentOptions<Vue>>{
 									return resolver(componentType, componentKey, that.definition);
 								})
 								.then(c => {
-									if (!isUndefined(c.default)) return resolve(c.default);
-									reject(appContext.errorHandler
-										.makeNetworkError(new Error("The loaded component " + componentType + " does not expose a default export!")));
+									if (!isUndefined(c.default) &&
+										(isPlainObject(c.default) || isFunction(c.default)))
+										return resolve(c.default);
+									
+									reject(appContext.errorHandler.makeContentElementError(
+										new Error("The loaded component " + componentType + " does not expose a default export!"),
+										that, that.definition, 500));
 								})
 								.catch(reject);
 						}
 						
 						// Not found
-						reject(appContext.errorHandler
-							.makeNetworkError("Could not find the required component: \"" + componentType + "\"!"));
+						reject(appContext.errorHandler.makeContentElementError(
+							new Error("Could not find the required component: \"" + componentType + "\"!"),
+							that, that.definition, 500));
 					}));
 				})
 				.then((component: Component | boolean) => {
