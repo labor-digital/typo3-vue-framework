@@ -73,7 +73,7 @@ export class SpaBootstrap {
 			appContext,
 			layoutComponents,
 			pidRepository: new PidRepository(appContext.store, appContext.eventEmitter),
-			linkRepository: new LinkRepository(appContext.store, appContext.eventEmitter)
+			linkRepository: new LinkRepository(appContext)
 		}));
 		
 		// Done

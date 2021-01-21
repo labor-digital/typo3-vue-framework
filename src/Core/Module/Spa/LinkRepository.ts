@@ -16,30 +16,33 @@
  * Last modified: 2020.10.09 at 11:47
  */
 
-import {EventEmitter, EventEmitterEvent} from "@labor-digital/helferlein/lib/Events/EventEmitter";
+import {EventEmitterEvent} from "@labor-digital/helferlein/lib/Events/EventEmitter";
 import {PlainObject} from "@labor-digital/helferlein/lib/Interfaces/PlainObject";
 import {isPlainObject} from "@labor-digital/helferlein/lib/Types/isPlainObject";
+import {Route} from "vue-router";
+import {AppContext} from "../../Context/AppContext";
 import {FrameworkEventList} from "../../Interface/FrameworkEventList";
 import {FrameworkStoreKeys} from "../../Interface/FrameworkStoreKeys";
 import {Resource} from "../../JsonApi/IdeHelper";
-import {Store} from "../General/Store";
 
 export class LinkRepository {
+	
 	/**
-	 * The reactive store to read the links from
+	 * The app context object to access both the store and the vue router
+	 * @protected
 	 */
-	protected _store: Store;
+	protected _context: AppContext;
+	
 	
 	/**
 	 * LinkRepository constructor.
-	 * @param store
-	 * @param eventEmitter
+	 * @param appContext
 	 */
-	public constructor(store: Store, eventEmitter: EventEmitter) {
-		this._store = store;
+	public constructor(appContext: AppContext) {
+		this._context = appContext;
 		
 		// Bind update event
-		eventEmitter.bind(FrameworkEventList.HOOK_UPDATE_FRAMEWORK_AFTER_NAVIGATION,
+		appContext.eventEmitter.bind(FrameworkEventList.HOOK_UPDATE_FRAMEWORK_AFTER_NAVIGATION,
 			e => this.afterNavigation(e));
 	}
 	
@@ -60,10 +63,27 @@ export class LinkRepository {
 	}
 	
 	/**
+	 * Allows you to navigate the user to the link with the given key.
+	 * Note: This only works for internal links.
+	 * @param key
+	 */
+	public goTo(key: string): Promise<Route> {
+		let url = this.get(key);
+		if (url === "")
+			return Promise.reject(new Error("Could not go to link with key: \"" + key + "\" because it was not found!"));
+		// @todo better handling for external urls/ if the user is already on the page
+		try {
+			return this._context.pageContext.router.push(url.replace(/^(?:\/\/|[^/]+)*\//, ""));
+		} catch (e) {
+			return Promise.reject(e);
+		}
+	}
+	
+	/**
 	 * Returns all links that have been registered for this page
 	 */
 	public getAll(): PlainObject<string> {
-		return this._store.get(FrameworkStoreKeys.SPA_PAGE_LINKS, {});
+		return this._context.store.get(FrameworkStoreKeys.SPA_PAGE_LINKS, {});
 	}
 	
 	/**
@@ -72,7 +92,7 @@ export class LinkRepository {
 	 */
 	protected afterNavigation(e: EventEmitterEvent): void {
 		const state: Resource = e.args.state;
-		this._store.set(FrameworkStoreKeys.SPA_PAGE_LINKS,
+		this._context.store.set(FrameworkStoreKeys.SPA_PAGE_LINKS,
 			isPlainObject(state.response.links) ? state.response.links : {}
 		);
 	}
