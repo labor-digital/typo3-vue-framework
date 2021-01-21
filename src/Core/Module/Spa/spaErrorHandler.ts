@@ -61,9 +61,9 @@ export default function (handlerContext: ConcreteErrorHandlerContextInterface, a
 	
 	// Prevent infinite loops
 	const lastRoutes = appContext.errorHandler.navigationStack.slice(-2);
-	console.log(lastRoutes, errorRoute);
 	if (lastRoutes.indexOf(errorRoute) !== -1) {
-		console.error("Failed to redirect! It seems there would be an infinite loop between: " + lastRoutes[1] + " -> " + errorRoute);
+		console.error("Failed to redirect! It seems there would be an infinite loop between: " +
+			(lastRoutes[1] ?? lastRoutes[0]) + " -> " + errorRoute);
 		if (lastRoutes.indexOf("/") === -1) {
 			console.info("Trying to redirect to root page...");
 			errorRoute = "/";
