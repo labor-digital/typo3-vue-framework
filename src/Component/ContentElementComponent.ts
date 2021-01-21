@@ -172,9 +172,9 @@ export default <ComponentOptions<Vue>>{
 			that.errorHandler = errorHandler;
 			
 			// Check if we got a definition
-			if (isUndefined(that.definition)) {
+			if (!isPlainObject(that.definition)) {
 				that.componentFailed = true;
-				return errorHandler(new Error("Could not render a component, because it does not have a definition!"));
+				return errorHandler(new Error("Could not render a component, because it does not have a valid definition!"));
 			}
 			
 			// Allow filtering
@@ -187,17 +187,23 @@ export default <ComponentOptions<Vue>>{
 					const componentType = that.definition.componentType;
 					
 					// Handle special "html" type -> We render a static html here
+					// We also abuse the "html" type, so we are backward compatible with older versions
 					if (componentType === "html") {
+						
+						// Handle error in definition
+						if (isPlainObject(that.definition.error)) {
+							that.componentFailed = true;
+							return errorHandler(
+								new Error(that.definition.error.message ?? ""),
+								that.definition.error.code ?? 500,
+								that.definition.error.context ?? {}
+							);
+						}
+						
 						that.component = StaticHtmlComponent;
 						that.componentProps = {html: that.definition.data};
 						that.componentLoaded = true;
 						return false;
-					}
-					
-					// Handle error in definition
-					if (componentType === "serverError") {
-						that.componentFailed = true;
-						return errorHandler(new Error(that.definition.data));
 					}
 					
 					// Handle content element component import
