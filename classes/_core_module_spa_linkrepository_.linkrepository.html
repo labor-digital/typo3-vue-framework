@@ -90,7 +90,7 @@
 						<section class="tsd-index-section tsd-is-private-protected">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><a href="_core_module_spa_linkrepository_.linkrepository.html#_store" class="tsd-kind-icon">_store</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><a href="_core_module_spa_linkrepository_.linkrepository.html#_context" class="tsd-kind-icon">_context</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
@@ -99,6 +99,7 @@
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><a href="_core_module_spa_linkrepository_.linkrepository.html#afternavigation" class="tsd-kind-icon">after<wbr>Navigation</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_core_module_spa_linkrepository_.linkrepository.html#get" class="tsd-kind-icon">get</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_core_module_spa_linkrepository_.linkrepository.html#getall" class="tsd-kind-icon">get<wbr>All</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_core_module_spa_linkrepository_.linkrepository.html#goto" class="tsd-kind-icon">go<wbr>To</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_core_module_spa_linkrepository_.linkrepository.html#has" class="tsd-kind-icon">has</a></li>
 							</ul>
 						</section>
@@ -111,13 +112,13 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Link<wbr>Repository<span class="tsd-signature-symbol">(</span>store<span class="tsd-signature-symbol">: </span><a href="_core_module_general_store_.store.html" class="tsd-signature-type">Store</a>, eventEmitter<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">EventEmitter</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_core_module_spa_linkrepository_.linkrepository.html" class="tsd-signature-type">LinkRepository</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Link<wbr>Repository<span class="tsd-signature-symbol">(</span>appContext<span class="tsd-signature-symbol">: </span><a href="_core_context_appcontext_.appcontext.html" class="tsd-signature-type">AppContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_core_module_spa_linkrepository_.linkrepository.html" class="tsd-signature-type">LinkRepository</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/c2fda97/src/Core/Module/Spa/LinkRepository.ts#L31">src/Core/Module/Spa/LinkRepository.ts:31</a></li>
+									<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/1ad987d/src/Core/Module/Spa/LinkRepository.ts#L34">src/Core/Module/Spa/LinkRepository.ts:34</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -128,10 +129,7 @@
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>store: <a href="_core_module_general_store_.store.html" class="tsd-signature-type">Store</a></h5>
-								</li>
-								<li>
-									<h5>eventEmitter: <span class="tsd-signature-type">EventEmitter</span></h5>
+									<h5>appContext: <a href="_core_context_appcontext_.appcontext.html" class="tsd-signature-type">AppContext</a></h5>
 									<div class="tsd-comment tsd-typography">
 										<div class="lead">
 										</div>
@@ -146,17 +144,17 @@
 			<section class="tsd-panel-group tsd-member-group tsd-is-private-protected">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-protected">
-					<a name="_store" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagProtected">Protected</span> _store</h3>
-					<div class="tsd-signature tsd-kind-icon">_store<span class="tsd-signature-symbol">:</span> <a href="_core_module_general_store_.store.html" class="tsd-signature-type">Store</a></div>
+					<a name="_context" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagProtected">Protected</span> _context</h3>
+					<div class="tsd-signature tsd-kind-icon">_context<span class="tsd-signature-symbol">:</span> <a href="_core_context_appcontext_.appcontext.html" class="tsd-signature-type">AppContext</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/c2fda97/src/Core/Module/Spa/LinkRepository.ts#L31">src/Core/Module/Spa/LinkRepository.ts:31</a></li>
+							<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/1ad987d/src/Core/Module/Spa/LinkRepository.ts#L34">src/Core/Module/Spa/LinkRepository.ts:34</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>The reactive store to read the links from</p>
+							<p>The app context object to access both the store and the vue router</p>
 						</div>
 					</div>
 				</section>
@@ -173,7 +171,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/c2fda97/src/Core/Module/Spa/LinkRepository.ts#L73">src/Core/Module/Spa/LinkRepository.ts:73</a></li>
+									<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/1ad987d/src/Core/Module/Spa/LinkRepository.ts#L93">src/Core/Module/Spa/LinkRepository.ts:93</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -203,7 +201,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/c2fda97/src/Core/Module/Spa/LinkRepository.ts#L58">src/Core/Module/Spa/LinkRepository.ts:58</a></li>
+									<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/1ad987d/src/Core/Module/Spa/LinkRepository.ts#L61">src/Core/Module/Spa/LinkRepository.ts:61</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -233,7 +231,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/c2fda97/src/Core/Module/Spa/LinkRepository.ts#L65">src/Core/Module/Spa/LinkRepository.ts:65</a></li>
+									<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/1ad987d/src/Core/Module/Spa/LinkRepository.ts#L85">src/Core/Module/Spa/LinkRepository.ts:85</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -242,6 +240,37 @@
 								</div>
 							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">PlainObject</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="goto" class="tsd-anchor"></a>
+					<h3>go<wbr>To</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">go<wbr>To<span class="tsd-signature-symbol">(</span>key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Route</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/1ad987d/src/Core/Module/Spa/LinkRepository.ts#L70">src/Core/Module/Spa/LinkRepository.ts:70</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Allows you to navigate the user to the link with the given key.
+									Note: This only works for internal links.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>key: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Route</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -255,7 +284,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/c2fda97/src/Core/Module/Spa/LinkRepository.ts#L50">src/Core/Module/Spa/LinkRepository.ts:50</a></li>
+									<li>Defined in <a href="https://github.com/labor-digital/typo3-vue-framework/blob/1ad987d/src/Core/Module/Spa/LinkRepository.ts#L53">src/Core/Module/Spa/LinkRepository.ts:53</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -299,7 +328,7 @@
 								<a href="_core_module_spa_linkrepository_.linkrepository.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-protected">
-								<a href="_core_module_spa_linkrepository_.linkrepository.html#_store" class="tsd-kind-icon">_store</a>
+								<a href="_core_module_spa_linkrepository_.linkrepository.html#_context" class="tsd-kind-icon">_context</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-protected">
 								<a href="_core_module_spa_linkrepository_.linkrepository.html#afternavigation" class="tsd-kind-icon">after<wbr>Navigation</a>
@@ -309,6 +338,9 @@
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="_core_module_spa_linkrepository_.linkrepository.html#getall" class="tsd-kind-icon">get<wbr>All</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_core_module_spa_linkrepository_.linkrepository.html#goto" class="tsd-kind-icon">go<wbr>To</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="_core_module_spa_linkrepository_.linkrepository.html#has" class="tsd-kind-icon">has</a>
