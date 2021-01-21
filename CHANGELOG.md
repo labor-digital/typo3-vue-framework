@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.19.0](https://github.com/labor-digital/typo3-vue-framework/compare/v2.18.3...v2.19.0) (2021-01-21)
+
+
+### Features
+
+* **ContentElementComponent:** improve error handling ([1dc2e40](https://github.com/labor-digital/typo3-vue-framework/commit/1dc2e407f36b01b6807b4324d1318088720dbe31))
+* **LinkRepository:** implement "goTo" method ([754513b](https://github.com/labor-digital/typo3-vue-framework/commit/754513b4ae41abdec959eab239fbdce00b03b2e0))
+
+
+### Bug Fixes
+
+* **ErrorHandler:** remove unnecessary console.log ([d377bc6](https://github.com/labor-digital/typo3-vue-framework/commit/d377bc65e77c68637b9ef6111a7786c7585d3682))
+* **spaErrorHandler:** fix issue with incorrect redirect target ([068cc1c](https://github.com/labor-digital/typo3-vue-framework/commit/068cc1c6309cab8f94120c98f43ee7f066043253))
+
 ### [2.18.3](https://github.com/labor-digital/typo3-vue-framework/compare/v2.18.2...v2.18.3) (2020-12-11)
 
 
