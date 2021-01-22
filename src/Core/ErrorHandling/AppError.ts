@@ -179,8 +179,10 @@ export class AppError extends Error {
 									globalData: getPath(context.appContext.vueRenderContext, ["globalData", "data"], {})
 								};
 							}
+							
 							return {
 								type: "[VUE VM instance]",
+								name: v.$options.name ?? "Anonymous component",
 								props: encoder(props, encoder, 0)
 							};
 						}
@@ -190,7 +192,6 @@ export class AppError extends Error {
 							return encoder(v, encoder, depth + 1);
 						});
 					} catch (e) {
-						console.error("SENTRY EXTRA CONVERSION FAILED!", v, e);
 						return "[CONVERSION ERROR]";
 					}
 				}
