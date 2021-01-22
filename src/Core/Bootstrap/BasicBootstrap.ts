@@ -206,7 +206,10 @@ export class BasicBootstrap {
 				originalErrorHandler(err, vm, info);
 			}
 			
-			const e = appContext.errorHandler.makeGlobalError(err);
+			const e = vm
+				? appContext.errorHandler.makeContentElementError(err, vm as any, {} as any)
+				: appContext.errorHandler.makeGlobalError(err);
+			
 			e.addAdditionalPayload({vm, info});
 			appContext.errorHandler.emitError(e);
 		};
