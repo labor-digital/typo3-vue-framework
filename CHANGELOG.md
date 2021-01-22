@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.21.0](https://github.com/labor-digital/typo3-vue-framework/compare/v2.20.0...v2.21.0) (2021-01-22)
+
+
+### Features
+
+* **AppError:** show component name in additional output ([fe2aef8](https://github.com/labor-digital/typo3-vue-framework/commit/fe2aef864bf6539c7281e9911978f62c9368807a))
+
+
+### Bug Fixes
+
+* **BasicBootstrap:** ignore global errors that don't belong to our application ([1d3fdc4](https://github.com/labor-digital/typo3-vue-framework/commit/1d3fdc42b487aefc064ab37cf6e3d47f073ea552))
+* **BasicBootstrap:** make sure component errors don't break the frontend completely ([8e7ed38](https://github.com/labor-digital/typo3-vue-framework/commit/8e7ed38160265aaac2507887369280703e00410f))
+
 ## [2.20.0](https://github.com/labor-digital/typo3-vue-framework/compare/v2.19.1...v2.20.0) (2021-01-22)
 
 
