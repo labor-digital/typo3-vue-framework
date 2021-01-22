@@ -7,6 +7,7 @@
 	<meta name="description" content="Documentation for @labor-digital/typo3-vue-framework">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="assets/css/main.css">
+	<script async src="assets/js/search.js" id="search-script"></script>
 </head>
 <body>
 <header>
@@ -40,8 +41,6 @@
 							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
 							<input type="checkbox" id="tsd-filter-externals" checked />
 							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
-							<input type="checkbox" id="tsd-filter-only-exported" />
-							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
 						</div>
 					</div>
 					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
@@ -51,11 +50,6 @@
 	</div>
 	<div class="tsd-page-title">
 		<div class="container">
-			<ul class="tsd-breadcrumb">
-				<li>
-					<a href="globals.html">Globals</a>
-				</li>
-			</ul>
 			<h1>@labor-digital/typo3-vue-framework</h1>
 		</div>
 	</div>
@@ -75,129 +69,136 @@
 					<h2>Installation</h2>
 				</a>
 				<p>Install this package using npm:</p>
-				<pre><code><span class="hljs-built_in">npm</span> install @labor-digital/typo3-vue-framework</code></pre>
+				<pre><code><span style="color: #001080">npm</span><span style="color: #000000"> </span><span style="color: #001080">install</span><span style="color: #000000"> @</span><span style="color: #001080">labor</span><span style="color: #000000">-</span><span style="color: #001080">digital</span><span style="color: #000000">/</span><span style="color: #001080">typo3</span><span style="color: #000000">-</span><span style="color: #001080">vue</span><span style="color: #000000">-</span><span style="color: #001080">framework</span>
+</code></pre>
 				<a href="#basic-usage" id="basic-usage" style="color: inherit; text-decoration: none;">
 					<h2>Basic Usage</h2>
 				</a>
 				<p>For the moment the simplest way to set up the framework is by creating a new package json using the labor <a href="https://github.com/labor-digital/asset-building">asset builder webpack</a> bundle.</p>
 				<p>Install the dependencies for building the script:</p>
-				<pre><code><span class="hljs-built_in">npm</span> install @labor-digital/asset-building @labor-digital/asset-building-dev-server @labor-digital/asset-building-env-vuejs nodemon</code></pre>
+				<pre><code><span style="color: #001080">npm</span><span style="color: #000000"> </span><span style="color: #001080">install</span><span style="color: #000000"> @</span><span style="color: #001080">labor</span><span style="color: #000000">-</span><span style="color: #001080">digital</span><span style="color: #000000">/</span><span style="color: #001080">asset</span><span style="color: #000000">-</span><span style="color: #001080">building</span><span style="color: #000000"> @</span><span style="color: #001080">labor</span><span style="color: #000000">-</span><span style="color: #001080">digital</span><span style="color: #000000">/</span><span style="color: #001080">asset</span><span style="color: #000000">-</span><span style="color: #001080">building</span><span style="color: #000000">-</span><span style="color: #001080">dev</span><span style="color: #000000">-</span><span style="color: #001080">server</span><span style="color: #000000"> @</span><span style="color: #001080">labor</span><span style="color: #000000">-</span><span style="color: #001080">digital</span><span style="color: #000000">/</span><span style="color: #001080">asset</span><span style="color: #000000">-</span><span style="color: #001080">building</span><span style="color: #000000">-</span><span style="color: #001080">env</span><span style="color: #000000">-</span><span style="color: #001080">vuejs</span><span style="color: #000000"> </span><span style="color: #001080">nodemon</span>
+</code></pre>
 				<p>Update your package json:</p>
-				<pre><code>{
-    <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;@your-vendor/your-project&quot;</span>,
-    ...
-    <span class="hljs-string">&quot;scripts&quot;</span>: {
-        <span class="hljs-string">&quot;start&quot;</span>: <span class="hljs-string">&quot;node index.js&quot;</span>,
-        <span class="hljs-string">&quot;start:development&quot;</span>: <span class="hljs-string">&quot;nodemon -L index.js&quot;</span>,
-        <span class="hljs-string">&quot;build&quot;</span>: <span class="hljs-string">&quot;labor-asset-building build&quot;</span>
-    },
-    <span class="hljs-string">&quot;labor&quot;</span>: {
-        <span class="hljs-string">&quot;apps&quot;</span>: [
-            {
-                <span class="hljs-string">&quot;entry&quot;</span>: <span class="hljs-string">&quot;./src/App.ts&quot;</span>,
-                <span class="hljs-string">&quot;output&quot;</span>: <span class="hljs-string">&quot;./dist/bundle.js&quot;</span>,
-                <span class="hljs-string">&quot;useSsr&quot;</span>: <span class="hljs-literal">true</span>,
-                <span class="hljs-string">&quot;htmlTemplate&quot;</span>: <span class="hljs-literal">true</span>,
-                <span class="hljs-string">&quot;extensions&quot;</span>: [
-                    <span class="hljs-string">&quot;@labor/asset-building-env-vuejs&quot;</span>
-                ]
-            }
-        ],
-        <span class="hljs-string">&quot;extensions&quot;</span>: [
-            <span class="hljs-string">&quot;@labor/asset-building-dev-server&quot;</span>
-        ]
-    }
-}</code></pre>
+				<pre><code><span style="color: #000000">{</span>
+<span style="color: #000000">    </span><span style="color: #A31515">&quot;name&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;@your-vendor/your-project&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    ...</span>
+<span style="color: #000000">    </span><span style="color: #A31515">&quot;scripts&quot;</span><span style="color: #000000">: {</span>
+<span style="color: #000000">        </span><span style="color: #A31515">&quot;start&quot;</span><span style="color: #001080">:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;node index.js&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">        </span><span style="color: #A31515">&quot;start:development&quot;</span><span style="color: #001080">:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;nodemon -L index.js&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">        </span><span style="color: #A31515">&quot;build&quot;</span><span style="color: #001080">:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;labor-asset-building build&quot;</span>
+<span style="color: #000000">    },</span>
+<span style="color: #000000">    </span><span style="color: #A31515">&quot;labor&quot;</span><span style="color: #000000">: {</span>
+<span style="color: #000000">        </span><span style="color: #A31515">&quot;apps&quot;</span><span style="color: #001080">:</span><span style="color: #000000"> [</span>
+<span style="color: #000000">            {</span>
+<span style="color: #000000">                </span><span style="color: #A31515">&quot;entry&quot;</span><span style="color: #001080">:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;./src/App.ts&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">                </span><span style="color: #A31515">&quot;output&quot;</span><span style="color: #001080">:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;./dist/bundle.js&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">                </span><span style="color: #A31515">&quot;useSsr&quot;</span><span style="color: #001080">:</span><span style="color: #000000"> </span><span style="color: #0000FF">true</span><span style="color: #000000">,</span>
+<span style="color: #000000">                </span><span style="color: #A31515">&quot;htmlTemplate&quot;</span><span style="color: #001080">:</span><span style="color: #000000"> </span><span style="color: #0000FF">true</span><span style="color: #000000">,</span>
+<span style="color: #000000">                </span><span style="color: #A31515">&quot;extensions&quot;</span><span style="color: #001080">:</span><span style="color: #000000"> [</span>
+<span style="color: #000000">                    </span><span style="color: #A31515">&quot;@labor/asset-building-env-vuejs&quot;</span>
+<span style="color: #000000">                ]</span>
+<span style="color: #000000">            }</span>
+<span style="color: #000000">        ],</span>
+<span style="color: #000000">        </span><span style="color: #A31515">&quot;extensions&quot;</span><span style="color: #001080">:</span><span style="color: #000000"> [</span>
+<span style="color: #000000">            </span><span style="color: #A31515">&quot;@labor/asset-building-dev-server&quot;</span>
+<span style="color: #000000">        ]</span>
+<span style="color: #000000">    }</span>
+<span style="color: #000000">}</span>
+</code></pre>
 				<p>Create the following folder structure at the folder where your package.json lives:</p>
-				<pre><code>package.json
-src
-src<span class="hljs-tag">\<span class="hljs-name">ContentElement</span></span>
-src<span class="hljs-tag">\<span class="hljs-name">ContentElement</span></span><span class="hljs-tag">\<span class="hljs-name">TypoExtensionVendor</span></span>
-src<span class="hljs-tag">\<span class="hljs-name">ContentElement</span></span><span class="hljs-tag">\<span class="hljs-name">TypoExtensionVendor</span></span><span class="hljs-tag">\<span class="hljs-name">ContentElementKey</span></span></code></pre>
+				<pre><code><span style="color: #001080">package</span><span style="color: #000000">.</span><span style="color: #001080">json</span>
+<span style="color: #001080">src</span>
+<span style="color: #001080">src</span><span style="color: #000000">\</span><span style="color: #001080">ContentElement</span>
+<span style="color: #001080">src</span><span style="color: #000000">\</span><span style="color: #001080">ContentElement</span><span style="color: #000000">\</span><span style="color: #001080">TypoExtensionVendor</span>
+<span style="color: #001080">src</span><span style="color: #000000">\</span><span style="color: #001080">ContentElement</span><span style="color: #000000">\</span><span style="color: #001080">TypoExtensionVendor</span><span style="color: #000000">\</span><span style="color: #001080">ContentElementKey</span>
+</code></pre>
 				<p>These directories should store your content elements will reside. This is the recommended way
 					but you can adjust this in the following step. Now we create the your main application file a
 				at <code>src\App.ts</code></p>
-				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> {ucFirst} <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@labor-digital/helferlein/lib/Strings/ucFirst&quot;</span>;
-<span class="hljs-keyword">import</span> {SpaApp} <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@labor-digital/typo3-vue-framework/lib/Variants/SpaApp&quot;</span>;
-<span class="hljs-keyword">import</span> <span class="hljs-string">&quot;./App.sass&quot;</span>;
-<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> SpaApp.init({
-    api: {
-        <span class="hljs-comment">// Define the api endpoint root that is used to resolve the resources</span>
-        baseUrl: <span class="hljs-string">&quot;https://www.example.org&quot;</span>,
-    },
-    vue: {
-        <span class="hljs-comment">// This part is important: This tells webpack how it should include your components.</span>
-        <span class="hljs-comment">// If you create the folder structure as described above you can simply copy and paste this,</span>
-        <span class="hljs-comment">// it will take care that all content elements will be linked to your correct .vue files</span>
-        dynamicComponentResolver: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"><span class="hljs-keyword">type</span>: <span class="hljs-built_in">string</span></span>) </span>{
-            <span class="hljs-keyword">const</span> parts = <span class="hljs-keyword">type</span>.split(<span class="hljs-string">&quot;/&quot;</span>);
-            <span class="hljs-keyword">const</span> isPlugin = parts.length === <span class="hljs-number">4</span>;
-            <span class="hljs-keyword">if</span> (isPlugin) <span class="hljs-keyword">return</span> <span class="hljs-keyword">import</span>(<span class="hljs-string">&quot;./ContentElement/&quot;</span> + ucFirst(parts[<span class="hljs-number">0</span>]) + <span class="hljs-string">&quot;/&quot;</span> + ucFirst(parts[<span class="hljs-number">1</span>]) + <span class="hljs-string">&quot;/&quot;</span> + ucFirst(parts[<span class="hljs-number">2</span>]) + <span class="hljs-string">&quot;/&quot;</span> + ucFirst(parts[<span class="hljs-number">3</span>]) + <span class="hljs-string">&quot;.vue&quot;</span>);
-            <span class="hljs-keyword">else</span> <span class="hljs-keyword">return</span> <span class="hljs-keyword">import</span>(<span class="hljs-string">&quot;./ContentElement/&quot;</span> + ucFirst(parts[<span class="hljs-number">0</span>]) + <span class="hljs-string">&quot;/&quot;</span> + ucFirst(parts[<span class="hljs-number">1</span>]) + <span class="hljs-string">&quot;/&quot;</span> + ucFirst(parts[<span class="hljs-number">1</span>]) + <span class="hljs-string">&quot;.vue&quot;</span>);
-        }
-    }
-});</code></pre>
+				<pre><code class="language-typescript"><span style="color: #AF00DB">import</span><span style="color: #000000"> {</span><span style="color: #001080">ucFirst</span><span style="color: #000000">} </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;@labor-digital/helferlein/lib/Strings/ucFirst&quot;</span><span style="color: #000000">;</span>
+<span style="color: #AF00DB">import</span><span style="color: #000000"> {</span><span style="color: #001080">SpaApp</span><span style="color: #000000">} </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;@labor-digital/typo3-vue-framework/lib/Variants/SpaApp&quot;</span><span style="color: #000000">;</span>
+<span style="color: #AF00DB">import</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;./App.sass&quot;</span><span style="color: #000000">;</span>
+<span style="color: #AF00DB">export</span><span style="color: #000000"> </span><span style="color: #AF00DB">default</span><span style="color: #000000"> </span><span style="color: #001080">SpaApp</span><span style="color: #000000">.</span><span style="color: #795E26">init</span><span style="color: #000000">({</span>
+<span style="color: #000000">    </span><span style="color: #001080">api:</span><span style="color: #000000"> {</span>
+<span style="color: #000000">        </span><span style="color: #008000">// Define the api endpoint root that is used to resolve the resources</span>
+<span style="color: #000000">        </span><span style="color: #001080">baseUrl:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;https://www.example.org&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    },</span>
+<span style="color: #000000">    </span><span style="color: #001080">vue:</span><span style="color: #000000"> {</span>
+<span style="color: #000000">        </span><span style="color: #008000">// This part is important: This tells webpack how it should include your components.</span>
+<span style="color: #000000">        </span><span style="color: #008000">// If you create the folder structure as described above you can simply copy and paste this,</span>
+<span style="color: #000000">        </span><span style="color: #008000">// it will take care that all content elements will be linked to your correct .vue files</span>
+<span style="color: #000000">        </span><span style="color: #795E26">dynamicComponentResolver</span><span style="color: #001080">:</span><span style="color: #000000"> </span><span style="color: #0000FF">function</span><span style="color: #000000"> (</span><span style="color: #001080">type</span><span style="color: #000000">: </span><span style="color: #267F99">string</span><span style="color: #000000">) {</span>
+<span style="color: #000000">            </span><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">parts</span><span style="color: #000000"> = </span><span style="color: #001080">type</span><span style="color: #000000">.</span><span style="color: #795E26">split</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;/&quot;</span><span style="color: #000000">);</span>
+<span style="color: #000000">            </span><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">isPlugin</span><span style="color: #000000"> = </span><span style="color: #001080">parts</span><span style="color: #000000">.</span><span style="color: #001080">length</span><span style="color: #000000"> === </span><span style="color: #098658">4</span><span style="color: #000000">;</span>
+<span style="color: #000000">            </span><span style="color: #AF00DB">if</span><span style="color: #000000"> (</span><span style="color: #001080">isPlugin</span><span style="color: #000000">) </span><span style="color: #AF00DB">return</span><span style="color: #000000"> </span><span style="color: #0000FF">import</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;./ContentElement/&quot;</span><span style="color: #000000"> + </span><span style="color: #795E26">ucFirst</span><span style="color: #000000">(</span><span style="color: #001080">parts</span><span style="color: #000000">[</span><span style="color: #098658">0</span><span style="color: #000000">]) + </span><span style="color: #A31515">&quot;/&quot;</span><span style="color: #000000"> + </span><span style="color: #795E26">ucFirst</span><span style="color: #000000">(</span><span style="color: #001080">parts</span><span style="color: #000000">[</span><span style="color: #098658">1</span><span style="color: #000000">]) + </span><span style="color: #A31515">&quot;/&quot;</span><span style="color: #000000"> + </span><span style="color: #795E26">ucFirst</span><span style="color: #000000">(</span><span style="color: #001080">parts</span><span style="color: #000000">[</span><span style="color: #098658">2</span><span style="color: #000000">]) + </span><span style="color: #A31515">&quot;/&quot;</span><span style="color: #000000"> + </span><span style="color: #795E26">ucFirst</span><span style="color: #000000">(</span><span style="color: #001080">parts</span><span style="color: #000000">[</span><span style="color: #098658">3</span><span style="color: #000000">]) + </span><span style="color: #A31515">&quot;.vue&quot;</span><span style="color: #000000">);</span>
+<span style="color: #000000">            </span><span style="color: #AF00DB">else</span><span style="color: #000000"> </span><span style="color: #AF00DB">return</span><span style="color: #000000"> </span><span style="color: #0000FF">import</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;./ContentElement/&quot;</span><span style="color: #000000"> + </span><span style="color: #795E26">ucFirst</span><span style="color: #000000">(</span><span style="color: #001080">parts</span><span style="color: #000000">[</span><span style="color: #098658">0</span><span style="color: #000000">]) + </span><span style="color: #A31515">&quot;/&quot;</span><span style="color: #000000"> + </span><span style="color: #795E26">ucFirst</span><span style="color: #000000">(</span><span style="color: #001080">parts</span><span style="color: #000000">[</span><span style="color: #098658">1</span><span style="color: #000000">]) + </span><span style="color: #A31515">&quot;/&quot;</span><span style="color: #000000"> + </span><span style="color: #795E26">ucFirst</span><span style="color: #000000">(</span><span style="color: #001080">parts</span><span style="color: #000000">[</span><span style="color: #098658">1</span><span style="color: #000000">]) + </span><span style="color: #A31515">&quot;.vue&quot;</span><span style="color: #000000">);</span>
+<span style="color: #000000">        }</span>
+<span style="color: #000000">    }</span>
+<span style="color: #000000">});</span>
+</code></pre>
 				<p>This is enough if you don&#39;t want server side rendering. For the use of a server-side-renderer you need to create an node server.
 				I tried to keep the creation as simple as possible: Create a new index.js file:</p>
-				<pre><code class="language-javascript"><span class="hljs-keyword">const</span> expressAssetBuildingPlugin = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@labor-digital/asset-building/dist/Express/expressAssetBuildingPlugin.js&quot;</span>);
-<span class="hljs-keyword">const</span> expressDevServerPlugin = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@labor-digital/asset-building-dev-server/dist/expressDevServerPlugin.js&quot;</span>);
-<span class="hljs-keyword">const</span> expressSsrPlugin = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@labor-digital/asset-building-env-vuejs/dist/expressSsrPlugin.js&quot;</span>);
-<span class="hljs-keyword">const</span> express = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;express&quot;</span>);
-<span class="hljs-keyword">const</span> app = express();
-<span class="hljs-keyword">const</span> port = <span class="hljs-number">8000</span>;
+				<pre><code class="language-javascript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">expressAssetBuildingPlugin</span><span style="color: #000000"> = </span><span style="color: #795E26">require</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;@labor-digital/asset-building/dist/Express/expressAssetBuildingPlugin.js&quot;</span><span style="color: #000000">);</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">expressDevServerPlugin</span><span style="color: #000000"> = </span><span style="color: #795E26">require</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;@labor-digital/asset-building-dev-server/dist/expressDevServerPlugin.js&quot;</span><span style="color: #000000">);</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">expressSsrPlugin</span><span style="color: #000000"> = </span><span style="color: #795E26">require</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;@labor-digital/asset-building-env-vuejs/dist/expressSsrPlugin.js&quot;</span><span style="color: #000000">);</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">express</span><span style="color: #000000"> = </span><span style="color: #795E26">require</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;express&quot;</span><span style="color: #000000">);</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">app</span><span style="color: #000000"> = </span><span style="color: #795E26">express</span><span style="color: #000000">();</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">port</span><span style="color: #000000"> = </span><span style="color: #098658">8000</span><span style="color: #000000">;</span>
 
-<span class="hljs-comment">// Create the express asset builder context</span>
-expressAssetBuildingPlugin(app)
+<span style="color: #008000">// Create the express asset builder context</span>
+<span style="color: #795E26">expressAssetBuildingPlugin</span><span style="color: #000000">(</span><span style="color: #001080">app</span><span style="color: #000000">)</span>
 
-<span class="hljs-comment">// Register your custom routes, those will not reach the expressSsrPlugin!</span>
-    .then(<span class="hljs-function"><span class="hljs-params">context</span> =&gt;</span> {
-        <span class="hljs-comment">// Add static resources to express handling</span>
-        context.registerPublicAssets(<span class="hljs-string">&quot;public&quot;</span>);
+<span style="color: #008000">// Register your custom routes, those will not reach the expressSsrPlugin!</span>
+<span style="color: #000000">    .</span><span style="color: #795E26">then</span><span style="color: #000000">(</span><span style="color: #001080">context</span><span style="color: #000000"> </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
+<span style="color: #000000">        </span><span style="color: #008000">// Add static resources to express handling</span>
+<span style="color: #000000">        </span><span style="color: #001080">context</span><span style="color: #000000">.</span><span style="color: #795E26">registerPublicAssets</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;public&quot;</span><span style="color: #000000">);</span>
 
-        <span class="hljs-comment">// Return the context</span>
-        <span class="hljs-keyword">return</span> context;
-    })
+<span style="color: #000000">        </span><span style="color: #008000">// Return the context</span>
+<span style="color: #000000">        </span><span style="color: #AF00DB">return</span><span style="color: #000000"> </span><span style="color: #001080">context</span><span style="color: #000000">;</span>
+<span style="color: #000000">    })</span>
 
-    <span class="hljs-comment">// Register the asset-builder dev-server plugin</span>
-    .then(expressDevServerPlugin)
+<span style="color: #000000">    </span><span style="color: #008000">// Register the asset-builder dev-server plugin</span>
+<span style="color: #000000">    .</span><span style="color: #795E26">then</span><span style="color: #000000">(</span><span style="color: #001080">expressDevServerPlugin</span><span style="color: #000000">)</span>
 
-    <span class="hljs-comment">// Register the ssr plugin which acts as a wildcard for everything that is not defined above</span>
-    .then(expressSsrPlugin)
+<span style="color: #000000">    </span><span style="color: #008000">// Register the ssr plugin which acts as a wildcard for everything that is not defined above</span>
+<span style="color: #000000">    .</span><span style="color: #795E26">then</span><span style="color: #000000">(</span><span style="color: #001080">expressSsrPlugin</span><span style="color: #000000">)</span>
 
-    <span class="hljs-comment">// Create the app</span>
-    .then(<span class="hljs-function"><span class="hljs-params">context</span> =&gt;</span> {
-        context.expressApp.listen(port, <span class="hljs-function">() =&gt;</span> <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`\r\nThe frontend is listening on port <span class="hljs-subst">${port}</span>!`</span>));
-    });</code></pre>
+<span style="color: #000000">    </span><span style="color: #008000">// Create the app</span>
+<span style="color: #000000">    .</span><span style="color: #795E26">then</span><span style="color: #000000">(</span><span style="color: #001080">context</span><span style="color: #000000"> </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
+<span style="color: #000000">        </span><span style="color: #001080">context</span><span style="color: #000000">.</span><span style="color: #001080">expressApp</span><span style="color: #000000">.</span><span style="color: #795E26">listen</span><span style="color: #000000">(</span><span style="color: #001080">port</span><span style="color: #000000">, () </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #A31515">`</span><span style="color: #EE0000">\r\n</span><span style="color: #A31515">The frontend is listening on port </span><span style="color: #0000FF">${</span><span style="color: #001080">port</span><span style="color: #0000FF">}</span><span style="color: #A31515">!`</span><span style="color: #000000">));</span>
+<span style="color: #000000">    });</span>
+</code></pre>
 				<p>With this the main setup should be done, now you can create your first content element. First create the content element following
 				the frontend-api documentation and set up your site for using SPA rendering.</p>
 				<p>Now let&#39;s create the frontend component; let&#39;s say we have a content element that is called typoExtensionVendor/contentElementKey
 				you will have to create a ContentElementKey.vue single file component in the <code>src\ContentElement\TypoExtensionVendor\ContentElementKey</code> directory. </p>
-				<pre><code class="language-vue">&lt;template&gt;
-    &lt;div class=&quot;contentElement&quot;&gt;
-        {{text}}
-    &lt;/div&gt;
-&lt;/template&gt;
+				<pre><code class="language-vue"><span style="color: #800000">&lt;template&gt;</span>
+<span style="color: #000000">    </span><span style="color: #800000">&lt;div</span><span style="color: #000000"> </span><span style="color: #FF0000">class</span><span style="color: #000000">=</span><span style="color: #0000FF">&quot;contentElement&quot;</span><span style="color: #800000">&gt;</span>
+<span style="color: #000000">        {{</span><span style="color: #001080">text</span><span style="color: #000000">}}</span>
+<span style="color: #000000">    </span><span style="color: #800000">&lt;/div&gt;</span>
+<span style="color: #800000">&lt;/template&gt;</span>
 
-&lt;script lang=&quot;ts&quot;&gt;
-    import {ContentElementContext} from &quot;@labor-digital/typo3-vue-framework/lib/Core/Context/ContentElementContext&quot;;
+<span style="color: #800000">&lt;script</span><span style="color: #000000"> </span><span style="color: #FF0000">lang</span><span style="color: #000000">=</span><span style="color: #0000FF">&quot;ts&quot;</span><span style="color: #800000">&gt;</span>
+<span style="color: #000000">    </span><span style="color: #AF00DB">import</span><span style="color: #000000"> {</span><span style="color: #001080">ContentElementContext</span><span style="color: #000000">} </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;@labor-digital/typo3-vue-framework/lib/Core/Context/ContentElementContext&quot;</span><span style="color: #000000">;</span>
 
-    export default {
-        name: &quot;ContentElementKey&quot;,
-        props: {
-            // You can request the context in every content element component as a prop.
-            // The content provides you with all information about the current app.
-            context: null as ContentElementContext
-        },
-        computed: {
-            text() {
-                // We retrieve the initial data from the data attribute of the context
-                return this.context.data.get(&quot;text&quot;);
-            }
-        }
-    };
-&lt;/script&gt;
+<span style="color: #000000">    </span><span style="color: #AF00DB">export</span><span style="color: #000000"> </span><span style="color: #AF00DB">default</span><span style="color: #000000"> {</span>
+<span style="color: #000000">        </span><span style="color: #001080">name:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;ContentElementKey&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">        </span><span style="color: #001080">props:</span><span style="color: #000000"> {</span>
+<span style="color: #000000">            </span><span style="color: #008000">// You can request the context in every content element component as a prop.</span>
+<span style="color: #000000">            </span><span style="color: #008000">// The content provides you with all information about the current app.</span>
+<span style="color: #000000">            </span><span style="color: #001080">context:</span><span style="color: #000000"> </span><span style="color: #0000FF">null</span><span style="color: #000000"> </span><span style="color: #AF00DB">as</span><span style="color: #000000"> </span><span style="color: #267F99">ContentElementContext</span>
+<span style="color: #000000">        },</span>
+<span style="color: #000000">        </span><span style="color: #001080">computed:</span><span style="color: #000000"> {</span>
+<span style="color: #000000">            </span><span style="color: #795E26">text</span><span style="color: #000000">() {</span>
+<span style="color: #000000">                </span><span style="color: #008000">// We retrieve the initial data from the data attribute of the context</span>
+<span style="color: #000000">                </span><span style="color: #AF00DB">return</span><span style="color: #000000"> </span><span style="color: #0000FF">this</span><span style="color: #000000">.</span><span style="color: #001080">context</span><span style="color: #000000">.</span><span style="color: #001080">data</span><span style="color: #000000">.</span><span style="color: #795E26">get</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;text&quot;</span><span style="color: #000000">);</span>
+<span style="color: #000000">            }</span>
+<span style="color: #000000">        }</span>
+<span style="color: #000000">    };</span>
+<span style="color: #800000">&lt;/script&gt;</span>
 
-&lt;style scoped lang=&quot;sass&quot;&gt;&lt;/style&gt;</code></pre>
+<span style="color: #800000">&lt;style</span><span style="color: #000000"> </span><span style="color: #FF0000">scoped</span><span style="color: #000000"> </span><span style="color: #FF0000">lang</span><span style="color: #000000">=</span><span style="color: #0000FF">&quot;sass&quot;</span><span style="color: #800000">&gt;&lt;/style&gt;</span>
+</code></pre>
 				<p>Now lets run your frontend using: <code>npm run start:development</code></p>
 				<a href="#documentation" id="documentation" style="color: inherit; text-decoration: none;">
 					<h2>Documentation</h2>
@@ -215,140 +216,140 @@ expressAssetBuildingPlugin(app)
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
 			<nav class="tsd-navigation primary">
 				<ul>
-					<li class="globals  ">
-						<a href="globals.html"><em>Globals</em></a>
+					<li class=" ">
+						<a href="modules.html">Exports</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/_component_contentelementchildrencomponent_.html">&quot;<wbr>Component/<wbr>Content<wbr>Element<wbr>Children<wbr>Component&quot;</a>
+						<a href="modules/component_contentelementchildrencomponent.html">Component/<wbr>Content<wbr>Element<wbr>Children<wbr>Component</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/_component_contentelementcomponent_.html">&quot;<wbr>Component/<wbr>Content<wbr>Element<wbr>Component&quot;</a>
+						<a href="modules/component_contentelementcomponent.html">Component/<wbr>Content<wbr>Element<wbr>Component</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/_component_defaultappcomponent_.html">&quot;<wbr>Component/<wbr>Default<wbr>App<wbr>Component&quot;</a>
+						<a href="modules/component_defaultappcomponent.html">Component/<wbr>Default<wbr>App<wbr>Component</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/_component_defaultapperrorcomponent_.html">&quot;<wbr>Component/<wbr>Default<wbr>App<wbr>Error<wbr>Component&quot;</a>
+						<a href="modules/component_defaultapperrorcomponent.html">Component/<wbr>Default<wbr>App<wbr>Error<wbr>Component</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/_component_defaultcontentelementerrorcomponent_.html">&quot;<wbr>Component/<wbr>Default<wbr>Content<wbr>Element<wbr>Error<wbr>Component&quot;</a>
+						<a href="modules/component_defaultcontentelementerrorcomponent.html">Component/<wbr>Default<wbr>Content<wbr>Element<wbr>Error<wbr>Component</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/_component_defaultcontentelementloadercomponent_.html">&quot;<wbr>Component/<wbr>Default<wbr>Content<wbr>Element<wbr>Loader<wbr>Component&quot;</a>
+						<a href="modules/component_defaultcontentelementloadercomponent.html">Component/<wbr>Default<wbr>Content<wbr>Element<wbr>Loader<wbr>Component</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/_component_defaultpagelayoutcomponent_.html">&quot;<wbr>Component/<wbr>Default<wbr>Page<wbr>Layout<wbr>Component&quot;</a>
+						<a href="modules/component_defaultpagelayoutcomponent.html">Component/<wbr>Default<wbr>Page<wbr>Layout<wbr>Component</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/_component_defaultpreviewmarkercomponent_.html">&quot;<wbr>Component/<wbr>Default<wbr>Preview<wbr>Marker<wbr>Component&quot;</a>
+						<a href="modules/component_defaultpreviewmarkercomponent.html">Component/<wbr>Default<wbr>Preview<wbr>Marker<wbr>Component</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/_component_outerappcomponent_.html">&quot;<wbr>Component/<wbr>Outer<wbr>App<wbr>Component&quot;</a>
+						<a href="modules/component_outerappcomponent.html">Component/<wbr>Outer<wbr>App<wbr>Component</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/_component_routecomponent_.html">&quot;<wbr>Component/<wbr>Route<wbr>Component&quot;</a>
+						<a href="modules/component_routecomponent.html">Component/<wbr>Route<wbr>Component</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/_component_statichtmlcomponent_.html">&quot;<wbr>Component/<wbr>Static<wbr>Html<wbr>Component&quot;</a>
+						<a href="modules/component_statichtmlcomponent.html">Component/<wbr>Static<wbr>Html<wbr>Component</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/_core_bootstrap_basicbootstrap_.html">&quot;<wbr>Core/<wbr>Bootstrap/<wbr>Basic<wbr>Bootstrap&quot;</a>
+						<a href="modules/core_bootstrap_basicbootstrap.html">Core/<wbr>Bootstrap/<wbr>Basic<wbr>Bootstrap</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/_core_bootstrap_hybridbootstrap_.html">&quot;<wbr>Core/<wbr>Bootstrap/<wbr>Hybrid<wbr>Bootstrap&quot;</a>
+						<a href="modules/core_bootstrap_hybridbootstrap.html">Core/<wbr>Bootstrap/<wbr>Hybrid<wbr>Bootstrap</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/_core_bootstrap_spabootstrap_.html">&quot;<wbr>Core/<wbr>Bootstrap/<wbr>Spa<wbr>Bootstrap&quot;</a>
+						<a href="modules/core_bootstrap_spabootstrap.html">Core/<wbr>Bootstrap/<wbr>Spa<wbr>Bootstrap</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/_core_config_appconfig_interfaces_.html">&quot;<wbr>Core/<wbr>Config/<wbr>App<wbr>Config.interfaces&quot;</a>
+						<a href="modules/core_config_appconfig_interfaces.html">Core/<wbr>Config/<wbr>App<wbr>Config.interfaces</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/_core_config_basicappconfiginterface_.html">&quot;<wbr>Core/<wbr>Config/<wbr>Basic<wbr>App<wbr>Config<wbr>Interface&quot;</a>
+						<a href="modules/core_config_basicappconfiginterface.html">Core/<wbr>Config/<wbr>Basic<wbr>App<wbr>Config<wbr>Interface</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/_core_config_hybridappconfiginterface_.html">&quot;<wbr>Core/<wbr>Config/<wbr>Hybrid<wbr>App<wbr>Config<wbr>Interface&quot;</a>
+						<a href="modules/core_config_hybridappconfiginterface.html">Core/<wbr>Config/<wbr>Hybrid<wbr>App<wbr>Config<wbr>Interface</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/_core_config_spaappconfiginterface_.html">&quot;<wbr>Core/<wbr>Config/<wbr>Spa<wbr>App<wbr>Config<wbr>Interface&quot;</a>
+						<a href="modules/core_config_spaappconfiginterface.html">Core/<wbr>Config/<wbr>Spa<wbr>App<wbr>Config<wbr>Interface</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/_core_context_abstractcontext_.html">&quot;<wbr>Core/<wbr>Context/<wbr>Abstract<wbr>Context&quot;</a>
+						<a href="modules/core_context_abstractcontext.html">Core/<wbr>Context/<wbr>Abstract<wbr>Context</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/_core_context_appcontext_.html">&quot;<wbr>Core/<wbr>Context/<wbr>App<wbr>Context&quot;</a>
+						<a href="modules/core_context_appcontext.html">Core/<wbr>Context/<wbr>App<wbr>Context</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/_core_context_contentelementcontext_.html">&quot;<wbr>Core/<wbr>Context/<wbr>Content<wbr>Element<wbr>Context&quot;</a>
+						<a href="modules/core_context_contentelementcontext.html">Core/<wbr>Context/<wbr>Content<wbr>Element<wbr>Context</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/_core_context_pagecontext_.html">&quot;<wbr>Core/<wbr>Context/<wbr>Page<wbr>Context&quot;</a>
+						<a href="modules/core_context_pagecontext.html">Core/<wbr>Context/<wbr>Page<wbr>Context</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/_core_errorhandling_apperror_.html">&quot;<wbr>Core/<wbr>Error<wbr>Handling/<wbr>App<wbr>Error&quot;</a>
+						<a href="modules/core_errorhandling_apperror.html">Core/<wbr>Error<wbr>Handling/<wbr>App<wbr>Error</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/_core_errorhandling_errorhandler_.html">&quot;<wbr>Core/<wbr>Error<wbr>Handling/<wbr>Error<wbr>Handler&quot;</a>
+						<a href="modules/core_errorhandling_errorhandler.html">Core/<wbr>Error<wbr>Handling/<wbr>Error<wbr>Handler</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/_core_errorhandling_errorhandler_interfaces_.html">&quot;<wbr>Core/<wbr>Error<wbr>Handling/<wbr>Error<wbr>Handler.interfaces&quot;</a>
+						<a href="modules/core_errorhandling_errorhandler_interfaces.html">Core/<wbr>Error<wbr>Handling/<wbr>Error<wbr>Handler.interfaces</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/_core_interface_contentelementcolumnlistinterface_.html">&quot;<wbr>Core/<wbr>Interface/<wbr>Content<wbr>Element<wbr>Column<wbr>List<wbr>Interface&quot;</a>
+						<a href="modules/core_interface_contentelementcolumnlistinterface.html">Core/<wbr>Interface/<wbr>Content<wbr>Element<wbr>Column<wbr>List<wbr>Interface</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/_core_interface_contentelementcomponentdefinitioninterface_.html">&quot;<wbr>Core/<wbr>Interface/<wbr>Content<wbr>Element<wbr>Component<wbr>Definition<wbr>Interface&quot;</a>
+						<a href="modules/core_interface_contentelementcomponentdefinitioninterface.html">Core/<wbr>Interface/<wbr>Content<wbr>Element<wbr>Component<wbr>Definition<wbr>Interface</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/_core_interface_eventlist_.html">&quot;<wbr>Core/<wbr>Interface/<wbr>Event<wbr>List&quot;</a>
+						<a href="modules/core_interface_eventlist.html">Core/<wbr>Interface/<wbr>Event<wbr>List</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/_core_interface_frameworkeventlist_.html">&quot;<wbr>Core/<wbr>Interface/<wbr>Framework<wbr>Event<wbr>List&quot;</a>
+						<a href="modules/core_interface_frameworkeventlist.html">Core/<wbr>Interface/<wbr>Framework<wbr>Event<wbr>List</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/_core_interface_frameworkstorekeys_.html">&quot;<wbr>Core/<wbr>Interface/<wbr>Framework<wbr>Store<wbr>Keys&quot;</a>
+						<a href="modules/core_interface_frameworkstorekeys.html">Core/<wbr>Interface/<wbr>Framework<wbr>Store<wbr>Keys</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/_core_interface_pageinterface_.html">&quot;<wbr>Core/<wbr>Interface/<wbr>Page<wbr>Interface&quot;</a>
+						<a href="modules/core_interface_pageinterface.html">Core/<wbr>Interface/<wbr>Page<wbr>Interface</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/_core_interface_rootlineelementinterface_.html">&quot;<wbr>Core/<wbr>Interface/<wbr>Root<wbr>Line<wbr>Element<wbr>Interface&quot;</a>
+						<a href="modules/core_interface_rootlineelementinterface.html">Core/<wbr>Interface/<wbr>Root<wbr>Line<wbr>Element<wbr>Interface</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/_core_jsonapi_idehelper_.html">&quot;<wbr>Core/<wbr>Json<wbr>Api/<wbr>Ide<wbr>Helper&quot;</a>
+						<a href="modules/core_jsonapi_idehelper.html">Core/<wbr>Json<wbr>Api/<wbr>Ide<wbr>Helper</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/_core_jsonapi_typojsonapi_.html">&quot;<wbr>Core/<wbr>Json<wbr>Api/<wbr>Typo<wbr>Json<wbr>Api&quot;</a>
+						<a href="modules/core_jsonapi_typojsonapi.html">Core/<wbr>Json<wbr>Api/<wbr>Typo<wbr>Json<wbr>Api</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/_core_module_general_store_.html">&quot;<wbr>Core/<wbr>Module/<wbr>General/<wbr>Store&quot;</a>
+						<a href="modules/core_module_general_store.html">Core/<wbr>Module/<wbr>General/<wbr>Store</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/_core_module_general_translation_.html">&quot;<wbr>Core/<wbr>Module/<wbr>General/<wbr>Translation&quot;</a>
+						<a href="modules/core_module_general_translation.html">Core/<wbr>Module/<wbr>General/<wbr>Translation</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/_core_module_hybrid_hybriderrorhandler_.html">&quot;<wbr>Core/<wbr>Module/<wbr>Hybrid/hybrid<wbr>Error<wbr>Handler&quot;</a>
+						<a href="modules/core_module_hybrid_hybriderrorhandler.html">Core/<wbr>Module/<wbr>Hybrid/hybrid<wbr>Error<wbr>Handler</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/_core_module_spa_linkrepository_.html">&quot;<wbr>Core/<wbr>Module/<wbr>Spa/<wbr>Link<wbr>Repository&quot;</a>
+						<a href="modules/core_module_spa_linkrepository.html">Core/<wbr>Module/<wbr>Spa/<wbr>Link<wbr>Repository</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/_core_module_spa_pagemeta_.html">&quot;<wbr>Core/<wbr>Module/<wbr>Spa/<wbr>Page<wbr>Meta&quot;</a>
+						<a href="modules/core_module_spa_pagemeta.html">Core/<wbr>Module/<wbr>Spa/<wbr>Page<wbr>Meta</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/_core_module_spa_pidrepository_.html">&quot;<wbr>Core/<wbr>Module/<wbr>Spa/<wbr>Pid<wbr>Repository&quot;</a>
+						<a href="modules/core_module_spa_pidrepository.html">Core/<wbr>Module/<wbr>Spa/<wbr>Pid<wbr>Repository</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/_core_module_spa_routehandler_.html">&quot;<wbr>Core/<wbr>Module/<wbr>Spa/<wbr>Route<wbr>Handler&quot;</a>
+						<a href="modules/core_module_spa_routehandler.html">Core/<wbr>Module/<wbr>Spa/<wbr>Route<wbr>Handler</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/_core_module_spa_spaerrorhandler_.html">&quot;<wbr>Core/<wbr>Module/<wbr>Spa/spa<wbr>Error<wbr>Handler&quot;</a>
+						<a href="modules/core_module_spa_spaerrorhandler.html">Core/<wbr>Module/<wbr>Spa/spa<wbr>Error<wbr>Handler</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/_variants_hybridapp_.html">&quot;<wbr>Variants/<wbr>Hybrid<wbr>App&quot;</a>
+						<a href="modules/variants_hybridapp.html">Variants/<wbr>Hybrid<wbr>App</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/_variants_spaapp_.html">&quot;<wbr>Variants/<wbr>Spa<wbr>App&quot;</a>
+						<a href="modules/variants_spaapp.html">Variants/<wbr>Spa<wbr>App</a>
 					</li>
 				</ul>
 			</nav>
@@ -364,7 +365,6 @@ expressAssetBuildingPlugin(app)
 		<h2>Legend</h2>
 		<div class="tsd-legend-group">
 			<ul class="tsd-legend">
-				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
 				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
 				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
 			</ul>
