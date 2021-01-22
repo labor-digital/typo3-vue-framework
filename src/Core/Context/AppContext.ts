@@ -85,6 +85,13 @@ export class AppContext extends AbstractContext {
 	protected _axios: AxiosInstance;
 	
 	/**
+	 * The list of created axios instances to pass to other services
+	 *
+	 * @protected
+	 */
+	protected _axiosInstances: Array<AxiosInstance>;
+	
+	/**
 	 * The resource api axios wrapper that handles communication with the TYPO3 resource api
 	 */
 	protected _resourceApi: JsonApi;
@@ -203,6 +210,13 @@ export class AppContext extends AbstractContext {
 	 */
 	public get axios(): AxiosInstance {
 		return this._axios;
+	}
+	
+	/**
+	 * Returns the list of all registered axios instances in this context
+	 */
+	public get allAxiosInstances(): Array<AxiosInstance> {
+		return this._axiosInstances;
 	}
 	
 	/**

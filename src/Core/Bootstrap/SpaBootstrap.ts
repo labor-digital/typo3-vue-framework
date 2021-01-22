@@ -51,7 +51,15 @@ export class SpaBootstrap {
 	}
 	
 	/**
-	 * Creates a new page context instance and inject's it into the app config object
+	 * Registers the required vue plugins for this bootstrap
+	 */
+	public static initialize(): void {
+		Vue.use(VueRouter);
+		Vue.use(Meta);
+	}
+	
+	/**
+	 * Creates a new page context instance and injects it into the app config object
 	 * @param appContext
 	 */
 	public static registerPageContext(appContext: AppContext): Promise<AppContext> {
@@ -135,12 +143,10 @@ export class SpaBootstrap {
 		vueConfig.el = hasPath(config, ["vue", "mountPoint"]) ? config.vue.mountPoint : "#app";
 		
 		// Register our render method and the router instance
-		Vue.use(VueRouter);
 		vueConfig.render = (createElement: CreateElement): VNode => createElement(OuterAppComponent);
 		vueConfig.router = appContext.pageContext.router;
 		
 		// Initialize vue meta plugin
-		Vue.use(Meta);
 		const staticMeta = isUndefined(config.staticMeta) ? {} : config.staticMeta;
 		const pageMeta = new PageMeta(staticMeta, appContext.eventEmitter);
 		appContext.pageContext.__setProperty("pageMeta", pageMeta);
@@ -171,6 +177,13 @@ export class SpaBootstrap {
 		if (appContext.isServer) {
 			// Set the router to the correct domain when we are running on the server
 			return new Promise((resolve) => {
+				// Helper to resolve the mount process when all errors have been processed
+				const resolver = function () {
+					appContext.errorHandler.waitForAllPromises().then(() => {
+						resolve(appContext.vue);
+					});
+				};
+				
 				// Set the router url when we doing the server side rendering
 				const router = appContext.pageContext.router;
 				router.replace(
@@ -178,8 +191,8 @@ export class SpaBootstrap {
 					.then((route) => {
 						// Prevent error on a direct request -> Always redirect to home.
 						if (route.name === "error") return router.push("/")
-							.then(() => resolve(appContext.vue));
-						resolve(appContext.vue);
+							.then(resolver);
+						resolver();
 					})
 					.catch((e) => {
 						// Skip if there was an error given
@@ -187,12 +200,12 @@ export class SpaBootstrap {
 						
 						// Register fallback
 						const fallbackTimeout = setTimeout(() => {
-							resolve(appContext.vue);
+							resolver();
 						}, 5000);
 						
 						// We probably got a redirect! Wait until the router is ready
 						router.onReady(() => {
-							resolve(appContext.vue);
+							resolver();
 							clearTimeout(fallbackTimeout);
 						});
 					});

@@ -29,7 +29,7 @@ export class HybridApp {
 	 */
 	public static init(config: HybridAppConfigInterface): Promise<Array<AppContext>> {
 		return BasicBootstrap
-			.makeAppContext("hybrid", config)
+			.makeAppContext("hybrid", BasicBootstrap.initialize(config))
 			.then(HybridBootstrap.registerConcreteErrorHandler)
 			.then(BasicBootstrap.applyContextFilter)
 			.then(HybridBootstrap.loadGlobalDataIntoRenderingContext)

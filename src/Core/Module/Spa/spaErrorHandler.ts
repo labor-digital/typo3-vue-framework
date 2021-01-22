@@ -60,16 +60,18 @@ export default function (handlerContext: ConcreteErrorHandlerContextInterface, a
 	}
 	
 	// Prevent infinite loops
-	const lastRoutes = appContext.errorHandler.navigationStack.slice(-2);
-	if (lastRoutes.indexOf(errorRoute) !== -1) {
-		console.error("Failed to redirect! It seems there would be an infinite loop between: " +
-			(lastRoutes[1] ?? lastRoutes[0]) + " -> " + errorRoute);
-		if (lastRoutes.indexOf("/") === -1) {
-			console.info("Trying to redirect to root page...");
-			errorRoute = "/";
-		} else {
-			console.error("I stay here!");
-			redirect = false;
+	if (redirect) {
+		const lastRoutes = appContext.errorHandler.navigationStack.slice(-2);
+		if (lastRoutes.indexOf(errorRoute) !== -1) {
+			console.error("Failed to redirect! It seems there would be an infinite loop between: " +
+				(lastRoutes[1] ?? lastRoutes[0]) + " -> " + errorRoute);
+			if (lastRoutes.indexOf("/") === -1) {
+				console.info("Trying to redirect to root page...");
+				errorRoute = "/";
+			} else {
+				console.error("I stay here!");
+				redirect = false;
+			}
 		}
 	}
 	
@@ -84,15 +86,43 @@ export default function (handlerContext: ConcreteErrorHandlerContextInterface, a
 			// Skip if we should not handle the error
 			if (args.handlerContext.ignore === true) return;
 			
+			const renderContext = appContext.vueRenderContext;
+			
 			// Check if we should handle a content element error
 			error = args.handlerContext.error;
 			if (!isGlobalError) {
 				const component = getPath(error.additionalPayload, ["component"]);
 				if (!isUndefined(component)) component.componentFailed = true;
+				return;
 			}
 			
 			// Set status for SSR
-			appContext.vueRenderContext.status = error.code;
+			renderContext.status = error.code;
+			
+			// Transport SSR errors to the frontend output
+			if (appContext.isServer) {
+				const errors = renderContext.ssrErrors ?? [];
+				errors.push(
+					"<script type=\"text/javascript\">" +
+					"console.error(\"SSR ERROR:\"," +
+					(
+						appContext.isDev ?
+							(
+								JSON.stringify(
+									error.name + "(" + error.code + ") | " + error.message +
+									"\n" + error.stack + "\n\n"
+								) +
+								", " +
+								JSON.stringify(error.getSentryExtra())
+									.replace(/<\/(script|style)/gi, "<\\/$1")
+									.replace(/<!--/g, "\\x3C!--")
+							)
+							: "\"An SSR ERROR occurred!\""
+					) +
+					");" +
+					"</script>");
+				renderContext.ssrErrors = errors;
+			}
 			
 			// Wrap the redirecting into a promise we can chain
 			return (() => {
@@ -128,7 +158,6 @@ export default function (handlerContext: ConcreteErrorHandlerContextInterface, a
 			})().then(() => {
 				// Disable the browser caching on SSR
 				if (appContext.isServer) {
-					const renderContext = appContext.vueRenderContext;
 					
 					// Check if we have a response we can update
 					if (!isUndefined(renderContext.serverResponse)) {

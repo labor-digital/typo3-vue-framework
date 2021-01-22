@@ -76,7 +76,7 @@ export class HybridBootstrap {
 		// Find all elements we want to initialize
 		const selector = getPath((appContext.config as HybridAppConfigInterface), ["contentElementSelector"],
 			"div[data-typo-frontend-api-content-element]");
-		const definitionTags = document.querySelectorAll(selector);
+		const definitionTags = document.querySelectorAll(selector) as any;
 		if (definitionTags.length === 0) return Promise.resolve([]);
 		
 		// Instantiate the vue apps
@@ -133,7 +133,7 @@ export class HybridBootstrap {
 					})
 					.then(() => {
 						// Done
-						resolve();
+						resolve(contexts);
 					});
 			}));
 			

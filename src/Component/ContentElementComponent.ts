@@ -19,10 +19,12 @@
 import {PlainObject} from "@labor-digital/helferlein/lib/Interfaces/PlainObject";
 import {forEach} from "@labor-digital/helferlein/lib/Lists/forEach";
 import {getPath} from "@labor-digital/helferlein/lib/Lists/Paths/getPath";
+import {htmlDecode} from "@labor-digital/helferlein/lib/Strings/htmlDecode";
 import {inflectToCamelCase} from "@labor-digital/helferlein/lib/Strings/Inflector/inflectToCamelCase";
 import {isArray} from "@labor-digital/helferlein/lib/Types/isArray";
 import {isFunction} from "@labor-digital/helferlein/lib/Types/isFunction";
 import {isPlainObject} from "@labor-digital/helferlein/lib/Types/isPlainObject";
+import {isString} from "@labor-digital/helferlein/lib/Types/isString";
 import {isUndefined} from "@labor-digital/helferlein/lib/Types/isUndefined";
 import {ComponentOptions, CreateElement, VNode} from "vue";
 import {Component} from "vue/types/options";
@@ -174,6 +176,7 @@ export default <ComponentOptions<Vue>>{
 			// Check if we got a definition
 			if (!isPlainObject(that.definition)) {
 				that.componentFailed = true;
+				that.componentLoaded = true;
 				return errorHandler(new Error("Could not render a component, because it does not have a valid definition!"));
 			}
 			
@@ -191,13 +194,31 @@ export default <ComponentOptions<Vue>>{
 					if (componentType === "html") {
 						
 						// Handle error in definition
-						if (isPlainObject(that.definition.error)) {
+						// This is a temporary workaround until the next major release,
+						// where errors are transferred as their own content element type!
+						if (isString(that.definition.data) && that.definition.data.indexOf("SERVER_ERROR::") !== -1) {
+							let error: PlainObject;
+							
+							try {
+								const errorString = that.definition.data.replace(
+									/^.*?<!--SERVER_ERROR::(.*?)::SERVER_ERROR-->.*?$/gm, "$1");
+								error = JSON.parse(htmlDecode(errorString));
+							} catch (e) {
+								error = {
+									message: "A server error occurred, but it could not be decoded!",
+									context: {
+										raw: that.definition.data
+									}
+								};
+							}
+							
 							that.componentFailed = true;
+							that.componentLoaded = true;
 							return errorHandler(
-								new Error(that.definition.error.message ?? ""),
-								that.definition.error.code ?? 500,
-								that.definition.error.context ?? {}
-							);
+								new Error(error.message ?? "Unknown error"),
+								error.code ?? 500,
+								error.context ?? {}
+							).then(() => false);
 						}
 						
 						that.component = StaticHtmlComponent;
@@ -224,8 +245,6 @@ export default <ComponentOptions<Vue>>{
 							const resolver = appContext.dynamicComponentResolver;
 							return resolver(componentType, componentKey, that.definition)
 								.catch((e) => {
-									console.log("Caught error: retry...", e);
-									
 									// If we fail... try it again -> We probably had a network issue
 									return resolver(componentType, componentKey, that.definition);
 								})

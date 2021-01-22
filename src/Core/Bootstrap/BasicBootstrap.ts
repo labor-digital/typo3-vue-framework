@@ -16,6 +16,7 @@
  * Last modified: 2019.12.12 at 11:20
  */
 
+import {cloneList} from "@labor-digital/helferlein";
 import {EventBus} from "@labor-digital/helferlein/lib/Events/EventBus";
 import {EventEmitter} from "@labor-digital/helferlein/lib/Events/EventEmitter";
 import {PlainObject} from "@labor-digital/helferlein/lib/Interfaces/PlainObject";
@@ -44,20 +45,18 @@ import {Translation} from "../Module/General/Translation";
 const axios = require("axios").default;
 
 export class BasicBootstrap {
-	/**
-	 * The list of created axios instances to pass to other services
-	 *
-	 * @protected
-	 */
-	protected static _axiosInstances: Array<AxiosInstance> = [];
 	
 	/**
-	 * Creates the app context object and returns it as a promise
-	 * @param mode
-	 * @param config
-	 * @param vueRenderContext
+	 * True as soon as vue is initialized at least once
+	 * @protected
 	 */
-	public static makeAppContext(mode: AppMode, config: BasicAppConfigInterface, vueRenderContext?: PlainObject): Promise<AppContext> {
+	protected static _vueIsInitialized = false;
+	
+	/**
+	 * Initializes the "only once" configuration of vue that must not take place for every app.
+	 * @param config
+	 */
+	public static initialize(config: BasicAppConfigInterface): BasicAppConfigInterface {
 		// Prepare config
 		if (!isPlainObject(config)) config = {};
 		
@@ -74,12 +73,32 @@ export class BasicBootstrap {
 			vueEnvironment = getPath(process, ["env", "VUE_ENV"], typeof process.env.VUE_ENV === "string" ? process.env.VUE_ENV : "client");
 		config.vue.vueEnvironment = vueEnvironment;
 		
+		// Register our internal components
+		Vue.component("content-element", ContentElementComponent);
+		Vue.component("content-element-children", ContentElementChildrenComponent);
+		
+		// Register plugins
+		Vue.use(VueI18n);
+		
+		return config;
+	}
+	
+	/**
+	 * Creates the app context object and returns it as a promise
+	 * @param mode
+	 * @param config
+	 * @param vueRenderContext
+	 */
+	public static makeAppContext(mode: AppMode, config: BasicAppConfigInterface, vueRenderContext?: PlainObject): Promise<AppContext> {
+		// Make a deep copy of the configuration, so we don't pollute the globals.
+		config = cloneList(config);
+		
 		// Initialize the error handler
 		const errorHandler = new ErrorHandler(getPath(config, ["errorHandling"], {}));
 		
 		// Register global error handler in browser
 		const useGlobalErrorHandler = getPath(config, ["errorHandling", "registerGlobalErrorHandler"], true);
-		if (useGlobalErrorHandler && vueEnvironment === "client")
+		if (useGlobalErrorHandler && config.vue.vueEnvironment === "client")
 			window.onerror = function (message, source, lineno, colno, error) {
 				const e = errorHandler.makeGlobalError(message);
 				e.addAdditionalPayload({source, lineno, colno, error});
@@ -89,10 +108,10 @@ export class BasicBootstrap {
 		// Apply the additional config if it exists
 		if (isFunction(config.additionalConfiguration))
 			config.additionalConfiguration({
-				type: environment,
+				type: config.environment,
 				mode: mode,
 				vueContext: vueRenderContext,
-				envVars: vueEnvironment === "client" ?
+				envVars: config.vue.vueEnvironment === "client" ?
 					getPath(window, ["VUE_ENV"], {}) :
 					getPath(vueRenderContext, ["env"],
 						getPath(process, ["env"], {}))
@@ -101,6 +120,7 @@ export class BasicBootstrap {
 		// Prepare the event emitter
 		const eventEmitter: EventEmitter | any = config.vue.vueEnvironment === "client" ?
 			EventBus.getEmitter() : new EventEmitter();
+		
 		let context = undefined;
 		if (isPlainObject(config.events))
 			forEach(config.events, (listener, event) => {
@@ -122,14 +142,23 @@ export class BasicBootstrap {
 			// Make the app context
 			config = args.config;
 			vueRenderContext = isUndefined(vueRenderContext) ? {} : vueRenderContext;
+			
+			// Create axios instances
+			const axiosInstances = [];
+			const generalAxios = BasicBootstrap.makeAxiosInstance(config, false, vueRenderContext);
+			const resourceAxios = BasicBootstrap.makeAxiosInstance(config, true, vueRenderContext);
+			axiosInstances.push(generalAxios);
+			axiosInstances.push(resourceAxios);
+			
 			return context = new AppContext(mode, {
 				env: config.environment,
 				vueEnv: config.vue.vueEnvironment,
 				errorHandler,
 				store: new Store({}, getPath(config, ["initialStore"])),
-				axios: BasicBootstrap.makeAxiosInstance(config, false, vueRenderContext),
+				axios: generalAxios,
+				axiosInstances,
 				resourceApi: new JsonApi({
-					axios: BasicBootstrap.makeAxiosInstance(config, true, vueRenderContext)
+					axios: resourceAxios
 				}),
 				eventEmitter,
 				dynamicComponentResolver: getPath(config, ["vue", "dynamicComponentResolver"]),
@@ -159,21 +188,33 @@ export class BasicBootstrap {
 		const vueConfig: ComponentOptions<Vue> = hasPath(appContext.config, ["vue", "config"]) ?
 			appContext.config.vue.config : {};
 		
-		// Register global vue event handler in browser
-		const originalErrorHandler = Vue.config.errorHandler;
+		// Register global vue event handler
+		// Don't extend already existing error handlers but replace them
+		const originalErrorHandler =
+			Vue.config.errorHandler && (Vue.config.errorHandler as any).frameworkErrorHandler
+				? null : Vue.config.errorHandler;
 		Vue.config.errorHandler = function (err, vm, info) {
 			if (isFunction(originalErrorHandler)) originalErrorHandler(err, vm, info);
 			const e = appContext.errorHandler.makeGlobalError(err);
 			e.addAdditionalPayload({vm, info});
 			appContext.errorHandler.emitError(e);
 		};
+		(Vue.config.errorHandler as any).frameworkErrorHandler = true;
 		
-		// Register our internal components
-		Vue.component("content-element", ContentElementComponent);
-		Vue.component("content-element-children", ContentElementChildrenComponent);
+		// Inject outlet for SSR Errors to be passed to the frontend
+		if (appContext.isServer) {
+			const renderContext = appContext.vueRenderContext;
+			renderContext.afterRendering = function (res) {
+				return appContext.errorHandler.waitForAllPromises()
+					.then(() => {
+						if (renderContext.ssrErrors) {
+							res.write(renderContext.ssrErrors.join("\n"));
+						}
+					});
+			};
+		}
 		
 		// Initialize the localization logic
-		Vue.use(VueI18n);
 		vueConfig.i18n = new VueI18n({
 			locale: "en",
 			messages: {
@@ -185,7 +226,7 @@ export class BasicBootstrap {
 				(vueConfig.i18n as VueI18n),
 				appContext.resourceApi,
 				appContext.eventEmitter,
-				BasicBootstrap._axiosInstances
+				appContext.allAxiosInstances
 			)
 		);
 		
@@ -208,8 +249,9 @@ export class BasicBootstrap {
 		appContext.config.vue.config = vueConfig;
 		
 		// Apply a custom, global vue configuration
-		if (hasPath(appContext.config, ["vue", "globalConfiguration"]))
+		if (!BasicBootstrap._vueIsInitialized && hasPath(appContext.config, ["vue", "globalConfiguration"]))
 			appContext.config.vue.globalConfiguration(appContext, Vue);
+		BasicBootstrap._vueIsInitialized = true;
 		
 		// Done
 		return Promise.resolve(appContext);
@@ -304,9 +346,7 @@ export class BasicBootstrap {
 			process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 		
 		// Create a new instance
-		const i = axios.create(axiosConfig);
-		BasicBootstrap._axiosInstances.push(i);
-		return i;
+		return axios.create(axiosConfig);
 	}
 	
 	/**

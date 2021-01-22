@@ -29,6 +29,11 @@ export class SpaApp {
 	 * @param config
 	 */
 	public static init(config: SpaAppConfigInterface): Promise<any> | Function {
+		
+		// Once in a lifetime bootstrapping
+		config = BasicBootstrap.initialize(config);
+		SpaBootstrap.initialize();
+		
 		/**
 		 * Async boot wrapper for both the browser and the ssr renderer
 		 * @param vueContext

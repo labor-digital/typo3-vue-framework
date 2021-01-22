@@ -16,6 +16,7 @@
  * Last modified: 2019.12.12 at 11:43
  */
 
+import {cloneList} from "@labor-digital/helferlein";
 import {isBrowser} from "@labor-digital/helferlein/lib/Environment/isBrowser";
 import {PlainObject} from "@labor-digital/helferlein/lib/Interfaces/PlainObject";
 import {maxLength} from "@labor-digital/helferlein/lib/Strings/maxLength";
@@ -61,9 +62,16 @@ export class ErrorHandler {
 	 */
 	protected _lastError: AppError | undefined;
 	
+	/**
+	 * The list of promises that are currently handled
+	 * @protected
+	 */
+	protected _handlingErrors: Array<Promise<any>>;
+	
 	public constructor(config: AppErrorConfigInterface) {
 		this._config = config;
 		this._navigationStack = [];
+		this._handlingErrors = [];
 		this._concreteErrorHandler = function () {
 			return Promise.resolve();
 		};
@@ -98,7 +106,7 @@ export class ErrorHandler {
 		};
 		
 		// Handle the error
-		return this._concreteErrorHandler(context).then(() => {
+		const promise = this._concreteErrorHandler(context).then(() => {
 			// Print this error to the console if required
 			if (context.printToConsole)
 				this.printMessageToConsole(error);
@@ -107,6 +115,17 @@ export class ErrorHandler {
 			if (context.sendToLogger && isFunction(this._config.logger))
 				this._config.logger(error);
 		});
+		
+		// Store the promise so we can wait for it
+		this._handlingErrors.push(promise.then(v => {
+			// Remove this promise from the list
+			this._handlingErrors = this._handlingErrors.splice(
+				this._handlingErrors.indexOf(promise), 1
+			);
+			return v;
+		}));
+		
+		return promise;
 	}
 	
 	/**
@@ -181,6 +200,15 @@ export class ErrorHandler {
 			e.addAdditionalPayload(additionalPayload);
 			return that.emitError(e);
 		};
+	}
+	
+	/**
+	 * Returns a promise that is resolved when all error promises have been resolved completely
+	 */
+	public waitForAllPromises(): Promise<void> {
+		if (isEmpty(this._handlingErrors)) return Promise.resolve();
+		return Promise.all(cloneList(this._handlingErrors)).then(() => {
+		});
 	}
 	
 	/**

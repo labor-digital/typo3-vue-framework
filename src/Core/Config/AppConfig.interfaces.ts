@@ -99,7 +99,7 @@ export interface AppStaticComponentListInterface {
 }
 
 export interface AppEventListener {
-	(evt: EventEmitterEvent, appContext: AppContext): void;
+	(evt: EventEmitterEvent, appContext: AppContext): void | Promise<void>;
 }
 
 export interface AppErrorRouteResolver {

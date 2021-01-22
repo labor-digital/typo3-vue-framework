@@ -135,7 +135,7 @@ export class RouteHandler {
 					
 					// On the server side we have to request the content of different routes ourselves
 					const to = appContext.vue.$router.resolve(nextValue, from).route;
-					return new Promise(resolve => {
+					return new Promise<void>(resolve => {
 						this.handle(to, from, (a, b, c) => {
 							resolve();
 							next(a, b, c);
