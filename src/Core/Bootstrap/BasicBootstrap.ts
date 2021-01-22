@@ -100,6 +100,10 @@ export class BasicBootstrap {
 		const useGlobalErrorHandler = getPath(config, ["errorHandling", "registerGlobalErrorHandler"], true);
 		if (useGlobalErrorHandler && config.vue.vueEnvironment === "client")
 			window.onerror = function (message, source, lineno, colno, error) {
+				
+				// Ignore external, global errors
+				if ((message + "").indexOf("webpack-internal://") === -1) return;
+				
 				const e = errorHandler.makeGlobalError(message);
 				e.addAdditionalPayload({source, lineno, colno, error});
 				errorHandler.emitError(e);
@@ -194,7 +198,14 @@ export class BasicBootstrap {
 			Vue.config.errorHandler && (Vue.config.errorHandler as any).frameworkErrorHandler
 				? null : Vue.config.errorHandler;
 		Vue.config.errorHandler = function (err, vm, info) {
-			if (isFunction(originalErrorHandler)) originalErrorHandler(err, vm, info);
+			
+			// Ignore external, global errors
+			if ((err.stack + "").indexOf("webpack-internal://") === -1) return;
+			
+			if (isFunction(originalErrorHandler)) {
+				originalErrorHandler(err, vm, info);
+			}
+			
 			const e = appContext.errorHandler.makeGlobalError(err);
 			e.addAdditionalPayload({vm, info});
 			appContext.errorHandler.emitError(e);
