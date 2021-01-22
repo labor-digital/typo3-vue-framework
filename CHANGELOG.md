@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.20.0](https://github.com/labor-digital/typo3-vue-framework/compare/v2.19.1...v2.20.0) (2021-01-22)
+
+
+### Features
+
+* resolves multiple issues for SSR rendering ([2522b6d](https://github.com/labor-digital/typo3-vue-framework/commit/2522b6d4ae3e8905bbab4b4ad9ee7b30ac814c27))
+* update dependencies ([c5274ca](https://github.com/labor-digital/typo3-vue-framework/commit/c5274ca7ca3ea4a1651238dc49b185d33520496c))
+* update dependencies ([cdfdeb4](https://github.com/labor-digital/typo3-vue-framework/commit/cdfdeb4b2336c2353d23599a0b7b82fb063d524b))
+
 ### [2.19.1](https://github.com/labor-digital/typo3-vue-framework/compare/v2.19.0...v2.19.1) (2021-01-21)
 
 
