@@ -16,11 +16,7 @@
  * Last modified: 2019.12.12 at 12:53
  */
 
-import {EventEmitter, EventEmitterEvent} from "@labor-digital/helferlein/lib/Events/EventEmitter";
-import {PlainObject} from "@labor-digital/helferlein/lib/Interfaces/PlainObject";
-import {forEach} from "@labor-digital/helferlein/lib/Lists/forEach";
-import {isString} from "@labor-digital/helferlein/lib/Types/isString";
-import {isUndefined} from "@labor-digital/helferlein/lib/Types/isUndefined";
+import {EventEmitter, EventEmitterEvent, forEach, isString, isUndefined, PlainObject} from "@labor-digital/helferlein";
 import {AxiosInstance} from "axios";
 import Vue from "vue";
 import {Route, VueRouter} from "vue-router/types/router";

@@ -16,8 +16,7 @@
  * Last modified: 2020.04.20 at 00:45
  */
 
-import {ucFirst} from "@labor-digital/helferlein/lib/Strings/ucFirst";
-import {isString} from "@labor-digital/helferlein/lib/Types/isString";
+import {isString, ucFirst} from "@labor-digital/helferlein";
 // @ts-ignore
 import {ComponentOptions, CreateElement, VNode} from "vue";
 import {Vue} from "vue/types/vue";

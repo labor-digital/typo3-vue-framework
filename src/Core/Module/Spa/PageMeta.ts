@@ -16,10 +16,7 @@
  * Last modified: 2019.10.23 at 09:59
  */
 
-import {isBrowser} from "@labor-digital/helferlein/lib/Environment/isBrowser";
-import {EventEmitter, EventEmitterEvent} from "@labor-digital/helferlein/lib/Events/EventEmitter";
-import {forEach} from "@labor-digital/helferlein/lib/Lists/forEach";
-import {merge} from "@labor-digital/helferlein/lib/Lists/merge";
+import {EventEmitter, EventEmitterEvent, forEach, isBrowser, merge} from "@labor-digital/helferlein";
 import Vue from "vue";
 import {MetaInfo, VueMetaPlugin} from "vue-meta";
 import {PageContext} from "../../Context/PageContext";

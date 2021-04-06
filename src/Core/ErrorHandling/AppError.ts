@@ -16,15 +16,17 @@
  * Last modified: 2019.12.12 at 11:45
  */
 
-import {PlainObject} from "@labor-digital/helferlein/lib/Interfaces/PlainObject";
-import {forEach} from "@labor-digital/helferlein/lib/Lists/forEach";
-import {map} from "@labor-digital/helferlein/lib/Lists/map";
-import {getPath} from "@labor-digital/helferlein/lib/Lists/Paths/getPath";
-import {ucFirst} from "@labor-digital/helferlein/lib/Strings/ucFirst";
-import {isArray} from "@labor-digital/helferlein/lib/Types/isArray";
-import {isObject} from "@labor-digital/helferlein/lib/Types/isObject";
-import {isString} from "@labor-digital/helferlein/lib/Types/isString";
-import {isUndefined} from "@labor-digital/helferlein/lib/Types/isUndefined";
+import {
+	forEach,
+	getPath,
+	isArray,
+	isObject,
+	isString,
+	isUndefined,
+	map,
+	PlainObject,
+	ucFirst
+} from "@labor-digital/helferlein";
 import {ContentElementContext} from "../Context/ContentElementContext";
 import {AppErrorType, ReasonType} from "./ErrorHandler.interfaces";
 

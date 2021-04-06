@@ -16,7 +16,7 @@
  * Last modified: 2019.09.27 at 15:21
  */
 
-import {PlainObject} from "@labor-digital/helferlein/lib/Interfaces/PlainObject";
+import {PlainObject} from "@labor-digital/helferlein";
 import {ContentElementColumnListInterface} from "./ContentElementColumnListInterface";
 
 export interface ContentElementComponentDefinitionInterface {

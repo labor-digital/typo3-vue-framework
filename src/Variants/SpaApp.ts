@@ -16,8 +16,7 @@
  * Last modified: 2019.12.12 at 11:20
  */
 
-import {isBrowser} from "@labor-digital/helferlein/lib/Environment/isBrowser";
-import {PlainObject} from "@labor-digital/helferlein/lib/Interfaces/PlainObject";
+import {isBrowser, PlainObject} from "@labor-digital/helferlein";
 import {BasicBootstrap} from "../Core/Bootstrap/BasicBootstrap";
 import {SpaBootstrap} from "../Core/Bootstrap/SpaBootstrap";
 import {SpaAppConfigInterface} from "../Core/Config/SpaAppConfigInterface";

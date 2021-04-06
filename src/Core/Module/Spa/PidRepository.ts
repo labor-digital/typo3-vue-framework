@@ -16,13 +16,16 @@
  * Last modified: 2020.04.19 at 19:48
  */
 
-import {EventEmitter, EventEmitterEvent} from "@labor-digital/helferlein/lib/Events/EventEmitter";
-import {ListPath} from "@labor-digital/helferlein/lib/Interfaces/List";
-import {PlainObject} from "@labor-digital/helferlein/lib/Interfaces/PlainObject";
-import {getPath} from "@labor-digital/helferlein/lib/Lists/Paths/getPath";
-import {isNumber} from "@labor-digital/helferlein/lib/Types/isNumber";
-import {isNumeric} from "@labor-digital/helferlein/lib/Types/isNumeric";
-import {isUndefined} from "@labor-digital/helferlein/lib/Types/isUndefined";
+import {
+	EventEmitter,
+	EventEmitterEvent,
+	getPath,
+	isNumber,
+	isNumeric,
+	isUndefined,
+	ListPath,
+	PlainObject
+} from "@labor-digital/helferlein";
 import {FrameworkEventList} from "../../Interface/FrameworkEventList";
 import {FrameworkStoreKeys} from "../../Interface/FrameworkStoreKeys";
 import {Resource} from "../../JsonApi/IdeHelper";

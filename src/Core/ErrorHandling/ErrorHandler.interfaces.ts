@@ -17,7 +17,7 @@
  */
 
 
-import {PlainObject} from "@labor-digital/helferlein/lib/Interfaces/PlainObject";
+import {PlainObject} from "@labor-digital/helferlein";
 import {AppErrorConfigInterface} from "../Config/BasicAppConfigInterface";
 import {SpaAppErrorConfigInterface} from "../Config/SpaAppConfigInterface";
 import {AppError} from "./AppError";

@@ -16,8 +16,7 @@
  * Last modified: 2019.12.12 at 11:24
  */
 
-import {EventEmitterEvent} from "@labor-digital/helferlein/lib/Events/EventEmitter";
-import {PlainObject} from "@labor-digital/helferlein/lib/Interfaces/PlainObject";
+import {EventEmitterEvent, PlainObject} from "@labor-digital/helferlein";
 import {Component, VueConstructor} from "vue";
 import {AppContext, AppEnvironmentType, AppMode} from "../Context/AppContext";
 import {AppError} from "../ErrorHandling/AppError";

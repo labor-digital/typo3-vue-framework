@@ -16,14 +16,16 @@
  * Last modified: 2019.10.29 at 17:41
  */
 
-import {ListPath} from "@labor-digital/helferlein/lib/Interfaces/List";
-import {PlainObject} from "@labor-digital/helferlein/lib/Interfaces/PlainObject";
-import {forEach} from "@labor-digital/helferlein/lib/Lists/forEach";
-import {getPath} from "@labor-digital/helferlein/lib/Lists/Paths/getPath";
-import {hasPath} from "@labor-digital/helferlein/lib/Lists/Paths/hasPath";
-import {isFunction} from "@labor-digital/helferlein/lib/Types/isFunction";
-import {isPlainObject} from "@labor-digital/helferlein/lib/Types/isPlainObject";
-import {isUndefined} from "@labor-digital/helferlein/lib/Types/isUndefined";
+import {
+	forEach,
+	getPath,
+	hasPath,
+	isFunction,
+	isPlainObject,
+	isUndefined,
+	ListPath,
+	PlainObject
+} from "@labor-digital/helferlein";
 import Vue, {WatchOptions} from "vue";
 
 export interface StoreWatcher {

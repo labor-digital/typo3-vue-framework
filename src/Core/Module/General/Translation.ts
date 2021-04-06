@@ -16,11 +16,14 @@
  * Last modified: 2019.09.30 at 11:12
  */
 
-import {EventEmitter, EventEmitterEvent} from "@labor-digital/helferlein/lib/Events/EventEmitter";
-import {PlainObject} from "@labor-digital/helferlein/lib/Interfaces/PlainObject";
-import {forEach} from "@labor-digital/helferlein/lib/Lists/forEach";
-import {isPlainObject} from "@labor-digital/helferlein/lib/Types/isPlainObject";
-import {isString} from "@labor-digital/helferlein/lib/Types/isString";
+import {
+	EventEmitter,
+	EventEmitterEvent,
+	forEach,
+	isPlainObject,
+	isString,
+	PlainObject
+} from "@labor-digital/helferlein";
 import {AxiosInstance} from "axios";
 import VueI18n, {Values} from "vue-i18n";
 import {FrameworkEventList} from "../../Interface/FrameworkEventList";

@@ -16,11 +16,7 @@
  * Last modified: 2019.12.12 at 15:17
  */
 
-import {forEach} from "@labor-digital/helferlein/lib/Lists/forEach";
-import {getPath} from "@labor-digital/helferlein/lib/Lists/Paths/getPath";
-import {isArray} from "@labor-digital/helferlein/lib/Types/isArray";
-import {isFunction} from "@labor-digital/helferlein/lib/Types/isFunction";
-import {isUndefined} from "@labor-digital/helferlein/lib/Types/isUndefined";
+import {forEach, getPath, isArray, isFunction, isUndefined} from "@labor-digital/helferlein";
 import DefaultAppErrorComponent from "../../../Component/DefaultAppErrorComponent";
 import {AppErrorConfigRouteDefinition, AppErrorRouteResolver} from "../../Config/AppConfig.interfaces";
 import {SpaAppErrorConfigInterface} from "../../Config/SpaAppConfigInterface";

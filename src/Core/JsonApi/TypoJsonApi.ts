@@ -16,10 +16,7 @@
  * Last modified: 2020.05.22 at 21:00
  */
 
-import {getPath} from "@labor-digital/helferlein/lib/Lists/Paths/getPath";
-import {debouncePromise} from "@labor-digital/helferlein/lib/Misc/debouncePromise";
-import {isNumber} from "@labor-digital/helferlein/lib/Types/isNumber";
-import {isUndefined} from "@labor-digital/helferlein/lib/Types/isUndefined";
+import {debouncePromise, getPath, isNumber, isUndefined} from "@labor-digital/helferlein";
 import {JsonApi} from "@labor-digital/json-api/lib/JsonApi";
 import {JsonApiGetQuery} from "@labor-digital/json-api/lib/JsonApi.interfaces";
 import {Collection, Resource} from "./IdeHelper";

@@ -16,9 +16,7 @@
  * Last modified: 2020.10.09 at 11:47
  */
 
-import {EventEmitterEvent} from "@labor-digital/helferlein/lib/Events/EventEmitter";
-import {PlainObject} from "@labor-digital/helferlein/lib/Interfaces/PlainObject";
-import {isPlainObject} from "@labor-digital/helferlein/lib/Types/isPlainObject";
+import {EventEmitterEvent, isPlainObject, PlainObject} from "@labor-digital/helferlein";
 import {Route} from "vue-router";
 import {AppContext} from "../../Context/AppContext";
 import {FrameworkEventList} from "../../Interface/FrameworkEventList";

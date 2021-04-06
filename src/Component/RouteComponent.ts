@@ -16,7 +16,7 @@
  * Last modified: 2019.10.07 at 17:41
  */
 
-import {isUndefined} from "@labor-digital/helferlein/lib/Types/isUndefined";
+import {isUndefined} from "@labor-digital/helferlein";
 import {ComponentOptions, CreateElement, VNode} from "vue";
 import {Route} from "vue-router";
 import {Vue} from "vue/types/vue";

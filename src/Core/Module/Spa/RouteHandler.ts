@@ -16,12 +16,7 @@
  * Last modified: 2019.11.29 at 21:46
  */
 
-import {getPath} from "@labor-digital/helferlein/lib/Lists/Paths/getPath";
-import {hasPath} from "@labor-digital/helferlein/lib/Lists/Paths/hasPath";
-import {isArray} from "@labor-digital/helferlein/lib/Types/isArray";
-import {isFunction} from "@labor-digital/helferlein/lib/Types/isFunction";
-import {isString} from "@labor-digital/helferlein/lib/Types/isString";
-import {isUndefined} from "@labor-digital/helferlein/lib/Types/isUndefined";
+import {getPath, hasPath, isArray, isFunction, isString, isUndefined} from "@labor-digital/helferlein";
 import {CreateElement, VNode} from "vue";
 import {Route} from "vue-router";
 import {AppContext} from "../../Context/AppContext";
@@ -76,7 +71,7 @@ export class RouteHandler {
 				if (this._initialRequest && appContext.isClient &&
 					hasPath(window, ["__INITIAL_STATE__"]))
 					return appContext.resourceApi.makeResourceOrCollection(
-						getPath(window, ["__INITIAL_STATE__"], {}));
+						getPath(window as any, ["__INITIAL_STATE__"], {}));
 				
 				// Request the information using the api
 				return appContext.resourceApi.getAdditional("page", "bySlug", args.query);

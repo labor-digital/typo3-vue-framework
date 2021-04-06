@@ -16,7 +16,7 @@
  * Last modified: 2019.12.12 at 11:21
  */
 
-import {PlainObject} from "@labor-digital/helferlein/lib/Interfaces/PlainObject";
+import {PlainObject} from "@labor-digital/helferlein";
 import {AxiosRequestConfig} from "axios";
 import Vue, {ComponentOptions} from "vue";
 import {AppEnvironmentType, VueEnvironmentType} from "../Context/AppContext";

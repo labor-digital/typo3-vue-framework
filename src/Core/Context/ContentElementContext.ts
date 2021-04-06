@@ -16,10 +16,7 @@
  * Last modified: 2019.12.12 at 16:55
  */
 
-import {EventEmitter} from "@labor-digital/helferlein/lib/Events/EventEmitter";
-import {PlainObject} from "@labor-digital/helferlein/lib/Interfaces/PlainObject";
-import {getPath} from "@labor-digital/helferlein/lib/Lists/Paths/getPath";
-import {isUndefined} from "@labor-digital/helferlein/lib/Types/isUndefined";
+import {EventEmitter, getPath, isUndefined, PlainObject} from "@labor-digital/helferlein";
 import {AxiosInstance} from "axios";
 import {ContentElementErrorHandler, ReasonType} from "../ErrorHandling/ErrorHandler.interfaces";
 import {ContentElementColumnListInterface} from "../Interface/ContentElementColumnListInterface";
@@ -76,9 +73,9 @@ export class ContentElementContext {
 					   definition: ContentElementComponentDefinitionInterface, errorHandler: ContentElementErrorHandler) {
 		this._id = definition.id;
 		this._children = definition.children;
-		this._initialType = getPath(definition, ["initialState", "resourceType"], null);
+		this._initialType = getPath(definition as any, ["initialState", "resourceType"], null);
 		this._initialState = initialState;
-		this._initialQuery = getPath(definition, ["initialState", "query"], null);
+		this._initialQuery = getPath(definition as any, ["initialState", "query"], null);
 		this._data = new State(definition.data);
 		this._appContext = context;
 		this._errorHandler = errorHandler;

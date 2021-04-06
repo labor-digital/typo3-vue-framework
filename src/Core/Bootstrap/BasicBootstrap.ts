@@ -16,19 +16,21 @@
  * Last modified: 2019.12.12 at 11:20
  */
 
-import {cloneList} from "@labor-digital/helferlein";
-import {EventBus} from "@labor-digital/helferlein/lib/Events/EventBus";
-import {EventEmitter} from "@labor-digital/helferlein/lib/Events/EventEmitter";
-import {PlainObject} from "@labor-digital/helferlein/lib/Interfaces/PlainObject";
-import {forEach} from "@labor-digital/helferlein/lib/Lists/forEach";
-import {merge} from "@labor-digital/helferlein/lib/Lists/merge";
-import {getPath} from "@labor-digital/helferlein/lib/Lists/Paths/getPath";
-import {hasPath} from "@labor-digital/helferlein/lib/Lists/Paths/hasPath";
-import {isFunction} from "@labor-digital/helferlein/lib/Types/isFunction";
-import {isObject} from "@labor-digital/helferlein/lib/Types/isObject";
-import {isPlainObject} from "@labor-digital/helferlein/lib/Types/isPlainObject";
-import {isString} from "@labor-digital/helferlein/lib/Types/isString";
-import {isUndefined} from "@labor-digital/helferlein/lib/Types/isUndefined";
+import {
+	cloneList,
+	EventBus,
+	EventEmitter,
+	forEach,
+	getPath,
+	hasPath,
+	isFunction,
+	isObject,
+	isPlainObject,
+	isString,
+	isUndefined,
+	merge,
+	PlainObject
+} from "@labor-digital/helferlein";
 import {AxiosInstance, AxiosRequestConfig} from "axios";
 import Vue, {ComponentOptions} from "vue";
 import VueI18n from "vue-i18n";
@@ -63,14 +65,14 @@ export class BasicBootstrap {
 		// Prepare the environment
 		let environment: AppEnvironmentType = config.environment;
 		if (environment !== "production" && environment !== "development")
-			environment = getPath(process, ["env", "NODE_ENV"], typeof process.env.NODE_ENV === "string" ? process.env.NODE_ENV : "production");
+			environment = getPath(process as any, ["env", "NODE_ENV"], typeof process.env.NODE_ENV === "string" ? process.env.NODE_ENV : "production");
 		config.environment = environment;
 		
 		// Prepare the vue environment
 		if (!isPlainObject(config.vue)) config.vue = {};
-		let vueEnvironment: VueEnvironmentType = getPath(config, ["vue", "vueEnvironment"]);
+		let vueEnvironment: VueEnvironmentType = getPath(config as any, ["vue", "vueEnvironment"]);
 		if (vueEnvironment !== "client" && vueEnvironment !== "server")
-			vueEnvironment = getPath(process, ["env", "VUE_ENV"], typeof process.env.VUE_ENV === "string" ? process.env.VUE_ENV : "client");
+			vueEnvironment = getPath(process as any, ["env", "VUE_ENV"], typeof process.env.VUE_ENV === "string" ? process.env.VUE_ENV : "client");
 		config.vue.vueEnvironment = vueEnvironment;
 		
 		// Register our internal components
@@ -94,7 +96,7 @@ export class BasicBootstrap {
 		config = cloneList(config);
 		
 		// Initialize the error handler
-		const errorHandler = new ErrorHandler(getPath(config, ["errorHandling"], {}));
+		const errorHandler = new ErrorHandler(getPath(config as any, ["errorHandling"], {}));
 		
 		// Register global error handler in browser
 		const useGlobalErrorHandler = getPath(config, ["errorHandling", "registerGlobalErrorHandler"], true);
@@ -116,7 +118,7 @@ export class BasicBootstrap {
 				mode: mode,
 				vueContext: vueRenderContext,
 				envVars: config.vue.vueEnvironment === "client" ?
-					getPath(window, ["VUE_ENV"], {}) :
+					getPath(window as any, ["VUE_ENV"], {}) :
 					getPath(vueRenderContext, ["env"],
 						getPath(process, ["env"], {}))
 			}, config);
@@ -129,7 +131,7 @@ export class BasicBootstrap {
 		if (isPlainObject(config.events))
 			forEach(config.events, (listener, event) => {
 				eventEmitter.bind(event, (e) => {
-					const res = listener(e, context);
+					const res: any = listener(e, context);
 					if (isObject(res) && isFunction(res.catch)) {
 						res.catch((err) => {
 							return errorHandler.emitError(
@@ -158,7 +160,7 @@ export class BasicBootstrap {
 				env: config.environment,
 				vueEnv: config.vue.vueEnvironment,
 				errorHandler,
-				store: new Store({}, getPath(config, ["initialStore"])),
+				store: new Store({}, getPath(config as any, ["initialStore"])),
 				axios: generalAxios,
 				axiosInstances,
 				resourceApi: new JsonApi({

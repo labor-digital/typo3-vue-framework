@@ -16,17 +16,19 @@
  * Last modified: 2019.12.12 at 11:43
  */
 
-import {cloneList} from "@labor-digital/helferlein";
-import {isBrowser} from "@labor-digital/helferlein/lib/Environment/isBrowser";
-import {PlainObject} from "@labor-digital/helferlein/lib/Interfaces/PlainObject";
-import {maxLength} from "@labor-digital/helferlein/lib/Strings/maxLength";
-import {ucFirst} from "@labor-digital/helferlein/lib/Strings/ucFirst";
-import {isEmpty} from "@labor-digital/helferlein/lib/Types/isEmpty";
-import {isFunction} from "@labor-digital/helferlein/lib/Types/isFunction";
-import {isNumber} from "@labor-digital/helferlein/lib/Types/isNumber";
-import {isObject} from "@labor-digital/helferlein/lib/Types/isObject";
-import {isString} from "@labor-digital/helferlein/lib/Types/isString";
-import {isUndefined} from "@labor-digital/helferlein/lib/Types/isUndefined";
+import {
+	cloneList,
+	isBrowser,
+	isEmpty,
+	isFunction,
+	isNumber,
+	isObject,
+	isString,
+	isUndefined,
+	maxLength,
+	PlainObject,
+	ucFirst
+} from "@labor-digital/helferlein";
 import PrettyError from "pretty-error";
 import {Component} from "vue";
 import {AppErrorConfigInterface} from "../Config/BasicAppConfigInterface";

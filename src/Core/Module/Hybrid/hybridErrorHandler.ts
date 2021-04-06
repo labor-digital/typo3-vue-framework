@@ -16,8 +16,7 @@
  * Last modified: 2019.12.30 at 15:48
  */
 
-import {getPath} from "@labor-digital/helferlein/lib/Lists/Paths/getPath";
-import {isUndefined} from "@labor-digital/helferlein/lib/Types/isUndefined";
+import {getPath, isUndefined} from "@labor-digital/helferlein";
 import {AppContext} from "../../Context/AppContext";
 import {AppError} from "../../ErrorHandling/AppError";
 import {ConcreteErrorHandlerContextInterface} from "../../ErrorHandling/ErrorHandler.interfaces";

@@ -16,12 +16,7 @@
  * Last modified: 2019.12.12 at 13:54
  */
 
-import {getPath} from "@labor-digital/helferlein/lib/Lists/Paths/getPath";
-import {hasPath} from "@labor-digital/helferlein/lib/Lists/Paths/hasPath";
-import {isArray} from "@labor-digital/helferlein/lib/Types/isArray";
-import {isPlainObject} from "@labor-digital/helferlein/lib/Types/isPlainObject";
-import {isString} from "@labor-digital/helferlein/lib/Types/isString";
-import {isUndefined} from "@labor-digital/helferlein/lib/Types/isUndefined";
+import {getPath, hasPath, isArray, isPlainObject, isString, isUndefined} from "@labor-digital/helferlein";
 import Vue, {CreateElement, VNode} from "vue";
 import Meta from "vue-meta";
 import VueRouter, {RouterOptions} from "vue-router";

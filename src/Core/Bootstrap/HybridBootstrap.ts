@@ -16,12 +16,7 @@
  * Last modified: 2019.12.30 at 15:47
  */
 
-import {getData} from "@labor-digital/helferlein/lib/Dom/getData";
-import {PlainObject} from "@labor-digital/helferlein/lib/Interfaces/PlainObject";
-import {cloneList} from "@labor-digital/helferlein/lib/Lists/cloneList";
-import {forEach} from "@labor-digital/helferlein/lib/Lists/forEach";
-import {getPath} from "@labor-digital/helferlein/lib/Lists/Paths/getPath";
-import {isPlainObject} from "@labor-digital/helferlein/lib/Types/isPlainObject";
+import {cloneList, forEach, getData, getPath, isPlainObject, PlainObject} from "@labor-digital/helferlein";
 import {Component, CreateElement, VNode} from "vue";
 import ContentElementComponent from "../../Component/ContentElementComponent";
 import {HybridAppConfigInterface} from "../Config/HybridAppConfigInterface";
@@ -47,12 +42,12 @@ export class HybridBootstrap {
 	 */
 	public static loadGlobalDataIntoRenderingContext(appContext: AppContext): Promise<AppContext> {
 		let globalData = {};
-		if (appContext.isServer) globalData = getPath(process, ["env", "FRONTEND_API_DATA"], {});
+		if (appContext.isServer) globalData = getPath(process as any, ["env", "FRONTEND_API_DATA"], {});
 		else {
 			if (typeof process.env.FRONTEND_API_DATA !== "undefined")
 				globalData = process.env.FRONTEND_API_DATA;
-			else globalData = getPath(window, [
-				getPath((appContext.config as HybridAppConfigInterface), ["globalDataWindowVar"], "FRONTEND_API_DATA")], {});
+			else globalData = getPath(window as any, [
+				getPath((appContext.config as any), ["globalDataWindowVar"], "FRONTEND_API_DATA")], {});
 		}
 		appContext.vueRenderContext.globalData = globalData;
 		return Promise.resolve(appContext);
@@ -64,7 +59,7 @@ export class HybridBootstrap {
 	 */
 	public static registerTranslation(appContext: AppContext): Promise<AppContext> {
 		appContext.translation.__setLanguageForHybridApp(
-			getPath(appContext, ["vueRenderContext", "globalData", "translations"], {}));
+			getPath(appContext as any, ["vueRenderContext", "globalData", "translations"], {}));
 		return Promise.resolve(appContext);
 	}
 	

@@ -16,10 +16,7 @@
  * Last modified: 2019.09.27 at 14:43
  */
 
-import {forEach} from "@labor-digital/helferlein/lib/Lists/forEach";
-import {getPath} from "@labor-digital/helferlein/lib/Lists/Paths/getPath";
-import {isEmpty} from "@labor-digital/helferlein/lib/Types/isEmpty";
-import {isUndefined} from "@labor-digital/helferlein/lib/Types/isUndefined";
+import {forEach, getPath, isEmpty, isUndefined} from "@labor-digital/helferlein";
 import {ComponentOptions, CreateElement, VNode} from "vue";
 import {Vue} from "vue/types/vue";
 import {ContentElementContext} from "../Core/Context/ContentElementContext";

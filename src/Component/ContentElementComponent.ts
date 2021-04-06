@@ -16,16 +16,18 @@
  * Last modified: 2019.09.27 at 14:48
  */
 
-import {PlainObject} from "@labor-digital/helferlein/lib/Interfaces/PlainObject";
-import {forEach} from "@labor-digital/helferlein/lib/Lists/forEach";
-import {getPath} from "@labor-digital/helferlein/lib/Lists/Paths/getPath";
-import {htmlDecode} from "@labor-digital/helferlein/lib/Strings/htmlDecode";
-import {inflectToCamelCase} from "@labor-digital/helferlein/lib/Strings/Inflector/inflectToCamelCase";
-import {isArray} from "@labor-digital/helferlein/lib/Types/isArray";
-import {isFunction} from "@labor-digital/helferlein/lib/Types/isFunction";
-import {isPlainObject} from "@labor-digital/helferlein/lib/Types/isPlainObject";
-import {isString} from "@labor-digital/helferlein/lib/Types/isString";
-import {isUndefined} from "@labor-digital/helferlein/lib/Types/isUndefined";
+import {
+	forEach,
+	getPath,
+	htmlDecode,
+	inflectToCamelCase,
+	isArray,
+	isFunction,
+	isPlainObject,
+	isString,
+	isUndefined,
+	PlainObject
+} from "@labor-digital/helferlein";
 import {ComponentOptions, CreateElement, VNode} from "vue";
 import {Component} from "vue/types/options";
 import {Vue} from "vue/types/vue";

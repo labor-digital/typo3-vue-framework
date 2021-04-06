@@ -16,11 +16,7 @@
  * Last modified: 2019.12.12 at 11:41
  */
 
-import {EventEmitter} from "@labor-digital/helferlein/lib/Events/EventEmitter";
-import {PlainObject} from "@labor-digital/helferlein/lib/Interfaces/PlainObject";
-import {cloneList} from "@labor-digital/helferlein/lib/Lists/cloneList";
-import {forEach} from "@labor-digital/helferlein/lib/Lists/forEach";
-import {isUndefined} from "@labor-digital/helferlein/lib/Types/isUndefined";
+import {cloneList, EventEmitter, forEach, isUndefined, PlainObject} from "@labor-digital/helferlein";
 import {AxiosInstance} from "axios";
 import {CombinedVueInstance, Vue} from "vue/types/vue";
 import {AppStaticComponentListInterface, VueDynamicComponentResolverInterface} from "../Config/AppConfig.interfaces";

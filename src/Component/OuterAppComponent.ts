@@ -16,9 +16,7 @@
  * Last modified: 2020.04.19 at 14:42
  */
 
-import {getPath} from "@labor-digital/helferlein/lib/Lists/Paths/getPath";
-import {hasPath} from "@labor-digital/helferlein/lib/Lists/Paths/hasPath";
-import {isUndefined} from "@labor-digital/helferlein/lib/Types/isUndefined";
+import {getPath, hasPath, isUndefined} from "@labor-digital/helferlein";
 import {ComponentOptions, CreateElement, VNode} from "vue";
 import {Vue} from "vue/types/vue";
 import {SpaAppVueConfigInterface} from "../Core/Config/SpaAppConfigInterface";

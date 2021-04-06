@@ -16,8 +16,7 @@
  * Last modified: 2019.12.12 at 13:05
  */
 
-import {PlainObject} from "@labor-digital/helferlein/lib/Interfaces/PlainObject";
-import {forEach} from "@labor-digital/helferlein/lib/Lists/forEach";
+import {forEach, PlainObject} from "@labor-digital/helferlein";
 
 export abstract class AbstractContext {
 	
