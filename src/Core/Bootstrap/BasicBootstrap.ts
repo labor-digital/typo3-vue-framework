@@ -65,14 +65,14 @@ export class BasicBootstrap {
 		// Prepare the environment
 		let environment: AppEnvironmentType = config.environment;
 		if (environment !== "production" && environment !== "development")
-			environment = getPath(process as any, ["env", "NODE_ENV"], typeof process.env.NODE_ENV === "string" ? process.env.NODE_ENV : "production");
+			environment = isString(process.env.NODE_ENV ?? false) ? process.env.NODE_ENV as any : "production";
 		config.environment = environment;
 		
 		// Prepare the vue environment
 		if (!isPlainObject(config.vue)) config.vue = {};
 		let vueEnvironment: VueEnvironmentType = getPath(config as any, ["vue", "vueEnvironment"]);
 		if (vueEnvironment !== "client" && vueEnvironment !== "server")
-			vueEnvironment = getPath(process as any, ["env", "VUE_ENV"], typeof process.env.VUE_ENV === "string" ? process.env.VUE_ENV : "client");
+			vueEnvironment = isString(process.env.VUE_ENV ?? false) ? process.env.VUE_ENV as any : "client";
 		config.vue.vueEnvironment = vueEnvironment;
 		
 		// Register our internal components
@@ -119,8 +119,7 @@ export class BasicBootstrap {
 				vueContext: vueRenderContext,
 				envVars: config.vue.vueEnvironment === "client" ?
 					getPath(window as any, ["VUE_ENV"], {}) :
-					getPath(vueRenderContext, ["env"],
-						getPath(process, ["env"], {}))
+					getPath(vueRenderContext, ["env"], getPath(process ?? {}, ["env"], {}))
 			}, config);
 		
 		// Prepare the event emitter

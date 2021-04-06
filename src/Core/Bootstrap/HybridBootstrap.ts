@@ -42,12 +42,14 @@ export class HybridBootstrap {
 	 */
 	public static loadGlobalDataIntoRenderingContext(appContext: AppContext): Promise<AppContext> {
 		let globalData = {};
-		if (appContext.isServer) globalData = getPath(process as any, ["env", "FRONTEND_API_DATA"], {});
+		if (appContext.isServer) globalData = process.env.FRONTEND_API_DATA ?? {};
 		else {
-			if (typeof process.env.FRONTEND_API_DATA !== "undefined")
+			if (process.env.FRONTEND_API_DATA ?? false) {
 				globalData = process.env.FRONTEND_API_DATA;
-			else globalData = getPath(window as any, [
-				getPath((appContext.config as any), ["globalDataWindowVar"], "FRONTEND_API_DATA")], {});
+			} else {
+				const configKey = (appContext.config as any).globalDataWindowVar ?? "FRONTEND_API_DATA";
+				globalData = window[configKey] ?? {};
+			}
 		}
 		appContext.vueRenderContext.globalData = globalData;
 		return Promise.resolve(appContext);
