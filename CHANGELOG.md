@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.0.0](https://github.com/labor-digital/typo3-vue-framework/compare/v2.21.0...v3.0.0) (2021-04-06)
+
+
+### ⚠ BREAKING CHANGES
+
+* Update dependency of @labor-digital/helferlein to 4.0.5
+or higher
+
+### Features
+
+* update dependencies ([35bc580](https://github.com/labor-digital/typo3-vue-framework/commit/35bc580f6108e6fd0d811b9204bd074ae8aa3fb0))
+
 ## [2.21.0](https://github.com/labor-digital/typo3-vue-framework/compare/v2.20.0...v2.21.0) (2021-01-22)
 
 
