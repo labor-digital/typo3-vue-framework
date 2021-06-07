@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.21.1](https://github.com/labor-digital/typo3-vue-framework/compare/v2.21.0...v2.21.1) (2021-06-07)
+
+
+### Bug Fixes
+
+* add missing axios package to devDependencies ([b81f286](https://github.com/labor-digital/typo3-vue-framework/commit/b81f2864280ca12587b6523bcac44d2a49e6129f))
+* brute-force disable some type issues ([588e2d8](https://github.com/labor-digital/typo3-vue-framework/commit/588e2d83ba8a86eea123ab46ea24ea5032c07bf2))
+* **PageMeta:** apply vmid to all links and meta tags provided by TYPO3 ([a486271](https://github.com/labor-digital/typo3-vue-framework/commit/a486271046f2a03b958f3e0cad6f16ccc252ee88))
+
 ## [2.21.0](https://github.com/labor-digital/typo3-vue-framework/compare/v2.20.0...v2.21.0) (2021-01-22)
 
 
