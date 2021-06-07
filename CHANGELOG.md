@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.0.1](https://github.com/labor-digital/typo3-vue-framework/compare/v3.0.0...v3.0.1) (2021-04-06)
+
+
+### Bug Fixes
+
+* no longer rely on the "process" polyfill of webpack ([6bbaca5](https://github.com/labor-digital/typo3-vue-framework/commit/6bbaca52cd7ef629647654b09b7990b669ef4fc4))
+
 ## [3.0.0](https://github.com/labor-digital/typo3-vue-framework/compare/v2.21.0...v3.0.0) (2021-04-06)
 
 

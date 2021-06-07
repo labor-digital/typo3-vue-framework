@@ -1,6 +1,6 @@
 {
 	"name": "@labor-digital/typo3-vue-framework",
-	"version": "3.0.0",
+	"version": "3.0.1",
 	"description": "This package contains a wrapper around the vue.js framework that is designed to provide a complete frontend for your TYPO3 website",
 	"directories": {
 		"lib": "lib"
