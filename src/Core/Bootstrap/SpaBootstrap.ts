@@ -148,7 +148,7 @@ export class SpaBootstrap {
 		
 		// Initialize vue meta plugin
 		const staticMeta = isUndefined(config.staticMeta) ? {} : config.staticMeta;
-		const pageMeta = new PageMeta(staticMeta, appContext.eventEmitter);
+		const pageMeta = new PageMeta(staticMeta, appContext.eventEmitter as any);
 		appContext.pageContext.__setProperty("pageMeta", pageMeta);
 		vueConfig.metaInfo = function () {
 			return pageMeta.metaInfo;

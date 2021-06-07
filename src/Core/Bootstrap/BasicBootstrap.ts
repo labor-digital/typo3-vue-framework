@@ -63,14 +63,14 @@ export class BasicBootstrap {
 		// Prepare the environment
 		let environment: AppEnvironmentType = config.environment;
 		if (environment !== "production" && environment !== "development")
-			environment = getPath(process, ["env", "NODE_ENV"], typeof process.env.NODE_ENV === "string" ? process.env.NODE_ENV : "production");
+			environment = getPath(process as any, ["env", "NODE_ENV"], typeof process.env.NODE_ENV === "string" ? process.env.NODE_ENV : "production");
 		config.environment = environment;
 		
 		// Prepare the vue environment
 		if (!isPlainObject(config.vue)) config.vue = {};
-		let vueEnvironment: VueEnvironmentType = getPath(config, ["vue", "vueEnvironment"]);
+		let vueEnvironment: VueEnvironmentType = getPath(config as any, ["vue", "vueEnvironment"]);
 		if (vueEnvironment !== "client" && vueEnvironment !== "server")
-			vueEnvironment = getPath(process, ["env", "VUE_ENV"], typeof process.env.VUE_ENV === "string" ? process.env.VUE_ENV : "client");
+			vueEnvironment = getPath(process as any, ["env", "VUE_ENV"], typeof process.env.VUE_ENV === "string" ? process.env.VUE_ENV : "client");
 		config.vue.vueEnvironment = vueEnvironment;
 		
 		// Register our internal components
@@ -94,7 +94,7 @@ export class BasicBootstrap {
 		config = cloneList(config);
 		
 		// Initialize the error handler
-		const errorHandler = new ErrorHandler(getPath(config, ["errorHandling"], {}));
+		const errorHandler = new ErrorHandler(getPath(config as any, ["errorHandling"], {}));
 		
 		// Register global error handler in browser
 		const useGlobalErrorHandler = getPath(config, ["errorHandling", "registerGlobalErrorHandler"], true);
@@ -116,7 +116,7 @@ export class BasicBootstrap {
 				mode: mode,
 				vueContext: vueRenderContext,
 				envVars: config.vue.vueEnvironment === "client" ?
-					getPath(window, ["VUE_ENV"], {}) :
+					getPath(window as any, ["VUE_ENV"], {}) :
 					getPath(vueRenderContext, ["env"],
 						getPath(process, ["env"], {}))
 			}, config);
@@ -158,14 +158,14 @@ export class BasicBootstrap {
 				env: config.environment,
 				vueEnv: config.vue.vueEnvironment,
 				errorHandler,
-				store: new Store({}, getPath(config, ["initialStore"])),
+				store: new Store({}, getPath(config as any, ["initialStore"])),
 				axios: generalAxios,
 				axiosInstances,
 				resourceApi: new JsonApi({
 					axios: resourceAxios
 				}),
 				eventEmitter,
-				dynamicComponentResolver: getPath(config, ["vue", "dynamicComponentResolver"]),
+				dynamicComponentResolver: getPath(config as any, ["vue", "dynamicComponentResolver"]),
 				staticComponents: getPath(config, ["vue", "staticComponents"], {}),
 				config: config,
 				vueRenderContext: vueRenderContext

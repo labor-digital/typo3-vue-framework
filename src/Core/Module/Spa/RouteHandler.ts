@@ -74,9 +74,9 @@ export class RouteHandler {
 				// Check if we are running in the browser and may fetch the initial request from the global marker
 				// when the framework was rendered by the SSR counterpart
 				if (this._initialRequest && appContext.isClient &&
-					hasPath(window, ["__INITIAL_STATE__"]))
+					hasPath(window as any, ["__INITIAL_STATE__"]))
 					return appContext.resourceApi.makeResourceOrCollection(
-						getPath(window, ["__INITIAL_STATE__"], {}));
+						getPath(window as any, ["__INITIAL_STATE__"], {}));
 				
 				// Request the information using the api
 				return appContext.resourceApi.getAdditional("page", "bySlug", args.query);

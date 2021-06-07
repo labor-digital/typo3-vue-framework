@@ -76,9 +76,9 @@ export class ContentElementContext {
 					   definition: ContentElementComponentDefinitionInterface, errorHandler: ContentElementErrorHandler) {
 		this._id = definition.id;
 		this._children = definition.children;
-		this._initialType = getPath(definition, ["initialState", "resourceType"], null);
+		this._initialType = getPath(definition as any, ["initialState", "resourceType"], null);
 		this._initialState = initialState;
-		this._initialQuery = getPath(definition, ["initialState", "query"], null);
+		this._initialQuery = getPath(definition as any, ["initialState", "query"], null);
 		this._data = new State(definition.data);
 		this._appContext = context;
 		this._errorHandler = errorHandler;

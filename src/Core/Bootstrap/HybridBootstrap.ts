@@ -47,12 +47,12 @@ export class HybridBootstrap {
 	 */
 	public static loadGlobalDataIntoRenderingContext(appContext: AppContext): Promise<AppContext> {
 		let globalData = {};
-		if (appContext.isServer) globalData = getPath(process, ["env", "FRONTEND_API_DATA"], {});
+		if (appContext.isServer) globalData = getPath(process as any, ["env", "FRONTEND_API_DATA"], {});
 		else {
 			if (typeof process.env.FRONTEND_API_DATA !== "undefined")
 				globalData = process.env.FRONTEND_API_DATA;
-			else globalData = getPath(window, [
-				getPath((appContext.config as HybridAppConfigInterface), ["globalDataWindowVar"], "FRONTEND_API_DATA")], {});
+			else globalData = getPath(window as any, [
+				getPath((appContext.config as any), ["globalDataWindowVar"], "FRONTEND_API_DATA")], {});
 		}
 		appContext.vueRenderContext.globalData = globalData;
 		return Promise.resolve(appContext);
@@ -64,7 +64,7 @@ export class HybridBootstrap {
 	 */
 	public static registerTranslation(appContext: AppContext): Promise<AppContext> {
 		appContext.translation.__setLanguageForHybridApp(
-			getPath(appContext, ["vueRenderContext", "globalData", "translations"], {}));
+			getPath(appContext as any, ["vueRenderContext", "globalData", "translations"], {}));
 		return Promise.resolve(appContext);
 	}
 	
