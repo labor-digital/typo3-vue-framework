@@ -16,7 +16,16 @@
  * Last modified: 2019.10.23 at 09:59
  */
 
-import {EventEmitter, EventEmitterEvent, forEach, isBrowser, merge} from "@labor-digital/helferlein";
+import {
+	EventEmitter,
+	EventEmitterEvent,
+	forEach,
+	isBrowser,
+	isPlainObject,
+	map,
+	merge,
+	PlainObject
+} from "@labor-digital/helferlein";
 import Vue from "vue";
 import {MetaInfo, VueMetaPlugin} from "vue-meta";
 import {PageContext} from "../../Context/PageContext";
@@ -81,7 +90,7 @@ export class PageMeta {
 	public setCanonical(link: string): PageMeta {
 		this.setRaw({
 			link: [{
-				rel: "canonical", href: link
+				rel: "canonical", href: link, vmid: "t3-canonical"
 			}]
 		});
 		return this;
@@ -116,6 +125,19 @@ export class PageMeta {
 		const state: Resource = e.args.state;
 		const context: PageContext = e.args.context;
 		
+		const vmIdApplier = function (v: PlainObject): any {
+			if (!isPlainObject(v) || v.vmid) return v;
+			
+			if (v.name) {
+				v.vmid = "t3-" + v.name;
+			} else if (v.hreflang) {
+				v.vmid = "t3-hlang-" + v.hreflang;
+			}
+			
+			return v;
+			
+		};
+		
 		// Merge the meta information with the existing data
 		this.setRawWithoutRefresh({
 			title: state.get(["data", "title"]),
@@ -123,12 +145,12 @@ export class PageMeta {
 				lang: context.languageCode
 			},
 			link: [
-				...state.get(["data", "hrefLang"], []),
+				...map(state.get(["data", "hrefLang"], []), vmIdApplier),
 				{
-					rel: "canonical", href: state.get(["data", "canonicalUrl"])
+					rel: "canonical", href: state.get(["data", "canonicalUrl"]), vmid: "t3-canonical"
 				}
 			],
-			meta: state.get(["data", "metaTags"])
+			meta: map(state.get(["data", "metaTags"], []), vmIdApplier)
 		});
 	}
 	
