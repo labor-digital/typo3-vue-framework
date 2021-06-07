@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.0.2](https://github.com/labor-digital/typo3-vue-framework/compare/v3.0.1...v3.0.2) (2021-06-07)
+
+
+### Bug Fixes
+
+* downgrade typescript to 4.2.4 ([cfa0051](https://github.com/labor-digital/typo3-vue-framework/commit/cfa00517b70e40fdd7e3667435c3d7206029ec4c))
+* **PageMeta:** apply vmid to all links and meta tags provided by TYPO3 ([9b53779](https://github.com/labor-digital/typo3-vue-framework/commit/9b5377906b18e8c9000909705a13f832ba6ea107))
+
 ### [3.0.1](https://github.com/labor-digital/typo3-vue-framework/compare/v3.0.0...v3.0.1) (2021-04-06)
 
 
