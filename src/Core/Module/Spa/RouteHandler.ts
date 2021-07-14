@@ -16,6 +16,7 @@
  * Last modified: 2019.11.29 at 21:46
  */
 
+import {forEach, PlainObject} from "@labor-digital/helferlein";
 import {getPath} from "@labor-digital/helferlein/lib/Lists/Paths/getPath";
 import {hasPath} from "@labor-digital/helferlein/lib/Lists/Paths/hasPath";
 import {isArray} from "@labor-digital/helferlein/lib/Types/isArray";
@@ -68,7 +69,7 @@ export class RouteHandler {
 		appContext.errorHandler.pushNavigationStack(to.fullPath);
 		
 		// Make the request
-		this.buildQuery(to.path)
+		this.buildQuery(to.path, to.query)
 			.then(args => {
 				
 				// Check if we are running in the browser and may fetch the initial request from the global marker
@@ -153,11 +154,18 @@ export class RouteHandler {
 	/**
 	 * Internal helper to build the api query based on the given slug
 	 * @param slug
+	 * @param queryParams
 	 */
-	protected buildQuery(slug: string): Promise<JsonApiGetQuery> {
+	protected buildQuery(slug: string, queryParams: PlainObject): Promise<JsonApiGetQuery> {
 		const query: JsonApiGetQuery = {
 			slug: slug
 		};
+		
+		const allowedQueryParams = ["no_cache", "t3ba-table-preview"];
+		forEach(allowedQueryParams, param => {
+			if (queryParams[param])
+				query[param] = allowedQueryParams[param];
+		});
 		
 		// Handle the initial query
 		if (this._initialRequest) query.include = "*";
