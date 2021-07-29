@@ -167,7 +167,7 @@ export class RouteHandler {
 		const allowedQueryParams = ["no_cache", "t3ba-table-preview"];
 		forEach(allowedQueryParams, param => {
 			if (queryParams[param])
-				query[param] = allowedQueryParams[param];
+				query[param] = queryParams[param];
 		});
 		
 		// Handle the initial query
