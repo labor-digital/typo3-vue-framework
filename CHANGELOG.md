@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.1.0](https://github.com/labor-digital/typo3-vue-framework/compare/v3.0.2...v3.1.0) (2021-07-14)
+
+
+### Features
+
+* **RouteHandler:** allow passthrough of selected query parameters ([b315fe9](https://github.com/labor-digital/typo3-vue-framework/commit/b315fe9d79d8db3ee253b46077b02e5ecdf0a50b))
+
 ### [3.0.2](https://github.com/labor-digital/typo3-vue-framework/compare/v3.0.1...v3.0.2) (2021-06-07)
 
 
