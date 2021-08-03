@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.22.0](https://github.com/labor-digital/typo3-vue-framework/compare/v2.21.1...v2.22.0) (2021-08-03)
+
+
+### Features
+
+* **ContentElementComponent:** delay hydration until browser is ready ([35c4e98](https://github.com/labor-digital/typo3-vue-framework/commit/35c4e98e39836132ec4143b17d1f378c59471cd5))
+* **RouteHandler:** allow passthrough of selected query parameters ([4719b7b](https://github.com/labor-digital/typo3-vue-framework/commit/4719b7bf868829785a4777191a0c87961affeed8))
+* **RouteHandler:** handle index.html requests as / request ([fc87327](https://github.com/labor-digital/typo3-vue-framework/commit/fc8732712fd0d1c926509f92f6b8240761cd83a5))
+
 ### [2.21.1](https://github.com/labor-digital/typo3-vue-framework/compare/v2.21.0...v2.21.1) (2021-06-07)
 
 
