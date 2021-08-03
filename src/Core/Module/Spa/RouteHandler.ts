@@ -157,6 +157,9 @@ export class RouteHandler {
 	 * @param queryParams
 	 */
 	protected buildQuery(slug: string, queryParams: PlainObject): Promise<JsonApiGetQuery> {
+		// Make sure that index.html and index.htm are redirected to "/" otherwise we will throw a 404 error
+		if (slug.match(/^\/index.html?/i)) slug = "/";
+		
 		const query: JsonApiGetQuery = {
 			slug: slug
 		};
