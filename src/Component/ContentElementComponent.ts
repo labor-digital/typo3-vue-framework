@@ -27,6 +27,7 @@ import {isPlainObject} from "@labor-digital/helferlein/lib/Types/isPlainObject";
 import {isString} from "@labor-digital/helferlein/lib/Types/isString";
 import {isUndefined} from "@labor-digital/helferlein/lib/Types/isUndefined";
 import {ComponentOptions, CreateElement, VNode} from "vue";
+import {hydrateWhenIdle} from "vue-lazy-hydration/dist/LazyHydrate.js";
 import {Component} from "vue/types/options";
 import {Vue} from "vue/types/vue";
 import {AppContext} from "../Core/Context/AppContext";
@@ -37,7 +38,6 @@ import {FrameworkEventList} from "../Core/Interface/FrameworkEventList";
 import DefaultContentElementErrorComponent from "./DefaultContentElementErrorComponent";
 import DefaultContentElementLoaderComponent from "./DefaultContentElementLoaderComponent";
 import StaticHtmlComponent from "./StaticHtmlComponent";
-
 
 /**
  * This component acts as a outer renderer around a certain component.
@@ -131,20 +131,6 @@ export default <ComponentOptions<Vue>>{
 			});
 		}
 		
-		// Show the loader until the component is ready
-		if (!this.componentLoaded) {
-			const loaderComponent = !isUndefined(appContext.staticComponents.contentElementLoaderComponent)
-			&& getPath(this.definition, "useLoaderComponent", true) === true ?
-				appContext.staticComponents.contentElementLoaderComponent : DefaultContentElementLoaderComponent;
-			return createElement(loaderComponent, {
-				props: {
-					context: appContext,
-					component: this.component,
-					componentProps: this.componentProps
-				}
-			});
-		}
-		
 		// Show error handler if required
 		if (this.componentFailed) {
 			const errorComponent = !isUndefined(appContext.staticComponents.contentElementErrorComponent) ?
@@ -156,6 +142,36 @@ export default <ComponentOptions<Vue>>{
 					componentProps: this.componentProps
 				}
 			});
+		}
+		
+		// Hydrate content elements only when the browser has time for it
+		if (appContext.mode === "spa") {
+			return createElement(hydrateWhenIdle(() => {
+				return this.findComponentDefinition().then(component => {
+					return {
+						default: {
+							render(createElement: CreateElement): VNode {
+								// Render the default component
+								return createElementWrapper(createElement, component);
+							}
+						}
+					};
+				});
+			}));
+		}
+		
+		// Show the loader until the component is ready
+		if (!this.componentLoaded) {
+			const loaderComponent = !isUndefined(appContext.staticComponents.contentElementLoaderComponent)
+			&& getPath(this.definition, "useLoaderComponent", true) === true ?
+				appContext.staticComponents.contentElementLoaderComponent : DefaultContentElementLoaderComponent;
+			return createElement(loaderComponent, {
+				props: {
+					context: appContext,
+					component: this.component,
+					componentProps: this.componentProps
+				}
+			}, [this.component]);
 		}
 		
 		// Default rendering
@@ -299,9 +315,5 @@ export default <ComponentOptions<Vue>>{
 					return that.component;
 				});
 		}
-	},
-	
-	beforeMount() {
-		return this.findComponentDefinition();
 	}
 };

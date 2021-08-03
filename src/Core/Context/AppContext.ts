@@ -134,6 +134,13 @@ export class AppContext extends AbstractContext {
 	}
 	
 	/**
+	 * Returns the mode that is currently running for this app
+	 */
+	public get mode(): AppMode {
+		return this._mode;
+	}
+	
+	/**
 	 * Returns the page context object.
 	 * Note: This only works for SPA apps!
 	 */
