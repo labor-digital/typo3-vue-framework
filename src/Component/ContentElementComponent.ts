@@ -165,6 +165,12 @@ export default <ComponentOptions<Vue>>{
 			const loaderComponent = !isUndefined(appContext.staticComponents.contentElementLoaderComponent)
 			&& getPath(this.definition, "useLoaderComponent", true) === true ?
 				appContext.staticComponents.contentElementLoaderComponent : DefaultContentElementLoaderComponent;
+			
+			// Ensure the component definition gets loaded and replaces the loader when it is ready.
+			this.$nextTick(() => {
+				this.findComponentDefinition();
+			});
+			
 			return createElement(loaderComponent, {
 				props: {
 					context: appContext,
