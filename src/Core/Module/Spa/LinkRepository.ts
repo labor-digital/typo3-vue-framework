@@ -71,7 +71,7 @@ export class LinkRepository {
 			return Promise.reject(new Error("Could not go to link with key: \"" + key + "\" because it was not found!"));
 		// @todo better handling for external urls/ if the user is already on the page
 		try {
-			return this._context.pageContext.router.push(url.replace(/^(?:\/\/|[^/]+)*\//, ""));
+			return this._context.pageContext.router.push(url.replace(/^(?:\/\/|[^/]+)*\//, "/"));
 		} catch (e) {
 			return Promise.reject(e);
 		}
