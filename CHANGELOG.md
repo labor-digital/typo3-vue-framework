@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.2.3](https://github.com/labor-digital/typo3-vue-framework/compare/v3.2.2...v3.2.3) (2022-04-06)
+
+
+### Bug Fixes
+
+* make sure that the link from url is full ([a163c0a](https://github.com/labor-digital/typo3-vue-framework/commit/a163c0a28a104df9051ab41fff4ac6498045fae6))
+
 ### [3.2.2](https://github.com/labor-digital/typo3-vue-framework/compare/v3.2.1...v3.2.2) (2022-03-28)
 
 
