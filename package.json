@@ -30,7 +30,7 @@
 		"@labor-digital/helferlein": "^4.1.0"
 	},
 	"devDependencies": {
-		"typedoc": "0.20.36",
+		"typedoc": "0.23.21",
 		"axios": "^0.21.1",
 		"@types/node": "15.12.1",
 		"@labor-digital/helferlein": "^4.1.0",
