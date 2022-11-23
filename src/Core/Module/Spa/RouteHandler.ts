@@ -24,7 +24,8 @@ import {
 	isFunction,
 	isString,
 	isUndefined,
-	PlainObject
+	PlainObject,
+	isEmpty
 } from "@labor-digital/helferlein";
 import {CreateElement, VNode} from "vue";
 import {Route} from "vue-router";
@@ -57,6 +58,9 @@ export class RouteHandler {
 	/**
 	 * Is called in the route component in the beforeRouteEnter() gate
 	 * and handles the request of new page data from the server
+	 * 
+	 * If the request fails and an status 301 with an route parameter in the response
+	 * data gets recieved we redirect to the given route.
 	 * @param to
 	 * @param from
 	 * @param next
@@ -121,6 +125,11 @@ export class RouteHandler {
 			})
 			.catch(e => {
 				const err = appContext.errorHandler.makeNetworkError(e);
+			
+				if (e.response.status === 301 && !isEmpty(e.response.data.route)) {
+					return appContext.vueRenderContext.serverResponse.redirect(e.response.status, e.response.data.route);
+				}
+
 				const context = {
 					reason: (new Error("RouteHandler navigation failed!")).stack,
 					response: e.response ? e.response.data.errors : null,
