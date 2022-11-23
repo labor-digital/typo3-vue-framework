@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.3.0](https://github.com/labor-digital/typo3-vue-framework/compare/v3.2.3...v3.3.0) (2022-11-23)
+
+
+### Features
+
+* **RouteHandler:** add redirect feature ([0f43d1a](https://github.com/labor-digital/typo3-vue-framework/commit/0f43d1a843905cae8906d1ab07b25a7d5089b931))
+
 ### [3.2.3](https://github.com/labor-digital/typo3-vue-framework/compare/v3.2.2...v3.2.3) (2022-04-06)
 
 
